@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2019 at 09:12 PM
+-- Generation Time: Oct 30, 2019 at 09:57 AM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -48,6 +48,28 @@ INSERT INTO `area` (`id`, `name`, `district_id`, `region_id`, `is_deleted`, `_ke
 (4, 'Atowari', 3, 4, 1, '25fa0b246c473391736cb6b48191464d'),
 (5, 'Tetulia', 3, 4, 0, '6155aec08712a92128c10877c4019efd'),
 (6, 'dfdsfd', 5, 3, 0, 'a9b7fe3985149cbee73256a999b376e3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chamber`
+--
+
+CREATE TABLE `chamber` (
+  `id` int(11) NOT NULL,
+  `doctor_id` int(11) DEFAULT NULL,
+  `region_id` int(11) DEFAULT NULL,
+  `area_id` int(11) DEFAULT NULL,
+  `teritory_id` int(11) DEFAULT NULL,
+  `market_id` int(11) DEFAULT NULL,
+  `consulting_center_id` int(11) DEFAULT NULL,
+  `hospital_id` int(11) DEFAULT NULL,
+  `address` varchar(256) DEFAULT NULL,
+  `visiting_hour` varchar(256) DEFAULT NULL,
+  `fee` varchar(256) DEFAULT NULL,
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
+  `_key` varchar(256) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -234,6 +256,32 @@ INSERT INTO `employee` (`id`, `user_id`, `designation`, `phone`, `area_id`, `dis
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hospital`
+--
+
+CREATE TABLE `hospital` (
+  `id` int(11) NOT NULL,
+  `name` varchar(256) DEFAULT NULL,
+  `teritory_id` int(11) DEFAULT NULL,
+  `area_id` int(11) DEFAULT NULL,
+  `region_id` int(11) DEFAULT NULL,
+  `market_id` int(11) DEFAULT NULL,
+  `address` text NOT NULL,
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
+  `_key` varchar(256) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `hospital`
+--
+
+INSERT INTO `hospital` (`id`, `name`, `teritory_id`, `area_id`, `region_id`, `market_id`, `address`, `is_deleted`, `_key`) VALUES
+(1, 'test hos', 3, 2, 4, 5, 'this is address', 1, '39d9ca85942c3d96dd9e55b03d3eed71'),
+(2, 'Medi ded', 2, 2, 4, 6, 'this is address', 0, '06c2e027fd129b8d2a0ffd2508fef555');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `market`
 --
 
@@ -381,6 +429,12 @@ ALTER TABLE `area`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `chamber`
+--
+ALTER TABLE `chamber`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `clinic`
 --
 ALTER TABLE `clinic`
@@ -414,6 +468,12 @@ ALTER TABLE `doctor`
 -- Indexes for table `employee`
 --
 ALTER TABLE `employee`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hospital`
+--
+ALTER TABLE `hospital`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -457,6 +517,12 @@ ALTER TABLE `area`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `chamber`
+--
+ALTER TABLE `chamber`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `clinic`
 --
 ALTER TABLE `clinic`
@@ -491,6 +557,12 @@ ALTER TABLE `doctor`
 --
 ALTER TABLE `employee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `hospital`
+--
+ALTER TABLE `hospital`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `market`

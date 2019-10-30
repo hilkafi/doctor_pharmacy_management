@@ -41,6 +41,10 @@ Route::post('/market/search', 'MarketController@search');
 Route::resource('/consulting_center', 'ConsultingCenterController');
 Route::post('/consulting_center/search', 'ConsultingCenterController@search');
 
+//hospital related routes
+Route::resource('/hospital', 'HospitalController');
+Route::post('/hospital/search', 'HospitalController@search');
+
 //Doctor related Route
 Route::resource('/doctor', 'DoctorController');
 Route::post('/doctor/search', 'DoctorController@search');
