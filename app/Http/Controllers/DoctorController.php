@@ -9,6 +9,7 @@ use App\Area;
 use App\District;
 use App\Region;
 use App\VisitLog;
+use App\Chamber;
 use Auth;
 
 class DoctorController extends Controller
@@ -21,7 +22,7 @@ class DoctorController extends Controller
     public function index()
     {
         //
-        $dataset = Doctor::where('is_deleted',0)->paginate(3);
+        $dataset = Doctor::where('is_deleted',0)->orderBy('id', 'DESC')->paginate(20);
         $region = new District();
         $regions = Region::where('is_deleted',0)->get();
         return view('doctor.index', compact('dataset','region','regions'));
@@ -35,12 +36,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
-        $dataset = Region::where('is_deleted',0)->get();
-        $dataset_two = District::where('is_deleted',0)->get();
-        $dataset_three = Area::where('is_deleted',0)->get();
-        $dataset_four = Market::where('is_deleted',0)->get();
-        return view('doctor.create', compact('dataset','dataset_two','dataset_three','dataset_four'));
+        return view('doctor.create');
     }
 
     /**
@@ -54,13 +50,7 @@ class DoctorController extends Controller
         //
         $validatedData = $request->validate([
             'doc_name' => 'required',
-            'designation' => 'required',
-            'expertise' => 'required',
-            'address' => 'required',
-            'market_id' => 'required',
-            'district_id' => 'required',
-            'area_id' => 'required',
-            'region_id' => 'required',
+            'designation' => 'required'
             
         ]);
 
@@ -69,18 +59,14 @@ class DoctorController extends Controller
                 $model->name = $request->doc_name;
                 $model->designation = $request->designation;
                 $model->expertise = $request->expertise;
-                $model->address = $request->address;
-                $model->market_id = $request->market_id;
-                $model->area_id = $request->area_id;
-                $model->district_id = $request->district_id;
-                $model->region_id = $request->region_id;
-                $model->latitude = $request->latitude;
-                $model->longitude = $request->longitude;
-
+                $model->department = $request->department;
+                $model->degree = $request->degree;
+                $model->institute = $request->institute;
+                $model->is_qualified = $request->is_qualified;
+                $model->mul_chamber = $request->mul_chamber;
+                $model->is_covered = $request->is_covered;
                 $model->_key = md5(microtime().rand());
-                    
-        
-        
+
                if($model->save()){
                 $message = "Succssfully added data";
                }
@@ -104,7 +90,10 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Doctor::where('id', $id)->first();
+        $chambers = Chamber::where('doctor_id', $id)->get();
+
+        return view('doctor.details', compact('data', 'chambers'));
     }
 
     /**
@@ -268,4 +257,55 @@ class DoctorController extends Controller
             $vlog = new VisitLog();
         return view('doctor.visit_details', compact('dataset', 'id', 'vlog'));
     }
+
+        public function add_chamber($id){
+
+            $data = Doctor::where('_key',$id)->first();
+              $dataset = Region::where('is_deleted',0)->get();
+
+            return view('doctor.add_chamber',compact('data','dataset'));
+
+
+         }
+         public function final_add_chamber(Request $request){
+
+            $validatedData = $request->validate([
+            'doctor_id' => 'required',
+            'teritory_id' => 'required'
+            
+        ]);
+                $model = new Chamber();
+         
+                $model->doctor_id= $request->doctor_id;
+                $model->region_id = $request->region_id;
+                $model->area_id = $request->area_id;
+                $model->teritory_id = $request->teritory_id;
+                $model->market_id = $request->market_id;
+                $model->consulting_center_id = $request->consulting_center_id;
+                $model->hospital_id = $request->hospital_id;
+                $model->address = $request->address;
+                $model->visiting_hour = $request->visiting_hour;
+                $model->fee = $request->fee;
+                $model->_key = md5(microtime().rand());
+
+
+               if($model->save()){
+                $message = "Succssfully added data";
+               }
+               else{
+                   $message = "Data Entry Error";
+               
+                
+            }
+           
+              
+            
+
+            return redirect('/doctor')->with('message',$message);
+
+
+         }
+
+
+
 }

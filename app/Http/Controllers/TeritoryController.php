@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Area;
 use App\District;
 use App\Market;
+use App\Hospital;
+use App\Consulting_Center;
 use Auth;
 use App\Region;
 
@@ -205,6 +207,29 @@ class TeritoryController extends Controller
             }
     }
 
+        public function list_consulting_center(Request $r){
+            $dataset = Consulting_Center::where([['is_deleted', 0], ['market_id', $r->market]])->get();
+            $str = "";
+            if(!empty($dataset)){
+               $str .="<option value = ''>Select Consulting_Center</option>";
+                foreach($dataset as $data){
+                   $str .= "<option value='{$data->id}'>{$data->name}</option>";
+                }
+               return $str;
+            }
+    }
+
+            public function list_hospital(Request $r){
+            $dataset = Hospital::where([['is_deleted', 0], ['market_id', $r->market]])->get();
+            $str = "";
+            if(!empty($dataset)){
+               $str .="<option value = ''>Select Consulting_Center</option>";
+                foreach($dataset as $data){
+                   $str .= "<option value='{$data->id}'>{$data->name}</option>";
+                }
+               return $str;
+            }
+        }
     
     public function search(Request $r){
         $region = new District();

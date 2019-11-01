@@ -32,6 +32,8 @@ Route::resource('/teritory', 'TeritoryController');
 Route::post('/teritory/list_district', 'TeritoryController@list_district');
 Route::post('/teritory/list_area', 'TeritoryController@list_area');
 Route::post('/teritory/list_market', 'TeritoryController@list_market');
+Route::post('/teritory/list_consulting_center', 'TeritoryController@list_consulting_center');
+Route::post('/teritory/list_hospital', 'TeritoryController@list_hospital');
 Route::post('/teritory/search', 'TeritoryController@search');
 
 Route::resource('/market', 'MarketController');
@@ -52,6 +54,8 @@ Route::get('/doctor/{id}/visit', 'DoctorController@visit_view');
 Route::post('/doctor/visit/{id}', 'DoctorController@visit_confirm');
 Route::get('doctor/visit/log', 'DoctorController@visit_log');
 Route::get('doctor/visit/{id}/details', 'DoctorController@visited_doctor_details');
+Route::get('/doctor/chamber/{id}', 'DoctorController@add_chamber');
+Route::post('/doctor/add_chamber', 'DoctorController@final_add_chamber');
 
 Route::resource('/dispensary', 'DispensaryController');
 Route::post('/dispensary/search', 'DispensaryController@search');

@@ -1,5 +1,6 @@
 <?php
-$user_role = Auth::user()->user_role;
+
+ $user_role = Auth::user()->user_role;
 
 ?>
 

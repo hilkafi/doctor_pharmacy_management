@@ -68,6 +68,7 @@ class DispensaryController extends Controller
                 $model->region_id = $request->region_id;
                 $model->latitude = $request->latitude;
                 $model->longitude = $request->longitude;
+                $model->is_covered = $request->is_covered;
 
                 $model->_key = md5(microtime().rand());
                     

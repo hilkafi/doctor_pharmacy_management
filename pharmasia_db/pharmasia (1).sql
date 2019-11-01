@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2019 at 09:57 AM
+-- Generation Time: Nov 01, 2019 at 05:50 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -70,6 +70,15 @@ CREATE TABLE `chamber` (
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `_key` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `chamber`
+--
+
+INSERT INTO `chamber` (`id`, `doctor_id`, `region_id`, `area_id`, `teritory_id`, `market_id`, `consulting_center_id`, `hospital_id`, `address`, `visiting_hour`, `fee`, `is_deleted`, `_key`) VALUES
+(1, 9, 4, 2, 2, 4, NULL, NULL, 'this is address', NULL, '500', 0, '56465f592024999a3551332e1630cec3'),
+(2, 8, 4, 2, 2, 4, NULL, NULL, 'fgsdgs', '4pm-5pm', '1000', 0, '91195c5f7c92cf2326030e31e8a0150d'),
+(3, 9, 4, 2, 3, 5, NULL, NULL, 'address', '4pm-8pm', '1000', 0, 'ced39e530a90f0ab24f5daa5522de54a');
 
 -- --------------------------------------------------------
 
@@ -142,9 +151,7 @@ CREATE TABLE `dispensary` (
   `area_id` int(11) DEFAULT NULL,
   `district_id` int(11) DEFAULT NULL,
   `region_id` int(11) DEFAULT NULL,
-  `address` text,
-  `latitude` varchar(256) DEFAULT NULL,
-  `longitude` varchar(256) DEFAULT NULL,
+  `is_covered` enum('Covered','Not Covered') DEFAULT NULL,
   `is_deleted` int(11) NOT NULL DEFAULT '0',
   `_key` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -153,14 +160,14 @@ CREATE TABLE `dispensary` (
 -- Dumping data for table `dispensary`
 --
 
-INSERT INTO `dispensary` (`id`, `name`, `owner`, `market_id`, `area_id`, `district_id`, `region_id`, `address`, `latitude`, `longitude`, `is_deleted`, `_key`) VALUES
-(1, 'Medicine Dispesary', 'Mr. John Doe', 3, 2, 2, 4, 'this is address', '', NULL, 0, '73fad14e185045f73568cfb5aeb72ee6'),
-(2, 'Medicine', 'Mr. John Doe', 3, 2, 2, 4, 'this is address', '', NULL, 0, '36192e4b2fab561c9cd2b72cc84a42a7'),
-(3, 'Medicine Dispesary Dispesary', 'Mr. John Doe', 3, 2, 2, 4, 'this is address', '', NULL, 1, '314073335f8a6c564dcea7acd633445d'),
-(4, 'Medi ded', 'Mr. John Doe', 3, 2, 2, 4, 'this is address', '', NULL, 0, '08656ae511fa6f8a8b4d647a265d2f9b'),
-(5, 'Surjer Hasi clinic', 'fhsdg', 4, 2, 2, 4, 'dfgd', '', NULL, 0, '69cdaf150ac675ae8294e31a22904ad4'),
-(6, '@hasin', 'Mr. John Doe', 4, 2, 2, 4, 'this is address', '25.720', '89.256', 0, 'b312ef52d2f1c31da3d718b49d909d20'),
-(7, 'jononi drug house', 'parvej ahmed', 4, 2, 2, 4, 'this is address', '25.720', '89.256', 0, '72cc75a7e990bcdce6b731ab578d31df');
+INSERT INTO `dispensary` (`id`, `name`, `owner`, `market_id`, `area_id`, `district_id`, `region_id`, `is_covered`, `is_deleted`, `_key`) VALUES
+(1, 'Medicine Dispesary', 'Mr. John Doe', 3, 2, 2, 4, NULL, 0, '73fad14e185045f73568cfb5aeb72ee6'),
+(2, 'Medicine', 'Mr. John Doe', 3, 2, 2, 4, NULL, 0, '36192e4b2fab561c9cd2b72cc84a42a7'),
+(3, 'Medicine Dispesary Dispesary', 'Mr. John Doe', 3, 2, 2, 4, NULL, 1, '314073335f8a6c564dcea7acd633445d'),
+(4, 'Medi ded', 'Mr. John Doe', 3, 2, 2, 4, NULL, 0, '08656ae511fa6f8a8b4d647a265d2f9b'),
+(5, 'Surjer Hasi clinic', 'fhsdg', 4, 2, 2, 4, NULL, 0, '69cdaf150ac675ae8294e31a22904ad4'),
+(6, '@hasin', 'Mr. John Doe', 4, 2, 2, 4, NULL, 0, 'b312ef52d2f1c31da3d718b49d909d20'),
+(7, 'jononi drug house', 'parvej ahmed', 4, 2, 2, 4, NULL, 0, '72cc75a7e990bcdce6b731ab578d31df');
 
 -- --------------------------------------------------------
 
@@ -199,13 +206,12 @@ CREATE TABLE `doctor` (
   `name` varchar(256) DEFAULT NULL,
   `designation` varchar(256) NOT NULL,
   `expertise` varchar(256) NOT NULL,
-  `market_id` int(11) DEFAULT NULL,
-  `area_id` int(11) DEFAULT NULL,
-  `district_id` int(11) DEFAULT NULL,
-  `region_id` int(11) DEFAULT NULL,
-  `address` text,
-  `latitude` varchar(256) DEFAULT NULL,
-  `longitude` varchar(256) DEFAULT NULL,
+  `degree` varchar(256) DEFAULT NULL,
+  `department` varchar(256) DEFAULT NULL,
+  `institute` varchar(256) DEFAULT NULL,
+  `is_qualified` enum('yes','no') DEFAULT NULL,
+  `mul_chamber` enum('yes','no') NOT NULL DEFAULT 'no',
+  `is_covered` enum('Covered','Not Covered') DEFAULT NULL,
   `is_deleted` int(11) NOT NULL DEFAULT '0',
   `_key` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -214,15 +220,16 @@ CREATE TABLE `doctor` (
 -- Dumping data for table `doctor`
 --
 
-INSERT INTO `doctor` (`id`, `name`, `designation`, `expertise`, `market_id`, `area_id`, `district_id`, `region_id`, `address`, `latitude`, `longitude`, `is_deleted`, `_key`) VALUES
-(1, 'nk', 'dfdsf', 'dsfsfd', 4, 2, 2, 4, 'rtgdfg', NULL, NULL, 0, 'd4b0a117f289aae6176ccee4b4028ea5'),
-(2, 'Medicine dispensary', 'dfdsf', 'dsfsfd', 4, 2, 2, 4, 'dfsfsdfs', NULL, NULL, 0, 'fd98712f0bf1a5c62d9a340146e6b0a0'),
-(3, 'dfsdfd', 'dfdsf', 'dsfsfd', 4, 2, 2, 4, 'rtgdfg', NULL, NULL, 0, '53265e74de5a6440ae3516898106b86a'),
-(4, 'sdfgdsfgd', 'sdfdf', 'dsfsfdsdfsdf', 6, 2, 2, 4, 'dfsdfsd', NULL, NULL, 0, '164fe71a31f75c26248cb94a54cf4acb'),
-(5, 'dfsdfd', 'dfdsf', 'dsfsfd', 4, 2, 2, 4, 'dfgd', NULL, NULL, 0, '615c08266ec29f433288779a6bd9b87b'),
-(6, 'test', 'dfdsf', 'dsfsfdsdfsdf', 4, 2, 2, 4, 'this is address', '25.720', '89.256', 0, '606ff19edaf60e8becc8307a12040fd4'),
-(7, 'dfsdfd', 'dfdsf', 'dsfsfd', 4, 2, 2, 4, 'rtgdfg', NULL, NULL, 0, 'b3ec8b943c956c140b48386f50d7772e'),
-(8, 'sujon sir', 'dfdsf', 'dsfsfd', 6, 2, 2, 4, 'this is address', NULL, NULL, 0, 'b4a3be6078fc7487aa1b8ba68f96f210');
+INSERT INTO `doctor` (`id`, `name`, `designation`, `expertise`, `degree`, `department`, `institute`, `is_qualified`, `mul_chamber`, `is_covered`, `is_deleted`, `_key`) VALUES
+(1, 'nk', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'd4b0a117f289aae6176ccee4b4028ea5'),
+(2, 'Medicine dispensary', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'fd98712f0bf1a5c62d9a340146e6b0a0'),
+(3, 'dfsdfd', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, 'yes', 'no', NULL, 0, '53265e74de5a6440ae3516898106b86a'),
+(4, 'sdfgdsfgd', 'sdfdf', 'dsfsfdsdfsdf', NULL, NULL, NULL, 'yes', 'no', NULL, 0, '164fe71a31f75c26248cb94a54cf4acb'),
+(5, 'dfsdfd', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, 'yes', 'no', NULL, 0, '615c08266ec29f433288779a6bd9b87b'),
+(6, 'test', 'dfdsf', 'dsfsfdsdfsdf', NULL, NULL, NULL, 'yes', 'no', NULL, 0, '606ff19edaf60e8becc8307a12040fd4'),
+(7, 'dfsdfd', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'b3ec8b943c956c140b48386f50d7772e'),
+(8, 'sujon sir', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'b4a3be6078fc7487aa1b8ba68f96f210'),
+(9, 'Dr. ABS Ruman', 'Assistant Professor', 'Sargon', 'MBBS, MD, FCPS', 'Nefrology', 'Panchagar Medical College', 'yes', 'yes', NULL, 0, '72d266cbc39ac47554f320e63a9fe566');
 
 -- --------------------------------------------------------
 
@@ -520,7 +527,7 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT for table `chamber`
 --
 ALTER TABLE `chamber`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `clinic`
@@ -550,7 +557,7 @@ ALTER TABLE `district`
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `employee`
