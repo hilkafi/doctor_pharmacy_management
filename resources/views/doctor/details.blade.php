@@ -10,7 +10,7 @@
 
         
         </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
         @if(session()->has('message'))
         <div class="alert alert-success">
         {{ session()->get('message') }}
@@ -27,6 +27,7 @@
                           <tr><th>Speciality:</th><td>{{$data->expertise}}</td></tr>
                           <tr><th>Degree:</th><td>{{$data->degree}}</td></tr>
                           <tr><th>Department:</th><td>{{$data->department}}</td></tr>
+                          <tr><th>Institute:</th><td>{{ $data->institute }}</td></tr>
                           <tr><th>Qualified:</th><td>{{$data->expertise}}</td></tr>
                           <tr><th>Is Covered:</th><td>{{$data->is_covered}}</td></tr>
                       </table>
@@ -40,8 +41,11 @@
                             <th>Area</th>
                             <th>teritory</th>
                             <th>Market</th>
+                            <th>C Center</th>
+                            <th>Hospital</th>
                             <th>visiting Hour</th>
                             <th>Fee</th>
+                            <th>Action</th>
                         </tr>
                         @foreach($chambers as $chamber)
                         <tr>
@@ -49,8 +53,11 @@
                             <td>{{ $data->district_name($chamber->area_id) }}</td>
                             <td>{{ $data->area_name($chamber->teritory_id) }}</td>
                             <td>{{ $data->market_name($chamber->market_id) }}</td>
+                            <td>{{ $data->consalting_center_name($chamber->consalting_center_id) }}</td>
+                            <td>{{ $data->hospital_name($chamber->hospital_id) }}</td>
                             <td>{{ $chamber->visiting_hour }}</td>
                             <td>{{ $chamber->fee }}</td>
+                            <td><a href="#" class="btn btn-primary">Edit</a> || <a href="#" class="btn btn-danger">Del</a></td>
                         </tr>
                         @endforeach
                     </table>

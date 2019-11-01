@@ -5,6 +5,8 @@ use App\Region;
 use App\District;
 use App\Area;
 use App\Market;
+use App\Consulting_Center;
+use App\Hospital;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -54,6 +56,28 @@ class Doctor extends Model
 	public function market_name($id)
 	{
 	    $qry = Market::query();
+	        if(!empty($id))
+	        {
+	            $data = $qry->where('id',$id)->first();
+	        }
+	        return !empty($data) ? $data->name : " ";
+
+	}
+
+	public function consalting_center_name($id)
+	{
+	    $qry = Consulting_Center::query();
+	        if(!empty($id))
+	        {
+	            $data = $qry->where('id',$id)->first();
+	        }
+	        return !empty($data) ? $data->name : " ";
+
+	}
+
+	public function hospital_name($id)
+	{
+	    $qry = Hospital::query();
 	        if(!empty($id))
 	        {
 	            $data = $qry->where('id',$id)->first();
