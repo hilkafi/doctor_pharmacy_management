@@ -21,36 +21,46 @@
                 <div  class=""></div><a href='{{url("dispensary/create")}}' class = "btn btn-success">Add</a><br><br>
                 <form method="post" class="form-class" id="my_frm">
                 @csrf
-                <div class="input-group">
-                <div class="input-group col-md-3">
-                    <select class="form-control" id="region" name="region_id">
-                        <option value="">Select Region</option>
-                        @foreach($regions as $r)
-                        <option value="{{$r->id}}">{{$r->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="input-group col-md-2">
-                    <select class="form-control" id="district" name="district_id">
-                        <option value="">Select District</option>
-                    </select>
-                </div>
-                <div class="input-group col-md-2">
-                    <select class="form-control" id="area" name="area_id">
-                        <option value="">Select Area</option>
-                    </select>
-                </div>
-                <div class="input-group col-md-2">
-                    <select class="form-control" id="market" name="market_id">
-                        <option value="">Select Market</option>
-                    </select>
-                </div>
-                    <div class="input-group md-form form-sm form-2 pl-0 col-md-3">
-                        <input class="form-control my-0 py-1 red-border" name="search" type="text" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append" style="cursor: pointer">
-                            <span class="input-group-text red lighten-3" id="srch">Search</span>
+                <p class="btn btn-primary" id="mapping">Mapping</p>
+                <div class="display-mapping" style="display: none; margin-bottom: 10px">
+                    <div class="input-group">
+                        <div class="input-group col-md-3">
+                            <select class="form-control" id="region" name="region_id">
+                                <option value="">Select Region</option>
+                                @foreach($regions as $r)
+                                <option value="{{$r->id}}">{{$r->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="input-group col-md-3">
+                            <select class="form-control" id="district" name="district_id">
+                                <option value="">Select District</option>
+                            </select>
+                        </div>
+                        <div class="input-group col-md-3">
+                            <select class="form-control" id="area" name="area_id">
+                                <option value="">Select Area</option>
+                            </select>
+                        </div>
+                        <div class="input-group col-md-3">
+                            <select class="form-control" id="market" name="market_id">
+                                <option value="">Select Market</option>
+                            </select>
                         </div>
                     </div>
+                </div>
+                                <div class="is-covered">
+                    <div class="input-group">
+                        <label class="radio-inline" style="margin-right: 15px">
+                          <input type="radio" name="is_covered" value="Covered" style="margin-right: 5px">Covered
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="is_covered" value ="Not Covered" style="margin-right: 5px">Not Covered
+                        </label>
+                    </div>
+                </div>
+                <div class="input-group" style="cursor: pointer">
+                    <span class="input-group-text red lighten-3" id="srch">Search</span>
                 </div>
                 </form>
                 <div id ="ajax_content">
@@ -93,6 +103,11 @@
                 </tr></table></td>
                 </tr>
                 @endforeach
+                    <tr>
+                    <td  colspan = '4' style="text-align: right; font-weight: bold">Total Pharamcy</td>
+                    <td style="font-weight: bold">{{ $i }}</td>
+                    <td></td>
+                </tr>
               
                 </table>
                 <?php echo $dataset->render(); ?>
@@ -105,11 +120,15 @@
 </div>
 <script>
 $(document).ready(function(){
+    $('#mapping').click(function(){
+    $('.display-mapping').toggle(
+        function(){$("display-mapping").css({"display": "block"});});
+    });
 
     $('#region').change(function(){
 
     var region_id = $(this).val();
-    var _url = "{{URL::to('area/list_district')}}";
+    var _url = "{{URL::to('teritory/list_district')}}";
     $.ajax({
         url: _url,
         method:"POST",
@@ -124,7 +143,7 @@ $(document).ready(function(){
     $('#district').change(function(){
 
     var district_id = $(this).val();
-    var _url = "{{URL::to('area/list_area')}}";
+    var _url = "{{URL::to('teritory/list_area')}}";
     $.ajax({
         url: _url,
         method:"POST",
@@ -139,7 +158,7 @@ $(document).ready(function(){
     $('#area').change(function(){
 
     var area_id = $(this).val();
-    var _url = "{{URL::to('area/list_market')}}";
+    var _url = "{{URL::to('teritory/list_market')}}";
     $.ajax({
         url: _url,
         method:"POST",

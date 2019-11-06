@@ -66,8 +66,7 @@ class DispensaryController extends Controller
                 $model->area_id = $request->area_id;
                 $model->district_id = $request->district_id;
                 $model->region_id = $request->region_id;
-                $model->latitude = $request->latitude;
-                $model->longitude = $request->longitude;
+
                 $model->is_covered = $request->is_covered;
 
                 $model->_key = md5(microtime().rand());
@@ -141,6 +140,7 @@ class DispensaryController extends Controller
                 $model->area_id = $request->area_id;
                 $model->district_id = $request->district_id;
                 $model->region_id = $request->region_id;
+                $model->is_covered = $request->is_covered;
                     
         
         
@@ -172,6 +172,7 @@ class DispensaryController extends Controller
         $district_id = $r->district_id;
         $area_id = $r->area_id;
         $market_id = $r->market_id;
+        $is_covered = $r->is_covered;
         $data = Dispensary::where('is_deleted', 0);
         if(!empty($search)){
             $data = $data->where('name', 'like', '%'.trim($search).'%' );
@@ -187,6 +188,9 @@ class DispensaryController extends Controller
         }
         if(!empty($market_id)){
             $data = $data->where('market_id', $market_id);
+        }
+        if(!empty($is_covered)){
+        $data = $data->where('is_covered', $is_covered);
         }
         $dataset = $data->paginate(10);
         return view('dispensary._list', compact('dataset', 'region'));

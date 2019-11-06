@@ -95,6 +95,16 @@
 
                             </div>
                         </div>
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Is Covered') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="is_covered" id="is_covered">
+                                    <option value="Covered">Covered</option>
+                                    <option value="Not Covered">No</option>
+                                </select>
+                            </div>
+                        </div>
 
 
 

@@ -11,6 +11,7 @@ use App\Region;
 use App\VisitLog;
 use App\Chamber;
 use Auth;
+use DB;
 
 class DoctorController extends Controller
 {
@@ -105,7 +106,7 @@ class DoctorController extends Controller
     public function edit($id)
     {
         //
-        $data = Doctor::where('_key',$id)->first();
+        $data = Doctor::where('id',$id)->first();
 
         $dataset = Region::where('is_deleted',0)->get();
         $region = new District();
@@ -138,11 +139,12 @@ class DoctorController extends Controller
         $model->name = $request->doc_name;
         $model->designation = $request->designation;
         $model->expertise = $request->expertise;
-        $model->address = $request->address;
-        $model->market_id = $request->market_id;
-        $model->area_id = $request->area_id;
-        $model->district_id = $request->district_id;
-        $model->region_id = $request->region_id;
+        $model->department = $request->department;
+        $model->degree = $request->degree;
+        $model->institute = $request->institute;
+        $model->is_qualified = $request->is_qualified;
+        $model->mul_chamber = $request->mul_chamber;
+        $model->is_covered = $request->is_covered;
        
        if($model->save()){
         $message = "Succssfully updated department";
@@ -162,29 +164,68 @@ class DoctorController extends Controller
      */
     public function search(Request $r){
         $region = new District();
-        $search = $r->search;
         $region_id = $r->region_id;
         $district_id = $r->district_id;
         $area_id = $r->area_id;
         $market_id = $r->market_id;
-        $data = Doctor::where('is_deleted', 0);
-        if(!empty($search)){
-            $data = $data->where('name', 'like', '%'.trim($search).'%' );
+        $hospital_id = $r->hospital_id;
+        $cc_id = $r->cc_id;
+        $qualification = $r->qualification;
+        $speciality = $r->speciality;
+        $designation = $r->designation;
+        $degree = $r->degree;
+        $department = $r->department;
+        $name = $r->name;
+        $is_covered = $r->is_covered;
+
+        $data = DB::table('doctor')->join('chamber', 'doctor.id', '=', 'chamber.doctor_id');
+        if(!empty($name)){
+            $data = $data->where('name', 'like', '%'.trim($name).'%' );
         }
         if(!empty($region_id)){
             $data = $data->where('region_id', $region_id);
         }
         if(!empty($district_id)){
-            $data = $data->where('district_id', $district_id);
+            $data = $data->where('area_id', $district_id);
         }
         if(!empty($area_id)){
-            $data = $data->where('area_id', $area_id);
+            $data = $data->where('teritory_id', $area_id);
         }
         if(!empty($market_id)){
             $data = $data->where('market_id', $market_id);
         }
-        $dataset = $data->paginate(10);
-        return view('doctor._list', compact('dataset', 'region'));
+        if(!empty($hospital_id)){
+            $data = $data->where('hospital_id', $hospital_id);
+        }
+        if(!empty($cc_id)){
+            $data = $data->where('consulting_center_id', $cc_id);
+        }
+        if(!empty($qualification)){
+            $data = $data->where('is_qualified', $qualification);
+        }
+        if(!empty($speciality)){
+            $data = $data->where('expertise', $speciality);
+        }
+        if(!empty($designation)){
+            $data = $data->where('designation', $designation);
+        }
+        if(!empty($degree)){
+            $data = $data->where('degree', $degree);
+        }
+        if(!empty($department)){
+            $data = $data->where('department', $department);
+        }
+        if(!empty($name)){
+            $data = $data->where('name', $name);
+        }
+        if(!empty($is_covered)){
+        $data = $data->where('is_covered', $is_covered);
+        }
+        $dataset = $data->distinct('name')->paginate(10);
+
+        $regions = Region::where('is_deleted',0)->get();
+
+        return view('doctor._list', compact('dataset', 'region', 'regions'));
     }
 
 
@@ -260,7 +301,7 @@ class DoctorController extends Controller
 
         public function add_chamber($id){
 
-            $data = Doctor::where('_key',$id)->first();
+            $data = Doctor::where('id',$id)->first();
               $dataset = Region::where('is_deleted',0)->get();
 
             return view('doctor.add_chamber',compact('data','dataset'));

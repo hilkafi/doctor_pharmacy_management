@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2019 at 05:50 PM
+-- Generation Time: Nov 06, 2019 at 10:31 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -78,7 +78,11 @@ CREATE TABLE `chamber` (
 INSERT INTO `chamber` (`id`, `doctor_id`, `region_id`, `area_id`, `teritory_id`, `market_id`, `consulting_center_id`, `hospital_id`, `address`, `visiting_hour`, `fee`, `is_deleted`, `_key`) VALUES
 (1, 9, 4, 2, 2, 4, NULL, NULL, 'this is address', NULL, '500', 0, '56465f592024999a3551332e1630cec3'),
 (2, 8, 4, 2, 2, 4, NULL, NULL, 'fgsdgs', '4pm-5pm', '1000', 0, '91195c5f7c92cf2326030e31e8a0150d'),
-(3, 9, 4, 2, 3, 5, NULL, NULL, 'address', '4pm-8pm', '1000', 0, 'ced39e530a90f0ab24f5daa5522de54a');
+(3, 9, 4, 2, 3, 5, NULL, NULL, 'address', '4pm-8pm', '1000', 0, 'ced39e530a90f0ab24f5daa5522de54a'),
+(4, 6, 4, 2, 2, 4, NULL, NULL, 'dfgd', '4pm-5pm', '1000', 0, '3a9b4c78966736edbb2c91026ab6fa48'),
+(5, 6, 4, 2, 2, 4, 2, NULL, 'dfsdfsd', '4pm-5pm', '500', 0, 'dc7b1e416a1bc80d7b0c80128b2fa0e9'),
+(6, 10, 4, 2, 2, 4, 2, NULL, 'dfsfsdfs', '4pm-5pm', '1000', 0, 'ba8652dc8a693e8b59faf230df42e9d0'),
+(7, 11, 4, 2, 2, 4, 2, NULL, 'fgsdgs', '4pm-5pm', '1000', 0, 'f9b27b0cfb6456cd70fa88d09d984362');
 
 -- --------------------------------------------------------
 
@@ -147,6 +151,7 @@ CREATE TABLE `dispensary` (
   `id` int(11) NOT NULL,
   `name` varchar(256) DEFAULT NULL,
   `owner` varchar(100) DEFAULT NULL,
+  `address` varchar(256) DEFAULT NULL,
   `market_id` int(11) DEFAULT NULL,
   `area_id` int(11) DEFAULT NULL,
   `district_id` int(11) DEFAULT NULL,
@@ -160,14 +165,15 @@ CREATE TABLE `dispensary` (
 -- Dumping data for table `dispensary`
 --
 
-INSERT INTO `dispensary` (`id`, `name`, `owner`, `market_id`, `area_id`, `district_id`, `region_id`, `is_covered`, `is_deleted`, `_key`) VALUES
-(1, 'Medicine Dispesary', 'Mr. John Doe', 3, 2, 2, 4, NULL, 0, '73fad14e185045f73568cfb5aeb72ee6'),
-(2, 'Medicine', 'Mr. John Doe', 3, 2, 2, 4, NULL, 0, '36192e4b2fab561c9cd2b72cc84a42a7'),
-(3, 'Medicine Dispesary Dispesary', 'Mr. John Doe', 3, 2, 2, 4, NULL, 1, '314073335f8a6c564dcea7acd633445d'),
-(4, 'Medi ded', 'Mr. John Doe', 3, 2, 2, 4, NULL, 0, '08656ae511fa6f8a8b4d647a265d2f9b'),
-(5, 'Surjer Hasi clinic', 'fhsdg', 4, 2, 2, 4, NULL, 0, '69cdaf150ac675ae8294e31a22904ad4'),
-(6, '@hasin', 'Mr. John Doe', 4, 2, 2, 4, NULL, 0, 'b312ef52d2f1c31da3d718b49d909d20'),
-(7, 'jononi drug house', 'parvej ahmed', 4, 2, 2, 4, NULL, 0, '72cc75a7e990bcdce6b731ab578d31df');
+INSERT INTO `dispensary` (`id`, `name`, `owner`, `address`, `market_id`, `area_id`, `district_id`, `region_id`, `is_covered`, `is_deleted`, `_key`) VALUES
+(1, 'Medicine Dispesary', 'Mr. John Doe', 'dfsfsdfs', 3, 2, 2, 4, 'Covered', 0, '73fad14e185045f73568cfb5aeb72ee6'),
+(2, 'Medicine', 'Mr. John Doe', NULL, 3, 2, 2, 4, NULL, 0, '36192e4b2fab561c9cd2b72cc84a42a7'),
+(3, 'Medicine Dispesary Dispesary', 'Mr. John Doe', NULL, 3, 2, 2, 4, NULL, 1, '314073335f8a6c564dcea7acd633445d'),
+(4, 'Medi ded', 'Mr. John Doe', NULL, 3, 2, 2, 4, NULL, 0, '08656ae511fa6f8a8b4d647a265d2f9b'),
+(5, 'Surjer Hasi clinic', 'fhsdg', NULL, 4, 2, 2, 4, NULL, 0, '69cdaf150ac675ae8294e31a22904ad4'),
+(6, '@hasin', 'Mr. John Doe', NULL, 4, 2, 2, 4, NULL, 0, 'b312ef52d2f1c31da3d718b49d909d20'),
+(7, 'jononi drug house', 'parvej ahmed', NULL, 4, 2, 2, 4, NULL, 0, '72cc75a7e990bcdce6b731ab578d31df'),
+(8, 'jhon drug house', 'Mr. John Doe', 'this is address', 4, 2, 2, 4, 'Not Covered', 0, '0de7888514763442d169b3a749ade73f');
 
 -- --------------------------------------------------------
 
@@ -229,7 +235,9 @@ INSERT INTO `doctor` (`id`, `name`, `designation`, `expertise`, `degree`, `depar
 (6, 'test', 'dfdsf', 'dsfsfdsdfsdf', NULL, NULL, NULL, 'yes', 'no', NULL, 0, '606ff19edaf60e8becc8307a12040fd4'),
 (7, 'dfsdfd', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'b3ec8b943c956c140b48386f50d7772e'),
 (8, 'sujon sir', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'b4a3be6078fc7487aa1b8ba68f96f210'),
-(9, 'Dr. ABS Ruman', 'Assistant Professor', 'Sargon', 'MBBS, MD, FCPS', 'Nefrology', 'Panchagar Medical College', 'yes', 'yes', NULL, 0, '72d266cbc39ac47554f320e63a9fe566');
+(9, 'Dr. ABS Ruman', 'Assistant Professor', 'Sargon', 'MBBS, MD, FCPS', 'Nefrology', 'Panchagar Medical College', 'yes', 'yes', NULL, 0, '72d266cbc39ac47554f320e63a9fe566'),
+(10, 'rashikul', 'bolod', 'sexology', 'MBBS, MD, FCPS', 'Sexology and women gender', 'Park more sexual university', 'yes', 'no', 'Not Covered', 0, '398d7ec4b2692c256381d93ee424477f'),
+(11, 'kazal', 'dfdsf', 'dsfsfd', 'MBBS, MD, FCPS', 'Vvhv', 'Panchagar Medical College', 'no', 'no', 'Covered', 0, 'a3ba69a193596ee5ae3037beaea5fb2b');
 
 -- --------------------------------------------------------
 
@@ -245,20 +253,18 @@ CREATE TABLE `employee` (
   `area_id` int(11) DEFAULT NULL,
   `district_id` int(11) DEFAULT NULL,
   `region_id` int(11) DEFAULT NULL,
-  `address` varchar(256) DEFAULT NULL,
-  `is_deleted` int(11) NOT NULL DEFAULT '0',
-  `_key` varchar(256) DEFAULT NULL
+  `address` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`id`, `user_id`, `designation`, `phone`, `area_id`, `district_id`, `region_id`, `address`, `is_deleted`, `_key`) VALUES
-(1, 1, 'bhai', '01751465611', 2, 2, 4, 'this is address', 0, 'c657d2df625d83bb5483dbca0f650b6e'),
-(3, 2, NULL, NULL, 4, 3, 4, 'this is address', 0, NULL),
-(4, 3, NULL, '01751465611', 2, 2, 4, 'dfd', 0, NULL),
-(5, 4, NULL, '01751465611', 6, 5, 3, 'this is address', 0, NULL);
+INSERT INTO `employee` (`id`, `user_id`, `designation`, `phone`, `area_id`, `district_id`, `region_id`, `address`) VALUES
+(1, 1, 'bhai', '01751465611', 2, 2, 4, 'this is address'),
+(3, 2, NULL, NULL, 4, 3, 4, 'this is address'),
+(4, 3, 'test', '01751465611', 2, 2, 4, 'dfd'),
+(5, 4, NULL, '01751465611', 6, 5, 3, 'this is address');
 
 -- --------------------------------------------------------
 
@@ -362,7 +368,7 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_role` int(11) NOT NULL,
+  `user_role` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   `created_by` int(11) DEFAULT NULL,
@@ -376,10 +382,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `user_role`, `created_at`, `updated_at`, `created_by`, `modified_by`, `is_deleted`, `_key`) VALUES
-(1, 'pitom', 'mhpitom007@gmail.com', NULL, '$2y$10$Pfccp0XrXufGsmi8R.ABquHGBxqa.JY0/OHMdrm//3rBMvKDxkVfK', 'QhUqnZBWCRjz782w4YbohwsvLOHsKxkL136rVqUhQX2zXb76yUEhQZVlnFRs', 0, '2019-10-09', '2019-10-09', NULL, NULL, 0, NULL),
-(2, 'Ratul', 'ratul@gmail.com', NULL, '$2y$10$euhSXfAgs2PWLKKn2Rsm8.IXHoJxzWwBkPY0VBmkWs3v5n/jFKDsS', NULL, 2, '2019-10-20', '2019-10-20', NULL, NULL, 0, '2a085bcff52de41c225c315cb8a99e3b'),
-(3, '@hasin', 'mridula@gmail.com', NULL, '$2y$10$3j1hu1vYg63AwuiLn8C12.m76CLM7yq7ImHrJXLuiUusuPrWVEXxy', NULL, 3, '2019-10-21', '2019-10-21', NULL, NULL, 0, '205a995e9ef7b052805d0ef4d5dbcbab'),
-(4, 'Medi ded', 'csebrur.hasinmanjare34@gmail.com', NULL, '$2y$10$vUISx0T5HMybtz/KPM1e0.pKuFLX/TiDztWtrSdFsEoRDVwRyLa96', NULL, 4, '2019-10-21', '2019-10-21', NULL, NULL, 0, '609df2951dce3c0b85df16c59d4872a6');
+(1, 'pitom', 'mhpitom007@gmail.com', NULL, '$2y$10$Pfccp0XrXufGsmi8R.ABquHGBxqa.JY0/OHMdrm//3rBMvKDxkVfK', 'QhUqnZBWCRjz782w4YbohwsvLOHsKxkL136rVqUhQX2zXb76yUEhQZVlnFRs', '0', '2019-10-09', '2019-10-09', NULL, NULL, 0, NULL),
+(2, 'Ratul', 'ratul@gmail.com', NULL, '$2y$10$euhSXfAgs2PWLKKn2Rsm8.IXHoJxzWwBkPY0VBmkWs3v5n/jFKDsS', NULL, '2', '2019-10-20', '2019-10-20', NULL, NULL, 0, '2a085bcff52de41c225c315cb8a99e3b'),
+(3, '@hasin', 'mridula@gmail.com', NULL, '$2y$10$3j1hu1vYg63AwuiLn8C12.m76CLM7yq7ImHrJXLuiUusuPrWVEXxy', NULL, '3', '2019-10-21', '2019-11-06', NULL, NULL, 1, '205a995e9ef7b052805d0ef4d5dbcbab'),
+(4, 'Medi ded', 'csebrur.hasinmanjare34@gmail.com', NULL, '$2y$10$vUISx0T5HMybtz/KPM1e0.pKuFLX/TiDztWtrSdFsEoRDVwRyLa96', NULL, '4', '2019-10-21', '2019-11-06', NULL, NULL, 1, '609df2951dce3c0b85df16c59d4872a6');
 
 -- --------------------------------------------------------
 
@@ -527,7 +533,7 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT for table `chamber`
 --
 ALTER TABLE `chamber`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `clinic`
@@ -545,7 +551,7 @@ ALTER TABLE `consulting_center`
 -- AUTO_INCREMENT for table `dispensary`
 --
 ALTER TABLE `dispensary`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `district`
@@ -557,7 +563,7 @@ ALTER TABLE `district`
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `employee`

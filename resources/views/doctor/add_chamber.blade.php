@@ -86,7 +86,7 @@
                             <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Consulting_Center') }}</label>
 
                             <div class="col-md-6">
-                            <select class="form-control" id="consulting_center" name ="consultin_center_id" >
+                            <select class="form-control" id="consulting_center" name ="consulting_center_id" >
                             <option value="">Select Consulting Center</option>
                            
                             </select>

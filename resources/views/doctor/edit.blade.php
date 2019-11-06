@@ -58,54 +58,56 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Region') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Degree') }}</label>
 
                             <div class="col-md-6">
-                            <select class="form-control" id="region" name ="region_id" required>
-                            <option value="">Select Region</option>
-                            @foreach($dataset as $data_one)
-                            <option value="{{$data_one->id}}"<?php if($data_one->id == $data->region_id){echo "selected";} ?>>{{$data_one->name}}</option>
-                           @endforeach
-                            </select>
-
+                                <input  type="text" class="form-control @error('degree') is-invalid @enderror" name="degree" value="{{$data->degree}}" required autocomplete="" autofocus>
                             </div>
                         </div>
-
-                        
                         <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Department') }}</label>
 
                             <div class="col-md-6">
-                            <select class="form-control" id="district" name ="district_id" required>
-                            <option value="{{$data->district_id}}">{{$region->district_name($data->district_id)}}</option>
-                     
-                            </select>
-
+                                <input  type="text" class="form-control @error('department') is-invalid @enderror" name="department" value="{{$data->department}}" required autocomplete="" autofocus>
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Institute') }}</label>
 
                             <div class="col-md-6">
-                            <select class="form-control" id="area" name ="area_id" required>
-                            <option value="{{$data->area_id}}">{{$region->area_name($data->area_id)}}</option>
-
-                            </select>
-
+                                <input type="text" value="{{$data->institute}}" name="institute" class="form-control" id="institute">
                             </div>
                         </div>
-
-
-
                         <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Market') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Qualified ') }}</label>
 
                             <div class="col-md-6">
-                            <select class="form-control" id="market" name ="market_id" required>
-                            <option value="{{$data->market_id}}">{{$region->market_name($data->market_id)}}</option>
-                            </select>
+                                <select class="form-control" value="{{$data->is_qualified}}" name="is_qualified" id="is_qualified">
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Multiple Chamber') }}</label>
 
+                            <div class="col-md-6">
+                                <select class="form-control" value="{{$data->mul_chamber}}" name="mul_chamber" id="mul_chamber">
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </div>
+                   
+
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Is Covered') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" value="{{$data->is_covered}}" name="is_covered" id="is_covered">
+                                    <option value="Covered">Covered</option>
+                                    <option value="Not Covered">No</option>
+                                </select>
                             </div>
                         </div>
 
@@ -154,7 +156,7 @@ $(document).ready(function(){
     $('#region').change(function(){
 
     var region_id = $(this).val();
-    var _url = "{{URL::to('area/list_district')}}";
+    var _url = "{{URL::to('teritory/list_district')}}";
     $.ajax({
         url: _url,
         method:"POST",
@@ -169,7 +171,7 @@ $(document).ready(function(){
     $('#district').change(function(){
 
     var district_id = $(this).val();
-    var _url = "{{URL::to('area/list_area')}}";
+    var _url = "{{URL::to('teritory/list_area')}}";
     $.ajax({
         url: _url,
         method:"POST",
@@ -184,7 +186,7 @@ $(document).ready(function(){
     $('#area').change(function(){
 
     var area_id = $(this).val();
-    var _url = "{{URL::to('area/list_market')}}";
+    var _url = "{{URL::to('teritory/list_market')}}";
     $.ajax({
         url: _url,
         method:"POST",

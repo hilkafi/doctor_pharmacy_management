@@ -31,7 +31,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Designation') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="designation" value="{{$data->designation}}" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="designation" value="{{$employee->designation}}" required autocomplete="" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -40,7 +40,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                      
 
                             <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('email') }}</label>
@@ -85,7 +85,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
+                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
 
                             <div class="col-md-6">
                             <select class="form-control" id="district" name ="district_id" required>
@@ -100,7 +100,7 @@
 
 
                         <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
+                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Teritory') }}</label>
 
                             <div class="col-md-6">
                             <select class="form-control" id="area" name ="area_id" required>

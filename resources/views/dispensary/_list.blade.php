@@ -32,6 +32,11 @@
                     </form></td></tr></table></td>
                 </tr>
                 @endforeach
+                    <tr>
+                    <td  colspan = '4' style="text-align: right; font-weight: bold">Total Pharamcy</td>
+                    <td style="font-weight: bold">{{ $i }}</td>
+                    <td></td>
+                </tr>
               
                 <table>
                 <?php echo $dataset->render(); ?>

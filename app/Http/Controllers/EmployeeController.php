@@ -56,8 +56,7 @@ class EmployeeController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'designation' => 'required',
-            'district_id' => 'required',
-            'area_id' => 'required',
+
             'region_id' => 'required',
             
         ]);

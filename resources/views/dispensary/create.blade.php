@@ -165,7 +165,7 @@ $(document).ready(function(){
     $('#region').change(function(){
 
     var region_id = $(this).val();
-    var _url = "{{URL::to('area/list_district')}}";
+    var _url = "{{URL::to('teritory/list_district')}}";
     $.ajax({
         url: _url,
         method:"POST",
@@ -180,7 +180,7 @@ $(document).ready(function(){
     $('#district').change(function(){
 
     var district_id = $(this).val();
-    var _url = "{{URL::to('area/list_area')}}";
+    var _url = "{{URL::to('teritory/list_area')}}";
     $.ajax({
         url: _url,
         method:"POST",
@@ -195,7 +195,7 @@ $(document).ready(function(){
     $('#area').change(function(){
 
     var area_id = $(this).val();
-    var _url = "{{URL::to('area/list_market')}}";
+    var _url = "{{URL::to('teritory/list_market')}}";
     $.ajax({
         url: _url,
         method:"POST",

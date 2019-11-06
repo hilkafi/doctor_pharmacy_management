@@ -211,7 +211,7 @@ class TeritoryController extends Controller
             $dataset = Consulting_Center::where([['is_deleted', 0], ['market_id', $r->market]])->get();
             $str = "";
             if(!empty($dataset)){
-               $str .="<option value = ''>Select Consulting_Center</option>";
+               $str .="<option value = ''>Select Consulting Center</option>";
                 foreach($dataset as $data){
                    $str .= "<option value='{$data->id}'>{$data->name}</option>";
                 }
@@ -223,7 +223,7 @@ class TeritoryController extends Controller
             $dataset = Hospital::where([['is_deleted', 0], ['market_id', $r->market]])->get();
             $str = "";
             if(!empty($dataset)){
-               $str .="<option value = ''>Select Consulting_Center</option>";
+               $str .="<option value = ''>Select Hospital</option>";
                 foreach($dataset as $data){
                    $str .= "<option value='{$data->id}'>{$data->name}</option>";
                 }

@@ -27,15 +27,24 @@
                             </div>
                             </div>
                             <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Designation') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control" name="designation" value="" required autocomplete="" autofocus>
+
+
+                            </div>
+                        </div>
+
+                            <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' User Role') }}</label>
 
                             <div class="col-md-6">
                                 <select class="form-control" id="user_role" name="user_role">
                                     <option value="">Select User Role</option>
                                     <option value="1">RSM</option>
-                                    <option value="2">DM</option>
-                                    <option value="3">AM</option>
-                                    <option value="4">MPO</option>
+                                    <option value="2">AM</option>
+                                    <option value="3">MPO</option>
                                 </select>
                             </div>
                         </div>
@@ -165,7 +174,7 @@ $(document).ready(function(){
     $('#region').change(function(){
 
     var region_id = $(this).val();
-    var _url = "{{URL::to('area/list_district')}}";
+    var _url = "{{URL::to('teritory/list_district')}}";
     $.ajax({
         url: _url,
         method:"POST",
@@ -180,7 +189,7 @@ $(document).ready(function(){
     $('#district').change(function(){
 
     var district_id = $(this).val();
-    var _url = "{{URL::to('area/list_area')}}";
+    var _url = "{{URL::to('teritory/list_area')}}";
     $.ajax({
         url: _url,
         method:"POST",
@@ -195,7 +204,7 @@ $(document).ready(function(){
     $('#area').change(function(){
 
     var area_id = $(this).val();
-    var _url = "{{URL::to('area/list_market')}}";
+    var _url = "{{URL::to('teritory/list_market')}}";
     $.ajax({
         url: _url,
         method:"POST",

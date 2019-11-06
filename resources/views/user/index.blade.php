@@ -79,25 +79,13 @@
                 <tr>
                 <td>{{$i}}</td>
                 <td>{{$data->name}}</td>
-                <td><?php 
-                    if($data->user_role == 0){
-                        echo "Super Admin";
-                    }elseif($data->user_role == 1){
-                        echo "RSM";
-                    }elseif($data->user_role == 2){
-                        echo "DM";
-                    }elseif ($data->user_role == 3) {
-                        echo "AM";
-                    }elseif($data->user_role == 4){
-                        echo "MPO";
-                    }
-                ?></td>
-                <td>{{$employee->region_name($data->id)}}</td>
-                <td>{{$employee->district_name($data->id)}}</td>
-                <td>{{$employee->area_name($data->id)}}</td>
+                <td>{{$data->designation}}</td>
+                <td>{{$district->region_name($data->id)}}</td>
+                <td>{{$district->district_name($data->id)}}</td>
+                <td>{{$district->area_name($data->id)}}</td>
                 <td><table><tr><td> <a href='user/{{$data->_key}}/edit' class="btn btn-warning">E</a><br><br></td>
                 
-               <td> <form action="{{ route('employee.destroy', $data->id) }}" method="POST">
+               <td> <form action="{{ route('user.destroy', $data->id) }}" method="POST">
                     @method('DELETE')
                      @csrf
                     <button class="btn btn-danger">D</button>
@@ -121,7 +109,7 @@ $(document).ready(function(){
     $('#region').change(function(){
 
     var region_id = $(this).val();
-    var _url = "{{URL::to('area/list_district')}}";
+    var _url = "{{URL::to('teritory/list_district')}}";
     $.ajax({
         url: _url,
         method:"POST",
@@ -136,7 +124,7 @@ $(document).ready(function(){
     $('#district').change(function(){
 
     var district_id = $(this).val();
-    var _url = "{{URL::to('area/list_area')}}";
+    var _url = "{{URL::to('teritory/list_area')}}";
     $.ajax({
         url: _url,
         method:"POST",
@@ -151,7 +139,7 @@ $(document).ready(function(){
     $('#area').change(function(){
 
     var area_id = $(this).val();
-    var _url = "{{URL::to('area/list_market')}}";
+    var _url = "{{URL::to('teritory/list_market')}}";
     $.ajax({
         url: _url,
         method:"POST",

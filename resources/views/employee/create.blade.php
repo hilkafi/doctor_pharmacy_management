@@ -105,7 +105,7 @@
                             <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
 
                             <div class="col-md-6">
-                            <select class="form-control" id="district" name ="district_id" required>
+                            <select class="form-control" id="district" name ="district_id" >
                             <option value="">Select District</option>
                             </select>
 
@@ -117,7 +117,7 @@
                             <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
 
                             <div class="col-md-6">
-                            <select class="form-control" id="area" name ="area_id" required>
+                            <select class="form-control" id="area" name ="area_id" >
                             <option value="">Select Area</option>
                             </select>
 

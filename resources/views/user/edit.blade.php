@@ -14,7 +14,7 @@
                 <div class="card-header" style="background-color:#007ACC;color:white;">Update Employee</div>
 
                 <div class="card-body">
-                <form method="post" action="{{url('/employee')}}/{{$data->id}}">
+                <form method="post" action="{{url('/user')}}/{{$data->id}}">
                       @csrf
                       {{method_field('PUT')}}
 
@@ -22,7 +22,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="emp_name" value="{{$data->name}}" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{$data->name}}" required autocomplete="" autofocus>
 
 
                             </div>
@@ -31,13 +31,9 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Designation') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="designation" value="{{$data->designation}}" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control" name="designation" value="{{$employee->designation}}" required autocomplete="" autofocus>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+
                             </div>
                         </div>
 
@@ -61,7 +57,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Contact No.') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{$data->phone}}" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{$employee->phone}}" required autocomplete="" autofocus>
 
                             </div>
                         </div>
@@ -74,8 +70,8 @@
                             <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Region') }}</label>
 
                             <div class="col-md-6">
-                            <select class="form-control" id ="region" name ="region_id" required>
-                            <option value="">Select Region</option>
+                            <select class="form-control" id ="region" value="" name ="region_id" required>
+                            <option value="{{$employee->region_id}}">{{$region->region_name($employee->region_id)}}</option>
                             @foreach($dataset as $data_one)
                             <option value="{{$data_one->id}}"<?php if($data_one->id == $data->region_id){echo "selected";} ?>>{{$data_one->name}}</option>
                            @endforeach
@@ -85,11 +81,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
+                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
 
                             <div class="col-md-6">
                             <select class="form-control" id="district" name ="district_id" required>
-                            <option value="">Select District</option>
+                            <option value="{{$employee->district_id}}">{{$region->district_name($employee->region_id)}}</option>
                             @foreach($dataset_two as $data_two)
                             <option value="{{$data_two->id}}"<?php if($data_two->id == $data->district_id){echo "selected";} ?>>{{$data_two->name}}</option>
                            @endforeach
@@ -100,11 +96,11 @@
 
 
                         <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
+                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Teritory') }}</label>
 
                             <div class="col-md-6">
                             <select class="form-control" id="area" name ="area_id" required>
-                            <option value="">Select Area</option>
+                           <option value="{{$employee->area_id}}">{{$region->area_name($employee->area_id)}}</option>
                             @foreach($dataset_three as $data_three)
                             <option value="{{$data_three->id}}"<?php if($data_three->id == $data->area_id){echo "selected";} ?>>{{$data_three->name}}</option>
                            @endforeach
@@ -117,22 +113,24 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="address" value="{{$data->address}}" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="address" value="{{$employee->address}}" required autocomplete="" autofocus>
 
                             </div>
                         </div>
-
                             <div class="form-group row">
-                           
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' User Role') }}</label>
 
                             <div class="col-md-6">
-                                <input id="latitude" type="hidden" class="form-control @error('name') is-invalid @enderror"  name="latitude" value="" required autocomplete="" autofocus>
-                                 <input id="longitude" type="hidden" class="form-control @error('name') is-invalid @enderror"  name="longitude" value="" required autocomplete="" autofocus>
-
-
-
+                                <select class="form-control"  id="user_role" name="user_role">
+                                    <option value="{{$data->user_role}}">{{$region->user_role($data->user_role)}}</option>
+                                    <option value="1">RSM</option>
+                                    <option value="2">AM</option>
+                                  
+                                    <option value="3">MPO</option>
+                                </select>
                             </div>
                         </div>
+
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
