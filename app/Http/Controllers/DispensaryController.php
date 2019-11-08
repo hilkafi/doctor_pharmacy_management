@@ -59,6 +59,8 @@ class DispensaryController extends Controller
 
         $model = new Dispensary();
          
+                $model->consulting_center_id = $request->consulting_center_id;
+                $model->hospital_id = $request->hospital_id;
                 $model->name = $request->name;
                 $model->owner = $request->owner;
                 $model->address = $request->address;
@@ -133,6 +135,8 @@ class DispensaryController extends Controller
 
         $model = Dispensary::where('id', $id)->first();
          
+                $model->consulting_center_id = $request->consulting_center_id;
+                $model->hospital_id = $request->hospital_id;
                 $model->name = $request->name;
                 $model->owner = $request->owner;
                 $model->address = $request->address;

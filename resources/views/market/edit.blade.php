@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style="background-color:#007ACC;color:white;">Update Area</div>
+                <div class="card-header" style="background-color:#007ACC;color:white;">Update Market</div>
 
                 <div class="card-body">
                 <form method="post" action="{{url('market')}}/{{$data->id}}">
@@ -32,11 +32,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="area_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
+                            <label for="area_id" class="col-md-4 col-form-label text-md-right">{{ __('Teritory') }}</label>
 
                             <div class="col-md-6">
                             <select class="form-control" name ="area_id" required>
-                            <option value="">Select Area</option>
+                            <option value=""></option>
                             @foreach($dataset_three as $d_three)
                             <option value="{{$d_three->id}}" <?php if($d_three->id == $data->id){echo "selected"; } ?>>{{$d_three ->name}}</option>
                            @endforeach
@@ -49,11 +49,11 @@
 
 
                         <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
+                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
 
                             <div class="col-md-6">
                             <select class="form-control" name ="district_id" required>
-                            <option value="">Select District</option>
+                            <option value="">Select Area</option>
                             @foreach($dataset_two as $d_two)
                             <option value="{{$d_two->id}}" <?php if($d_two->id == $data->id){echo "selected"; } ?>>{{$d_two->name}}</option>
                            @endforeach

@@ -8,6 +8,9 @@ use App\District;
 use App\Market;
 use App\Hospital;
 use App\Consulting_Center;
+use App\Chamber;
+use App\Doctor;
+use App\Dispensary;
 use Auth;
 use App\Region;
 
@@ -130,7 +133,8 @@ class TeritoryController extends Controller
         $data = Area::where('_key',$id)->first();
         $dataset_two = District::where('is_deleted',0)->get();
         $dataset = Region::where('is_deleted',0)->get();
-        return view('teritory.edit',compact('data','dataset','dataset_two'));
+        $rgn = new District;
+        return view('teritory.edit',compact('data','dataset','dataset_two','rgn'));
     }
 
     /**
@@ -271,4 +275,35 @@ class TeritoryController extends Controller
         }
         return redirect()->back()->with('message',$message);
     }
+
+     public function view_details($id)
+     {
+          $functionality = new Area;
+          $d = Area::where('_key',$id)->first();
+          $dataset = Chamber::where('teritory_id',$d->id)->get();
+          $doc_id[] = null;
+          foreach ($dataset as $data) {
+
+                 $doc_id[] = $data->doctor_id;
+           }
+
+
+         $final_data = Doctor::whereIn('id',$doc_id)->paginate(10);
+
+          return view('teritory.details',compact('final_data','d','functionality'));
+
+        }
+        public function view_pharmacy_details($id)
+        {
+          $dis = new District;  
+          $functionality = new District;
+          $d = Area::where('_key',$id)->first();
+          $dataset = Dispensary::where('area_id',$d->id)->paginate(10);
+
+
+
+          return view('teritory.pharmacy',compact('dataset','d','functionality','dis'));
+
+        }
+
 }

@@ -59,6 +59,27 @@
                                 <input type="text" name="institute" class="form-control" id="institute">
                             </div>
                         </div>
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Contact') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="Contact" class="form-control" id="">
+                            </div>
+                        </div>
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Mail') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="email" name="mail" class="form-control" id="">
+                            </div>
+                        </div>
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Mailing Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="address" class="form-control" id="">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Qualified ') }}</label>
 

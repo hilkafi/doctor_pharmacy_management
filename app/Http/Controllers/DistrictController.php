@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\District;
 use App\Region;
+use App\Dispensary;
+use App\Doctor;
+use App\Chamber;
 use Auth;
 
 class DistrictController extends Controller
@@ -121,7 +124,8 @@ class DistrictController extends Controller
 
         $data = District::where('_key',$id)->first();
         $dataset = Region::where('is_deleted',0)->get();
-        return view('district.edit',compact('data','dataset'));
+        $region = new District;
+        return view('area.edit',compact('data','dataset','region'));
     }
 
     /**
@@ -196,4 +200,36 @@ class DistrictController extends Controller
         }
         return redirect()->back()->with('message',$message);
     }
+
+
+     public function view_details($id)
+     {
+          $functionality = new District;
+          $d = District::where('_key',$id)->first();
+          $dataset = Chamber::where('area_id',$d->id)->get();
+          $doc_id[] = null;
+          foreach ($dataset as $data) {
+
+                 $doc_id[] = $data->doctor_id;
+           }
+
+
+         $final_data = Doctor::whereIn('id',$doc_id)->paginate(10);
+
+          return view('area.details',compact('final_data','d','functionality'));
+
+        }
+        public function view_pharmacy_details($id)
+        {
+          $dis = new District;  
+          $functionality = new District;
+          $d = District::where('_key',$id)->first();
+          $dataset = Dispensary::where('district_id',$d->id)->paginate(10);
+
+
+
+          return view('area.pharmacy',compact('dataset','d','functionality','dis'));
+
+        }
+
 }

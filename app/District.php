@@ -4,6 +4,10 @@ namespace App;
 use App\Region;
 use App\Area;
 use APP\User;
+use App\Doctor;
+use App\Chamber;
+use App\Dispensary;
+use App\District;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -57,6 +61,26 @@ public function market_name($id)
         return !empty($data) ? $data->name : " ";
 
 }
+public function cc_name($id)
+{
+    $qry = Consulting_Center::query();
+        if(!empty($id))
+        {
+            $data = $qry->where('id',$id)->first();
+        }
+        return !empty($data) ? $data->name : " ";
+
+}
+public function hospital_name($id)
+{
+    $qry = Hospital::query();
+        if(!empty($id))
+        {
+            $data = $qry->where('id',$id)->first();
+        }
+        return !empty($data) ? $data->name : " ";
+
+}
 
 public function user_role($id)
 {
@@ -75,6 +99,76 @@ public function user_role($id)
        
 
 }
+
+public function doctor_percentage($id){
+        if (!empty($id)) {
+        $query = Chamber::where('area_id', $id)->get();
+        $doctor[]=null;
+        if(!empty($query)){
+        foreach ($query as $doc) {
+        $doctor[] = $doc->doctor_id;
+        }
+    }
+        
+
+        $num_doc = Doctor::whereIn('id', $doctor)->get();
+
+        $covered = 0;
+        $uncovered = 0;
+        $i = 0;
+
+        if(!empty($num_doc)){
+        foreach ($num_doc as $doc) {
+         if($doc->is_covered == 'Covered'){
+            $covered += 1;
+            }
+            elseif ($doc->is_covered == 'Not Covered') {
+            $uncovered += 1;
+            }
+            $i++;
+            }
+         
+            
+                    
+            }
+
+       
+            $i == 0 ? $percentage = '' : $percentage = ($covered/$i)*100;
+            $fdata = Array($i,$covered,round($percentage, 2).'%'); 
+            return $fdata;
+        }
+                //return $i;
+            
+        }
+
+        public function pharmacy_covered($id){
+            if (!empty($id)) {
+                $query = Dispensary::where('district_id', $id)->get();
+               
+                $covered = 0;
+                
+                $i = 0;
+
+                if(!empty($query)){
+                    foreach ($query as $pharmacy) {
+                        if($pharmacy->is_covered == 'Covered'){
+                            $covered += 1;
+                        }
+
+                    $i++;
+                    }
+         
+            
+                    
+                }
+
+       
+            $i == 0 ? $percentage = '' : $percentage = ($covered/$i)*100;
+            $fdata = Array($i,$covered,round($percentage, 2).'%'); 
+            return $fdata;
+        }
+                
+        }
 
 }
 

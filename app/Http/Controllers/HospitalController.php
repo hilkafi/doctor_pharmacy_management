@@ -9,6 +9,8 @@ use App\District;
 use App\Hospital;
 use App\Area;
 use App\Market;
+use App\Chamber;
+use App\Doctor;
 
 class HospitalController extends Controller
 {
@@ -183,6 +185,24 @@ class HospitalController extends Controller
         $dataset = $data->paginate(10);
         return view('hospital._list', compact('dataset', 'region'));
  }
+
+        public function view_details($id)
+        {
+          $functionality = new Hospital;
+          $d = Hospital::where('_key',$id)->first();
+          $dataset = Chamber::where('hospital_id',$d->id)->get();
+          $doc_id[] = null;
+          foreach ($dataset as $data) {
+
+                 $doc_id[] = $data->doctor_id;
+           }
+
+
+         $final_data = Doctor::whereIn('id',$doc_id)->paginate(10);
+
+          return view('hospital/details',compact('final_data','d','functionality'));
+
+        }
 
     /**
      * Remove the specified resource from storage.

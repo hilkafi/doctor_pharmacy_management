@@ -63,6 +63,9 @@ class DoctorController extends Controller
                 $model->department = $request->department;
                 $model->degree = $request->degree;
                 $model->institute = $request->institute;
+                $model->contact = $request->contact;
+                $model->mail = $request->mail;
+                $model->address = $request->address;
                 $model->is_qualified = $request->is_qualified;
                 $model->mul_chamber = $request->mul_chamber;
                 $model->is_covered = $request->is_covered;
@@ -125,13 +128,6 @@ class DoctorController extends Controller
         //
         $validatedData = $request->validate([
             'doc_name' => 'required',
-            'designation' => 'required',
-            'expertise' => 'required',
-            'address' => 'required',
-            'market_id' => 'required',
-            'area_id'=> 'required',
-            'district_id'=> 'required',
-            'region_id'=> 'required',
             
         ]);
 
@@ -142,6 +138,9 @@ class DoctorController extends Controller
         $model->department = $request->department;
         $model->degree = $request->degree;
         $model->institute = $request->institute;
+        $model->contact = $request->contact;
+        $model->mail = $request->mail;
+        $model->address = $request->address;
         $model->is_qualified = $request->is_qualified;
         $model->mul_chamber = $request->mul_chamber;
         $model->is_covered = $request->is_covered;
@@ -325,6 +324,7 @@ class DoctorController extends Controller
                 $model->consulting_center_id = $request->consulting_center_id;
                 $model->hospital_id = $request->hospital_id;
                 $model->address = $request->address;
+                 $model->contact = $request->contact;
                 $model->visiting_hour = $request->visiting_hour;
                 $model->fee = $request->fee;
                 $model->_key = md5(microtime().rand());

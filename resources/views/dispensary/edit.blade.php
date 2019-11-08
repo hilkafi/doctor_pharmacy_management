@@ -95,6 +95,28 @@
 
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Consulting_Center') }}</label>
+
+                            <div class="col-md-6">
+                            <select class="form-control" id="consulting_center" name ="consulting_center_id" >
+                            <option value="{{ $data->consulting_center_id }}">{{$region->cc_name($data->consulting_center_id)}}</option>
+                           
+                            </select>
+
+                            </div>
+                        </div>
+                            <div class="form-group row">
+                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Hospital') }}</label>
+
+                            <div class="col-md-6">
+                            <select class="form-control" id="hospital" name ="hospital_id" >
+                            <option value="{{$data->hospital_id}}">{{$region->hospital_name($data->hospital_id)}}</option>
+                           
+                            </select>
+
+                            </div>
+                        </div>
                             <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Is Covered') }}</label>
 
@@ -190,6 +212,36 @@ $(document).ready(function(){
         success: function(result)
         {
         $('#market').html(result);
+        }
+
+    });
+});
+$('#market').change(function(){
+
+    var market_id = $(this).val();
+    var _url = "{{URL::to('teritory/list_consulting_center')}}";
+    $.ajax({
+        url: _url,
+        method:"POST",
+        data:{ market : market_id, _token : "{{ csrf_token() }}" },
+        success: function(result)
+        {
+        $('#consulting_center').html(result);
+        }
+
+    });
+});
+    $('#market').change(function(){
+
+    var market_id = $(this).val();
+    var _url = "{{URL::to('teritory/list_hospital')}}";
+    $.ajax({
+        url: _url,
+        method:"POST",
+        data:{ market : market_id, _token : "{{ csrf_token() }}" },
+        success: function(result)
+        {
+        $('#hospital').html(result);
         }
 
     });

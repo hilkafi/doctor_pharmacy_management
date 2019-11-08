@@ -8,6 +8,8 @@ use App\District;
 use App\Area;
 use App\Market;
 use App\Consulting_Center;
+use App\Chamber;
+use App\Doctor;
 use auth;
 
 class ConsultingCenterController extends Controller
@@ -184,6 +186,24 @@ class ConsultingCenterController extends Controller
         return view('consulting_center._list', compact('dataset', 'region'));
  }
 
+
+    public function view_details($id)
+    {
+          $functionality = new Consulting_Center;
+          $d = Consulting_Center::where('_key',$id)->first();
+          $dataset = Chamber::where('consulting_center_id',$d->id)->get();
+          $doc_id[] = null;
+           foreach ($dataset as $data) {
+
+                 $doc_id[] = $data->doctor_id;
+            }
+
+
+         $final_data = Doctor::whereIn('id',$doc_id)->paginate(10);
+
+          return view('consulting_center/details',compact('final_data','d','functionality'));
+
+    }
     /**
      * Remove the specified resource from storage.
      *

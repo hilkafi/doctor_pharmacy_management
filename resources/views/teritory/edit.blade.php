@@ -19,7 +19,7 @@
                       {{method_field('PUT')}}
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Area Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Teritory Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="area" value="{{$data->name}}" required autocomplete="" autofocus>
@@ -33,11 +33,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
+                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
 
                             <div class="col-md-6">
                             <select class="form-control" name ="district_id" required>
-                            <option value="">Select District</option>
+                            <option value="">Select Area</option>
                             @foreach($dataset_two as $d_two)
                             <option value="{{$d_two->id}}" <?php if($d_two->id == $data->id){echo "selected"; } ?>>{{$d_two->name}}</option>
                            @endforeach
@@ -57,7 +57,7 @@
 
                             <div class="col-md-6">
                             <select class="form-control" name ="region_id" required>
-                            <option value="">Select Region</option>
+                            <option value="{{$data->region_id}}">{{$region->region_name($data->region_id)}}</option>
                             @foreach($dataset as $d)
                             <option value="{{$d->id}}" <?php if($d->id == $data->id){echo "selected"; } ?>>{{$d->name}}</option>
                            @endforeach

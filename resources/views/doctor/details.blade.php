@@ -28,6 +28,9 @@
                           <tr><th>Degree:</th><td>{{$data->degree}}</td></tr>
                           <tr><th>Department:</th><td>{{$data->department}}</td></tr>
                           <tr><th>Institute:</th><td>{{ $data->institute }}</td></tr>
+                          <tr><th>Contact:</th><td>{{ $data->contact }}</td></tr>
+                          <tr><th>Mail:</th><td>{{ $data->mail }}</td></tr>
+                          <tr><th>Mailing Address:</th><td>{{ $data->address }}</td></tr>
                           <tr><th>Qualified:</th><td>{{$data->expertise}}</td></tr>
                           <tr><th>Is Covered:</th><td>{{$data->is_covered}}</td></tr>
                       </table>
@@ -43,6 +46,7 @@
                             <th>Market</th>
                             <th>C Center</th>
                             <th>Hospital</th>
+                            <th>Contact</th>
                             <th>visiting Hour</th>
                             <th>Fee</th>
                             <th>Action</th>
@@ -55,6 +59,7 @@
                             <td>{{ $data->market_name($chamber->market_id) }}</td>
                             <td>{{ $data->consalting_center_name($chamber->consulting_center_id) }}</td>
                             <td>{{ $data->hospital_name($chamber->hospital_id) }}</td>
+                              <td>{{ $chamber->contact }}</td>
                             <td>{{ $chamber->visiting_hour }}</td>
                             <td>{{ $chamber->fee }}</td>
                             <td><a href="#" class="btn btn-primary">Edit</a> || <a href="#" class="btn btn-danger">Del</a></td>

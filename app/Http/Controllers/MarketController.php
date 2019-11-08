@@ -7,6 +7,10 @@ use App\Market;
 use App\District;
 use App\Region;
 use App\Area;
+use App\Doctor;
+use App\Chamber;
+use App\Dispensary;
+
 
 class MarketController extends Controller
 {
@@ -187,4 +191,33 @@ class MarketController extends Controller
         }
         return redirect()->back()->with('message',$message);
     }
+    public function view_details($id)
+     {
+          $functionality = new Market;
+          $d = Market::where('_key',$id)->first();
+          $dataset = Chamber::where('market_id',$d->id)->get();
+          $doc_id[] = null;
+          foreach ($dataset as $data) {
+
+                 $doc_id[] = $data->doctor_id;
+           }
+
+
+         $final_data = Doctor::whereIn('id',$doc_id)->paginate(10);
+
+          return view('market.details',compact('final_data','d','functionality'));
+
+        }
+        public function view_pharmacy_details($id)
+        {
+          $dis = new District;  
+          $functionality = new Market;
+          $d = Market::where('_key',$id)->first();
+          $dataset = Dispensary::where('market_id',$d->id)->paginate(10);
+
+
+
+          return view('market.pharmacy',compact('dataset','d','functionality','dis'));
+
+        }
 }

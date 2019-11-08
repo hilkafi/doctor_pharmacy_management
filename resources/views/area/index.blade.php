@@ -45,6 +45,13 @@
                 <th>Sl.</th>
                 <th>Name</th>
                 <th>Region</th>
+                <th>Total Doctor</th>
+                <th>Covered Doctor</th>
+                <th>Doctor Covered</th>
+               
+                <th>Total Pharmacy</th>
+                <th>Covered Pharmacy</th>
+                <th>Pharmacy Covered</th>
                 <th>action</th>
                 </tr>
                 <?php $i = 0;
@@ -58,17 +65,35 @@
                 <td>{{$i}}</td>
                 <td>{{$data->name}}</td>
                 <td>{{$region->region_name($data->region_id)}}</td>
-                <td><table><tr><td> <a href='district/{{$data->_key}}/edit' class="btn btn-warning">E</a><br><br></td>
+                <?php
+                    $fdata = $data->doctor_percentage($data->id);
+                    $pdata = $data->pharmacy_covered($data->id);
+
+                ?>
+                @foreach($fdata as $key => $d)
+
+                <td>{{ $d}}</td>
+                @endforeach
+                @foreach($pdata as $key => $d)
+
+                <td>{{ $d}}</td>
+                @endforeach
+                <td><table><tr><td> <a href='area/{{$data->_key}}/edit' class="btn btn-warning">E</a><br><br></td>
                 
                <td> <form action="{{ route('area.destroy', $data->id) }}" method="POST">
                     @method('DELETE')
                      @csrf
                     <button class="btn btn-danger">D</button>
-                    </form></td></tr></table></td>
+                    </form></td>
+
+                     <td> <a href='area/{{$data->_key}}/details' class="btn btn-warning">V</a><br><br></td>
+                     <td> <a href='area/{{$data->_key}}/view_pharmacy' class="btn btn-warning">VPh</a><br><br></td>   
+                </tr></table></td>
+
                 </tr>
                 @endforeach
               
-                <table>
+                </table>
                 <?php echo $dataset->render(); ?>
 
                 </div>
@@ -83,7 +108,7 @@ $(document).ready(function(){
 $('#srch').click(function(){
 
 var _form = $('#my_frm');
-var _url = "{{URL::to('district/search')}}";
+var _url = "{{URL::to('area/search')}}";
 $.ajax({
     url: _url,
     method:"POST",

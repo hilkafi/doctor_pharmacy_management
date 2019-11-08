@@ -24,9 +24,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/region', 'RegionController');
 Route::post('/region/search', 'RegionController@search');
+Route::get('/region/{id}/details', 'RegionController@view_details');
+Route::get('region/{id}/view_pharmacy', 'RegionController@view_pharmacy_details');
 //district as area in new version
 Route::resource('/area', 'DistrictController');
 Route::post('/area/search', 'DistrictController@search');
+Route::get('/area/{id}/details', 'DistrictController@view_details');
+Route::get('area/{id}/view_pharmacy', 'DistrictController@view_pharmacy_details');
 //teritory as area in old version
 Route::resource('/teritory', 'TeritoryController');
 Route::post('/teritory/list_district', 'TeritoryController@list_district');
@@ -35,17 +39,23 @@ Route::post('/teritory/list_market', 'TeritoryController@list_market');
 Route::post('/teritory/list_consulting_center', 'TeritoryController@list_consulting_center');
 Route::post('/teritory/list_hospital', 'TeritoryController@list_hospital');
 Route::post('/teritory/search', 'TeritoryController@search');
+Route::get('/teritory/{id}/details', 'TeritoryController@view_details');
+Route::get('teritory/{id}/view_pharmacy', 'TeritoryController@view_pharmacy_details');
 
 Route::resource('/market', 'MarketController');
 Route::post('/market/search', 'MarketController@search');
+Route::get('/market/{id}/details', 'MarketController@view_details');
+Route::get('market/{id}/view_pharmacy', 'MarketController@view_pharmacy_details');
 
 //consulting center related route
 Route::resource('/consulting_center', 'ConsultingCenterController');
 Route::post('/consulting_center/search', 'ConsultingCenterController@search');
+Route::get('/consulting_center/{id}/details', 'ConsultingCenterController@view_details');
 
 //hospital related routes
 Route::resource('/hospital', 'HospitalController');
 Route::post('/hospital/search', 'HospitalController@search');
+Route::get('/hospital/{id}/details', 'HospitalController@view_details');
 
 //Doctor related Route
 Route::resource('/doctor', 'DoctorController');

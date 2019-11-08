@@ -37,7 +37,7 @@
 
                             <div class="col-md-6">
                             <select class="form-control" name ="region_id" required>
-                            <option value="">Select Region</option>
+                            <option value="{{$data->region_id}}">{{$region->region_name($data->region_id)}}</option>
                             @foreach($dataset as $d)
                             <option value="{{$d->id}}" <?php if($d->id == $data->id){echo "selected"; } ?>>{{$d->name}}</option>
                            @endforeach

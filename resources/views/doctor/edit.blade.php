@@ -22,53 +22,40 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="doc_name" value="{{$data->name}}" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="doc_name" value="{{$data->name}}" autocomplete="" autofocus>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Designation') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="designation" value="{{$data->designation}}" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="designation" value="{{$data->designation}}"  autocomplete="" autofocus>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                
                         </div>
+                    </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Expertise') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="expertise" value="{{$data->expertise}}" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="expertise" value="{{$data->expertise}}"  autocomplete="" autofocus>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                     
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Degree') }}</label>
 
                             <div class="col-md-6">
-                                <input  type="text" class="form-control @error('degree') is-invalid @enderror" name="degree" value="{{$data->degree}}" required autocomplete="" autofocus>
-                            </div>
+                                <input  type="text" class="form-control @error('degree') is-invalid @enderror" name="degree" value="{{$data->degree}}" required >
                         </div>
+                    </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Department') }}</label>
 
                             <div class="col-md-6">
-                                <input  type="text" class="form-control @error('department') is-invalid @enderror" name="department" value="{{$data->department}}" required autocomplete="" autofocus>
+                                <input  type="text" class="form-control @error('department') is-invalid @enderror" name="department" value="{{$data->department}}" autocomplete="" autofocus>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -76,6 +63,33 @@
 
                             <div class="col-md-6">
                                 <input type="text" value="{{$data->institute}}" name="institute" class="form-control" id="institute">
+                            </div>
+                        </div>
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Contact') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="" type="text" class="form-control @error('name') is-invalid @enderror" name="contact" value="{{$data->contact}}"  autocomplete="" autofocus>
+
+                     
+                            </div>
+                        </div>
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Mail') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="" type="text" class="form-control @error('name') is-invalid @enderror" name="mail" value="{{$data->mail}}"  autocomplete="" autofocus>
+
+                     
+                            </div>
+                        </div>
+                            <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Mailing Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="" type="text" class="form-control @error('name') is-invalid @enderror" name="address" value="{{$data->address}}"  autocomplete="" autofocus>
+
+                     
                             </div>
                         </div>
                         <div class="form-group row">
@@ -119,21 +133,6 @@
 
 
 
-
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="address" value="{{$data->address}}" required autocomplete="" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
