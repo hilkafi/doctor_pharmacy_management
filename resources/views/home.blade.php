@@ -17,7 +17,7 @@
                     @endif
                     <div class="row justify-content-center">
                         <div class="col-md-4">
-                            <div class="card" style="padding: 0px; margin: 0px; background: #000080; color: #fff">
+                            <div class="card" style="border-radius: 25px; padding: 0px; margin: 0px; background: #5757f7; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
                                     <a href="{{url('/doctor')}}" style="color: white;">
                                     <p style="font-size: 150px; text-align: center;"><i class="fa fa-user-md" aria-hidden="true"></i></p>
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card" style="padding: 0px; margin: 0px; background: #00ccff; color: #fff">
+                            <div class="card" style=" border-radius: 25px; padding: 0px; margin: 0px; background: #e85beb; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
                                     <a href="{{url('/dispensary')}}" style="color: white;">
                                     <p style="font-size: 150px; text-align: center;"><i class="fa fa-medkit" aria-hidden="true"></i></p>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card" style="padding: 0px; margin: 0px; background: #339933; color: #fff">
+                            <div class="card" style="border-radius: 25px; padding: 0px; margin: 0px; background: #339933; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
                                     <a href="{{url('/hospital')}}" style="color: white;">
                                     <p style="font-size: 150px; text-align: center;"><i class="fa fa-medkit" aria-hidden="true"></i></p>
@@ -59,10 +59,10 @@
                             </div>
                         </div>
                     </div>
-                    <br><br>
+                    <br>
                     <div class="row justify-content-center">
                         <div class="col-md-4">
-                            <div class="card" style="padding: 0px; margin: 0px; background: #000080; color: #fff"><a href="{{url('/region')}}">
+                            <div class="card" style="border-radius: 25px; padding: 0px; margin: 0px; background: #f23f3f; color: #fff"><a href="{{url('/region')}}">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
                                    <a  href="{{url('/region')}}" style="color:white;"> <p style="font-size: 150px; text-align: center;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
@@ -76,7 +76,7 @@
                         </div>
                     
                         <div class="col-md-4">
-                            <div class="card" style="padding: 0px; margin: 0px; background: #00ccff; color: #fff">
+                            <div class="card" style="border-radius: 25px; padding: 0px; margin: 0px; background: #00ccff; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
                                     <p style="font-size: 150px; text-align: center;"><a  href="{{url('/area')}}" style="color:white;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card" style="padding: 0px; margin: 0px; background: #339933; color: #fff">
+                            <div class="card" style="border-radius: 25px; padding: 0px; margin: 0px; background: #eba834; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
                                     <p style="font-size: 150px; text-align: center;"><a  href="{{url('/teritory')}}" style="color:white;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
@@ -102,10 +102,10 @@
                             </div>
                         </div>
                     </div>
-                    <br><br>
+                    <br>
                         <div class="row ">
                         <div class="col-md-4">
-                            <div class="card" style="padding: 0px; margin: 0px; background: #000080; color: #fff">
+                            <div class="card" style="border-radius: 25px; padding: 0px; margin: 0px; background: #34eb92; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
                                     <a href="{{url('/market')}}" style="color: white;">
                                     <p style="font-size: 150px; text-align: center;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></p>
