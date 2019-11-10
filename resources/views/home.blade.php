@@ -19,7 +19,7 @@
                         <div class="col-md-4">
                             <div class="card" style="padding: 0px; margin: 0px; background: #000080; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
-                                    <a href="url('/doctor')" style="color: white;">
+                                    <a href="{{url('/doctor')}}" style="color: white;">
                                     <p style="font-size: 150px; text-align: center;"><i class="fa fa-user-md" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
                                         <h3>Total Doctor: <i>{{$doctor}}</i></h3></a>
@@ -32,7 +32,7 @@
                         <div class="col-md-4">
                             <div class="card" style="padding: 0px; margin: 0px; background: #00ccff; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
-                                    <a href="url('/dispensary')" style="color: white;">
+                                    <a href="{{url('/dispensary')}}" style="color: white;">
                                     <p style="font-size: 150px; text-align: center;"><i class="fa fa-medkit" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
                                         
@@ -47,10 +47,11 @@
                         <div class="col-md-4">
                             <div class="card" style="padding: 0px; margin: 0px; background: #339933; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
-                                    <a href="{{url('/region')}}" style="color: white;">
-                                    <p style="font-size: 150px; text-align: center;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
+                                    <a href="{{url('/hospital')}}" style="color: white;">
+                                    <p style="font-size: 150px; text-align: center;"><i class="fa fa-medkit" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
-                                        <h1>Total Region: <i>{{$region}}</i></h3><br><br>
+                                        <h3><a href = "{{url('/hospital')}}" style="color: white;" >Total Hospital: <i>{{$hospital}}</i></a></h3>
+                                        <h3><a href = "{{url('/consulting_center')}}" style="color: white;" >Total Consulting Center: <i>{{$con_cen}}</i></h3><br>
 
                                     </div>
                                     </a>
@@ -61,24 +62,27 @@
                     <br><br>
                     <div class="row justify-content-center">
                         <div class="col-md-4">
-                            <div class="card" style="padding: 0px; margin: 0px; background: #000080; color: #fff"><a href="{{url('/area')}}">
+                            <div class="card" style="padding: 0px; margin: 0px; background: #000080; color: #fff"><a href="{{url('/region')}}">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
-                                   <a  href="{{url('/area')}}" style="color:white;"> <p style="font-size: 150px; text-align: center;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
+                                   <a  href="{{url('/region')}}" style="color:white;"> <p style="font-size: 150px; text-align: center;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
-                                        <h3>Total Area: <i>{{$area}}</i></h3>
+                                        <h3>Total Region: <i>{{$region}}</i></h3>
+                                          <h3>Total RSM: <i>{{$region}}</i></h3><br>
                                       
                                     </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    
                         <div class="col-md-4">
                             <div class="card" style="padding: 0px; margin: 0px; background: #00ccff; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
-                                    <p style="font-size: 150px; text-align: center;"><a  href="{{url('/teritory')}}" style="color:white;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
+                                    <p style="font-size: 150px; text-align: center;"><a  href="{{url('/area')}}" style="color:white;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
                                         
-                                        <h3>Total Teritory: <i>{{$teritory}}</i></h3>
+                                        <h3>Total Area: <i>{{$area}}</i></h3>
+                                          <h3>Total AM: <i>{{$area}}</i></h3><br>
 
                                     </a></div>
                                 </div>
@@ -87,15 +91,34 @@
                         <div class="col-md-4">
                             <div class="card" style="padding: 0px; margin: 0px; background: #339933; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
-                                    <p style="font-size: 150px; text-align: center;"><a  href="{{url('/market')}}" style="color:white;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></p>
+                                    <p style="font-size: 150px; text-align: center;"><a  href="{{url('/teritory')}}" style="color:white;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
-                                        <h3>Total Market: <i>{{$market}}</i></h3>
+                                        <h3>Total Teritory: <i>{{$teritory}}</i></h3>
+                                        <h3>Total MP0: <i>{{$teritory}}</i></h3><br>
+
 
                                     </a></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <br><br>
+                        <div class="row ">
+                        <div class="col-md-4">
+                            <div class="card" style="padding: 0px; margin: 0px; background: #000080; color: #fff">
+                                <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
+                                    <a href="{{url('/market')}}" style="color: white;">
+                                    <p style="font-size: 150px; text-align: center;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></p>
+                                    <div class="b-body" style="margin-top: -50px;">
+                                        <h3>Total Market: <i>{{$market}}</i></h3></a><br><br>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+             
+                    <br><br>
+
                
                
                   
