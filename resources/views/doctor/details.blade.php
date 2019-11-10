@@ -39,6 +39,7 @@
                             <th>Region</th>
                             <th>Area</th>
                             <th>teritory</th>
+                            <th>MPO</th>
                             <th>Market</th>
                             <th>C Center</th>
                             <th>Hospital</th>
@@ -52,6 +53,8 @@
                             <td>{{ $data->region_name($chamber->region_id) }}</td>
                             <td>{{ $data->district_name($chamber->area_id) }}</td>
                             <td>{{ $data->area_name($chamber->teritory_id) }}</td>
+                         
+                             <td>{{$user->employee_name($chamber->teritory_id)}}</td>
                             <td>{{ $data->market_name($chamber->market_id) }}</td>
                             <td>{{ $data->consalting_center_name($chamber->consulting_center_id) }}</td>
                             <td>{{ $data->hospital_name($chamber->hospital_id) }}</td>

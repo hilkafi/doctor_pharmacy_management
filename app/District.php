@@ -102,7 +102,7 @@ public function user_role($id)
 
 public function doctor_percentage($id){
         if (!empty($id)) {
-        $query = Chamber::where('area_id', $id)->get();
+        $query = Chamber::where('area_id', $id)->where('is_deleted','0')->get();
         $doctor[]=null;
         if(!empty($query)){
         foreach ($query as $doc) {
@@ -111,7 +111,7 @@ public function doctor_percentage($id){
     }
         
 
-        $num_doc = Doctor::whereIn('id', $doctor)->get();
+        $num_doc = Doctor::whereIn('id', $doctor)->where('is_deleted','0')->get();
 
         $covered = 0;
         $uncovered = 0;
@@ -143,7 +143,7 @@ public function doctor_percentage($id){
 
         public function pharmacy_covered($id){
             if (!empty($id)) {
-                $query = Dispensary::where('district_id', $id)->get();
+                $query = Dispensary::where('district_id', $id)->where('is_deleted','0')->get();
                
                 $covered = 0;
                 

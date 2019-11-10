@@ -10,6 +10,8 @@ use App\District;
 use App\Region;
 use App\VisitLog;
 use App\Chamber;
+use App\User;
+use App\Employee;
 use Auth;
 use DB;
 
@@ -99,9 +101,10 @@ class DoctorController extends Controller
     public function show($id)
     {
         $data = Doctor::where('id', $id)->first();
-        $chambers = Chamber::where('doctor_id', $id)->get();
+        $chambers = Chamber::where('doctor_id',$data->id)->get();
+        $user = new Doctor;
 
-        return view('doctor.details', compact('data', 'chambers'));
+        return view('doctor.details', compact('data', 'chambers','user'));
     }
 
     /**

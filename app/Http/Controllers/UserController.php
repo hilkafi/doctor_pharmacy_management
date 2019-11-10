@@ -110,8 +110,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::where('_key', $id)->first();
+        $employee = Employee::where('user_id',$user->id)->first();
         $district = new District();
-        return view('user.details', compact('user', 'district'));
+        return view('user.details', compact('user', 'district','employee'));
     }
 
     /**

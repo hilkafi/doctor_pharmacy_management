@@ -11,6 +11,8 @@ use App\District;
 use App\Region;
 use Auth;
 use App\VisitLog;
+use App\Employee;
+use App\User;
 
 class DispensaryController extends Controller
 {
@@ -210,7 +212,9 @@ class DispensaryController extends Controller
         $data = Dispensary::where('_key', $id)->first();
         $dataset = Region::where('is_deleted',0)->get();
         $region = new District();
-        return view('dispensary.visit', compact('data', 'dataset', 'region'));
+        $employee = Employee::where('area_id',$data->area_id)->first();
+        $user = User::where('is_deleted','0')->where('id',$employee->user_id)->first();
+        return view('dispensary.visit', compact('data', 'dataset', 'region','user'));
     }
 
 

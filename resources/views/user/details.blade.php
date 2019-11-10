@@ -26,15 +26,15 @@
                 <tr>
                     <th>Email</th><td>{{$user->email}} </td>
                  </tr>
+              
                 <tr>
-                <tr>
-                    <th>Teritory</th><td></td>
+                    <th>Teritory</th><td>{{$district->area_name($employee->area_id)}}</td>
                  </tr>
                 <tr>
-                    <th>Area</th><td></td>
+                    <th>Area</th><td>{{$district->district_name($employee->district_id)}}</td>
                  </tr>
                 <tr>
-                    <th>Teritory</th><td></td>
+                    <th>Region</th><td>{{$district->region_name($employee->region_id)}}</td>
                  </tr>  
                </table>
            </div>

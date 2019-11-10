@@ -7,6 +7,8 @@ use App\Area;
 use App\Market;
 use App\Consulting_Center;
 use App\Hospital;
+use App\Employee;
+use App\User;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -84,5 +86,12 @@ class Doctor extends Model
 	        }
 	        return !empty($data) ? $data->name : " ";
 
+	}
+	public function employee_name($id)
+	{
+		$qry = Employee::where('area_id',$id)->first();
+		$user = User::where('is_deleted','0')->where('id',$qry->user_id)->first();
+
+		return $user->name;
 	}
 }

@@ -17,6 +17,7 @@
                       @csrf
                       <table class="table table-bordered tbl_thin">
                           <tr><th>Dispensary Name:</th><td>{{$data->name}}</td></tr>
+                             <tr><th>MPO Name:</th><td>{{$user->name}}</td></tr>
                           <tr><th>Market:</th><td>{{$region->market_name($data->market_id)}}</td></tr>
                           <tr><th>Teritory:</th><td>{{$region->area_name($data->area_id)}}</td></tr>
                           <tr><th>Area:</th><td>{{$region->district_name($data->district_id)}}</td></tr>

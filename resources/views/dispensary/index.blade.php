@@ -17,7 +17,7 @@
                 <div  class="col-md-10">
                 <form method="post" class="form-class" id="my_frm">
                 @csrf
-                <p class="btn btn-outline-primary" id="mapping">Mapping</p>
+                <p class="btn btn-outline-primary" id="mapping">Section</p>
                 <div class="display-mapping" style="display: none; margin-bottom: 10px">
                     <div class="input-group">
                         <div class="input-group col-md-3">
@@ -30,12 +30,12 @@
                         </div>
                         <div class="input-group col-md-3">
                             <select class="form-control" id="district" name="district_id">
-                                <option value="">Select District</option>
+                                <option value="">Select Area</option>
                             </select>
                         </div>
                         <div class="input-group col-md-3">
                             <select class="form-control" id="area" name="area_id">
-                                <option value="">Select Area</option>
+                                <option value="">Select Teritory</option>
                             </select>
                         </div>
                         <div class="input-group col-md-3">

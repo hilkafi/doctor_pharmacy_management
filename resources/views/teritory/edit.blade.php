@@ -8,7 +8,7 @@
                 <div class="card-header" style="background-color:#333;color:white;">Update Teritory</div>
 
                 <div class="card-body">
-                <form method="post" action="{{url('area')}}/{{$data->id}}">
+                <form method="post" action="{{url('teritory')}}/{{$data->id}}">
                       @csrf
                       {{method_field('PUT')}}
 
@@ -18,11 +18,6 @@
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="area" value="{{$data->name}}" required autocomplete="" autofocus>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
 

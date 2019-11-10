@@ -16,7 +16,7 @@ class Hospital extends Model
 
          public function doctor_percentage($id){
         	if (!empty($id)) {
-        		$query = Chamber::where('hospital_id', $id)->get();
+        		$query = Chamber::where('hospital_id', $id)->where('is_deleted','0')->get();
         		$doctor[] = null;
         		if(!empty($query)){
 	        		foreach ($query as $doc) {
@@ -24,7 +24,7 @@ class Hospital extends Model
 	        		}
         		}
 
-        		$num_doc = Doctor::whereIn('id', $doctor)->get();
+        		$num_doc = Doctor::whereIn('id', $doctor)->where('is_deleted','0')->get();
 
         		$covered = 0;
         		$uncovered = 0;

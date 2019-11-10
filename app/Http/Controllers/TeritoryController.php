@@ -152,8 +152,7 @@ class TeritoryController extends Controller
     {
         //
         $validatedData = $request->validate([
-            'area' => 'required',
-            'district_id'=> 'required',
+
             'region_id'=> 'required',
             
         ]);

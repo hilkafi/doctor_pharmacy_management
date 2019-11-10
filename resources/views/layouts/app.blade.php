@@ -150,18 +150,19 @@ a#navbarDropdown{
 th, td{
   padding: 2px;
 }
+
     
     </style>
 </head>
 <body>
     <div id="app">
-    <nav class="navbar navbar-inverse navbar-expand-md navbar-light fixed-top" style = "background-color:#222;" >
+    <nav class="navbar navbar-inverse navbar-expand-md navbar-light fixed-top" style = "background-color:#5bcfa2;" >
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/home') }}">
                 <h2 style="color:white;"><b>Pharmasia</b></h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon " style=""></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -172,7 +173,7 @@ th, td{
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Mapping<span class="caret"></span>
+                                    Section<span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
