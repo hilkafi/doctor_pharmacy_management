@@ -86,6 +86,7 @@
   color: #CFD8DC;
   font-size: 14px;
   padding: 16px 24px;
+  color:white;
 }
 
 #sidebar .nav a:hover{

@@ -28,6 +28,7 @@
                                     </div>
                                 </div>
                             </div>
+                            &nbsp;
                         </div>
                         <div class="col-md-4">
                             <div class="card" style=" border-radius: 25px; padding: 0px; margin: 0px; background: #e85beb; color: #fff">
@@ -43,6 +44,7 @@
                                     
                                 </div>
                             </div>
+                            &nbsp;
                         </div>
                         <div class="col-md-4">
                             <div class="card" style="border-radius: 25px; padding: 0px; margin: 0px; background: #339933; color: #fff">
@@ -73,6 +75,7 @@
                                     </div>
                                 </div>
                             </div>
+                            &nbsp;
                         </div>
                     
                         <div class="col-md-4">
@@ -87,7 +90,10 @@
                                     </a></div>
                                 </div>
                             </div>
+                            &nbsp;
                         </div>
+                       
+                  
                         <div class="col-md-4">
                             <div class="card" style="border-radius: 25px; padding: 0px; margin: 0px; background: #eba834; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
