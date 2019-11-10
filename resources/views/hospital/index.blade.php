@@ -74,8 +74,15 @@
                 ?>
 
 
+
+
                 @foreach($dataset as $data) 
                 <?php $i++;?>
+                                <?php
+                $fdata= $data->doctor_percentage($data->id);
+
+
+                ?>
 
                 <tr>
                 <td>{{$i}}</td>
@@ -84,7 +91,7 @@
                 <td>{{$region->district_name($data->area_id)}}</td>
                 <td>{{$region->area_name($data->teritory_id)}}</td>
                 <td>{{$region->market_name($data->market_id)}}</td>
-                <td>{{ $data->doctor_percentage($data->id) }}%</td>
+                <td>{{ $fdata[2] }}</td>
                 <td>{{$data->pharmacy_covered($data->id)}}</td>
                  <td style="width: 15%; text-align: center;"> <a href='hospital/{{$data->_key}}/edit' class="btn btn-outline-dark"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                      <a href='hospital/{{$data->_key}}/details' class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a>

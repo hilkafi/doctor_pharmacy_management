@@ -19,11 +19,12 @@
                         <div class="col-md-4">
                             <div class="card" style="padding: 0px; margin: 0px; background: #000080; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
+                                    <a href="url('/doctor')" style="color: white;">
                                     <p style="font-size: 150px; text-align: center;"><i class="fa fa-user-md" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
-                                        <h3>Total Doctor: <i>200</i></h3>
-                                        <h4>Covered: 80</h4>
-                                        <h4>Percentage: 40%</h4>
+                                        <h3>Total Doctor: <i>{{$doctor}}</i></h3></a>
+                                        <h4>Covered: {{$cov_doc}}</h4>
+                                        <h4>Percentage: {{$doc_per}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -31,35 +32,78 @@
                         <div class="col-md-4">
                             <div class="card" style="padding: 0px; margin: 0px; background: #00ccff; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
+                                    <a href="url('/dispensary')" style="color: white;">
                                     <p style="font-size: 150px; text-align: center;"><i class="fa fa-medkit" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
-                                        <h3>Total Pharmacy: <i>200</i></h3>
-                                        <h4>Covered: 80</h4>
-                                        <h4>Percentage: 40%</h4>
+                                        
+                                        <h3>Total Pharmacy: <i>{{$pharmacy}}</i></h3></a>
+                                        <h4>Covered: {{$cov_phar}}</h4>
+                                        <h4>Percentage:{{$percentage}}</h4>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="card" style="padding: 0px; margin: 0px; background: #339933; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
-                                    <p style="font-size: 150px; text-align: center;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></p>
+                                    <a href="{{url('/region')}}" style="color: white;">
+                                    <p style="font-size: 150px; text-align: center;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
-                                        <h3>Total Market: <i>240</i></h3>
-                                        <h4>Covered: 60</h4>
-                                        <h4>Percentage: 20%</h4>
+                                        <h1>Total Region: <i>{{$region}}</i></h3><br><br>
+
                                     </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <canvas id="pieChart"></canvas>
+                    <br><br>
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <div class="card" style="padding: 0px; margin: 0px; background: #000080; color: #fff"><a href="{{url('/area')}}">
+                                <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
+                                   <a  href="{{url('/area')}}" style="color:white;"> <p style="font-size: 150px; text-align: center;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
+                                    <div class="b-body" style="margin-top: -50px;">
+                                        <h3>Total Area: <i>{{$area}}</i></h3>
+                                      
+                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card" style="padding: 0px; margin: 0px; background: #00ccff; color: #fff">
+                                <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
+                                    <p style="font-size: 150px; text-align: center;"><a  href="{{url('/teritory')}}" style="color:white;"><i class="fa fa-briefcase" aria-hidden="true"></i></p>
+                                    <div class="b-body" style="margin-top: -50px;">
+                                        
+                                        <h3>Total Teritory: <i>{{$teritory}}</i></h3>
+
+                                    </a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card" style="padding: 0px; margin: 0px; background: #339933; color: #fff">
+                                <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
+                                    <p style="font-size: 150px; text-align: center;"><a  href="{{url('/market')}}" style="color:white;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></p>
+                                    <div class="b-body" style="margin-top: -50px;">
+                                        <h3>Total Market: <i>{{$market}}</i></h3>
+
+                                    </a></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+               
+               
+                  
                 </div>
-</div>
+            </div>
+
+
+
 
 <script type="text/javascript">
     //pie

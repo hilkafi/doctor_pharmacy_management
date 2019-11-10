@@ -17,16 +17,19 @@
 
                  <div class="table-responsive">  
 
-            
+            <?php
+            $doc=$functionality->doctor_percentage($d->id);
+
+            ?>
                <table class="table table-bordered">
                 <tr>
-                    <th>Total Doctor</th><td></td>
+                    <th>Total Doctor</th><td>{{$doc[0]}}</td>
                  </tr>
                 <tr>
-                    <th>Covered Doctor</th><td></td>
+                    <th>Covered Doctor</th><td>{{$doc[1]}}</td>
                  </tr>
                 <tr>
-                    <th>Doctor Coverage Pecentage</th><td> {{ $functionality->doctor_percentage($d->id) }}%</td>
+                    <th>Doctor Coverage Pecentage</th><td>{{$doc[2]}} </td>
                  </tr>   
                </table>
            </div>

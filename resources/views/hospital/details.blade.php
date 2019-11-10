@@ -15,18 +15,22 @@
       <div class="card-body" style="padding: 10px; text-align: center;"><h4>{{$d->name}} Details<h4></div>
     </div>
 
-                <div class="table-responsive">  
+                <div class="table-responsive"> 
+                <?php
+                $doc = $functionality->doctor_percentage($d->id);
+
+                ?> 
 
             
                <table class="table table-bordered">
                 <tr>
-                    <th>Total Doctor</th><td></td>
+                    <th>Total Doctor</th><td>{{$doc[0]}}</td>
                  </tr>
                 <tr>
-                    <th>Covered Doctor</th><td></td>
+                    <th>Covered Doctor</th><td>{{$doc[1]}}</td>
                  </tr>
                 <tr>
-                    <th>Doctor Coverage Pecentage</th><td> {{ $functionality->doctor_percentage($d->id) }}%</td>
+                    <th>Doctor Coverage Pecentage</th><td> {{ $doc[2] }}</td>
                  </tr>   
                </table>
            </div>

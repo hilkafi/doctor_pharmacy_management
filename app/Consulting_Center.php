@@ -42,10 +42,9 @@ class Consulting_Center extends Model
 	        		
         		}
 
-        		$i == 0 ? $percentage = '' : $percentage = ($covered/$i)*100;
-
-        		return round($percentage, 2);
-        		//return $i;
+            $i == 0 ? $percentage = '' : $percentage = ($covered/$i)*100;
+            $fdata = Array($i,$covered,round($percentage, 2).'%'); 
+            return $fdata;
         	}
         }
 

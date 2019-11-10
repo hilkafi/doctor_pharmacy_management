@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2019 at 12:39 AM
+-- Generation Time: Nov 10, 2019 at 11:06 AM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -204,11 +204,11 @@ CREATE TABLE `district` (
 
 INSERT INTO `district` (`id`, `name`, `region_id`, `is_deleted`, `_key`) VALUES
 (1, 'dfgd', 1, 1, 'fgdfgdgdsfs'),
-(2, 'admintest', 4, 0, 'f826b5d34d5120928f1b9926ada2bc62'),
+(2, 'Bogura', 4, 0, 'f826b5d34d5120928f1b9926ada2bc62'),
 (3, 'Panchagarh', 4, 0, '491bd213958e4db9fcc935719a2ba1e1'),
 (4, 'Thakurgaon', 4, 0, 'ceb6f355fdb3916aa1748416ca952275'),
-(5, 'dd', 3, 0, 'b203a5ef6a16a9c02822a81892f169f5'),
-(6, 'Hughb', 4, 0, '57292dd4cba7376f5a070b6a1be47962');
+(5, 'Dinajpur', 5, 0, 'b203a5ef6a16a9c02822a81892f169f5'),
+(6, 'Joypurhat', 4, 0, '57292dd4cba7376f5a070b6a1be47962');
 
 -- --------------------------------------------------------
 
@@ -367,8 +367,8 @@ INSERT INTO `region` (`id`, `name`, `is_deleted`, `_key`) VALUES
 (1, 'not test', 1, '61e8d2e252682f750d907244229da48d'),
 (2, 'test', 1, 'baba0f1ab35bdf151c2bed362148488e'),
 (3, 'something', 1, '493590acc4d71513489770532cf14a27'),
-(4, 'another', 0, '81f2040c7b257cc78d8263767ad42ed6'),
-(5, 'chalkbazar', 0, 'c45b4027b4e4c57dc630af2db60cdce9');
+(4, 'Rajshahi', 0, '81f2040c7b257cc78d8263767ad42ed6'),
+(5, 'Rangpur', 0, 'c45b4027b4e4c57dc630af2db60cdce9');
 
 -- --------------------------------------------------------
 
@@ -397,7 +397,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `user_role`, `created_at`, `updated_at`, `created_by`, `modified_by`, `is_deleted`, `_key`) VALUES
-(1, 'pitom', 'mhpitom007@gmail.com', NULL, '$2y$10$Pfccp0XrXufGsmi8R.ABquHGBxqa.JY0/OHMdrm//3rBMvKDxkVfK', 'sJBctIHQHbNLCPFHwVoDtLOfiU5hULmkcP2b3yQHay3NgTPaANkp85nOdEyI', '0', '2019-10-09', '2019-10-09', NULL, NULL, 0, NULL),
+(1, 'pitom', 'mhpitom007@gmail.com', NULL, '$2y$10$Pfccp0XrXufGsmi8R.ABquHGBxqa.JY0/OHMdrm//3rBMvKDxkVfK', 'fq5koZ5nJUL76g4orpiHDRR6pvY8PVE16KCGr4IDH968pRB61ED9aJ810Q9b', '0', '2019-10-09', '2019-10-09', NULL, NULL, 0, NULL),
 (2, 'Ratul', 'ratul@gmail.com', NULL, '$2y$10$euhSXfAgs2PWLKKn2Rsm8.IXHoJxzWwBkPY0VBmkWs3v5n/jFKDsS', NULL, '2', '2019-10-20', '2019-10-20', NULL, NULL, 0, '2a085bcff52de41c225c315cb8a99e3b'),
 (3, '@hasin', 'mridula@gmail.com', NULL, '$2y$10$3j1hu1vYg63AwuiLn8C12.m76CLM7yq7ImHrJXLuiUusuPrWVEXxy', NULL, '3', '2019-10-21', '2019-11-06', NULL, NULL, 1, '205a995e9ef7b052805d0ef4d5dbcbab'),
 (4, 'Medi ded', 'csebrur.hasinmanjare34@gmail.com', NULL, '$2y$10$vUISx0T5HMybtz/KPM1e0.pKuFLX/TiDztWtrSdFsEoRDVwRyLa96', NULL, '4', '2019-10-21', '2019-11-06', NULL, NULL, 1, '609df2951dce3c0b85df16c59d4872a6');
