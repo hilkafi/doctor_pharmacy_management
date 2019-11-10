@@ -34,9 +34,7 @@
       @if($user_role==0  || $user_role==1 )
       <div class ="test">
       <li>
-        <a href="{{url('/region')}}">
-          <i class="zmdi zmdi-link"></i> Region
-        </a>
+        
       </li>
       </div>
       @endif

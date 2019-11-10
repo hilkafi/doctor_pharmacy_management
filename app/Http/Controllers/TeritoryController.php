@@ -16,6 +16,10 @@ use App\Region;
 
 class TeritoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -133,8 +137,8 @@ class TeritoryController extends Controller
         $data = Area::where('_key',$id)->first();
         $dataset_two = District::where('is_deleted',0)->get();
         $dataset = Region::where('is_deleted',0)->get();
-        $rgn = new District;
-        return view('teritory.edit',compact('data','dataset','dataset_two','rgn'));
+        $region = new District;
+        return view('teritory.edit',compact('data','dataset','dataset_two','region'));
     }
 
     /**

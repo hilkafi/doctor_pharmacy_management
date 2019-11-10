@@ -1,17 +1,11 @@
 @extends('layouts.app')
-@extends('layouts.sidebar')
 
 @section('content')
 <div class="container">
-    <div class="row ">
-        <div class="col-md-2">
-       
-
-        
-        </div>
+    <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style="background-color:#007ACC;color:white;">Update Area</div>
+                <div class="card-header" style="background-color:#333;color:white;">Update Teritory</div>
 
                 <div class="card-body">
                 <form method="post" action="{{url('area')}}/{{$data->id}}">
@@ -68,7 +62,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-outline-   secondary">
                                     {{ __('Update') }}
                                 </button>
                             </div>

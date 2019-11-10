@@ -1,15 +1,10 @@
 @extends('layouts.app')
-@extends('layouts.sidebar')
 
 @section('content')
 <div class="container">
 
-    <div class="row ">
-        <div class="col-md-2">
-      
+  <div class="row justify-content-center">
 
-        
-        </div>
         <div class="col-md-10">
         @if(session()->has('message'))
         <div class="alert alert-success">
@@ -17,11 +12,11 @@
         </div>
         @endif 
             <div class="card">
-                <div class="card-header" style="background-color:#007ACC;color:white;">Doctor Details</div>
+                <div class="card-header" style="background-color:#ddd;color:black;"><b>Doctor Details</b></div>
 
                 <div class="card-body">
 
-                      <table class="table table-bordered tbl_thin">
+                      <table class="table table-bordered">
                           <tr><th>Doctor Name:</th><td>{{$data->name}}</td></tr>
                           <tr><th>Designation:</th><td>{{$data->designation}}</td></tr>
                           <tr><th>Speciality:</th><td>{{$data->expertise}}</td></tr>
@@ -36,8 +31,9 @@
                       </table>
                       
                 </div>
+            <div class="card">
+                <div class="card-header" style="background-color:#ddd;color:black; text-align: center;"><b>Chambers</b></div>
                 <div class="card-body">
-                    <h4>Chamber</h4>
                     <table class="table table-bordered tbl_thin">
                         <tr>
                             <th>Region</th>
@@ -62,12 +58,13 @@
                               <td>{{ $chamber->contact }}</td>
                             <td>{{ $chamber->visiting_hour }}</td>
                             <td>{{ $chamber->fee }}</td>
-                            <td><a href="#" class="btn btn-primary">Edit</a> || <a href="#" class="btn btn-danger">Del</a></td>
+                            <td><a href="#" class="btn btn-outline-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a href="#" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                         </tr>
                         @endforeach
                     </table>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </div>

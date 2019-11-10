@@ -1,26 +1,22 @@
 @extends('layouts.app')
-@extends('layouts.sidebar')
 
 @section('content')
 <div class="container">
-
-    <div class="row ">
-        <div class="col-md-2">
-     
-
-        
-        </div>
-        <div class="col-md-8">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
 
     </div>
-        @endif   
-
+        @endif  
+        <div class="card">
+            <div class="card-header" style="text-align: center;">
+                <h3>{{$d->name}} Region Details</h3>
+            </div> 
+            <div class="card-body"> 
                 <div class="table-responsive">
-                <h1>Region Name: <i>{{$d->name}}</i></h1> 
-                <table class="table-bordered">
+                <table class="table table-bordered">
                  <tr class="table-active">
                  <th>Total Doctor</th>
                  <th>Covered Doctor</th> 
@@ -40,10 +36,15 @@
                 @endforeach
                 </tr>
                </table>
+
               
            </div>
 
-               
+               <div class="card" style=" margin-bottom: 20px; margin-top: 20px;">
+                   <div class="card-body" style="padding: 10px; text-align: center;">
+                       <h4>Doctor List</h4>
+                   </div>
+               </div>
   
                 <div class="table-responsive">
                 <table class ="table table-bordered">
@@ -76,12 +77,12 @@
                 <tr>
                     <td  colspan = '4' style="text-align: right; font-weight: bold">Total Doctors</td>
                     <td style="font-weight: bold">{{ $i }}</td>
-                    <td></td>
                 </tr>
               
                 </table>
                 <?php echo $final_data->render(); ?>
                 </div>
+            </div>
 
     </div>
 </div>

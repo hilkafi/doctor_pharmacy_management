@@ -15,6 +15,10 @@ use Hash;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 	  public function index()
 
     {
@@ -105,7 +109,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::where('_key', $id)->first();
+        $district = new District();
+        return view('user.details', compact('user', 'district'));
     }
 
     /**

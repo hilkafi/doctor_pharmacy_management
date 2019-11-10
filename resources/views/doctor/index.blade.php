@@ -1,16 +1,13 @@
 @extends('layouts.app')
-@extends('layouts.sidebar')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
+    <div class="card" style="margin-bottom: 15px;">
+      <div class="card-body" style="padding: 10px; text-align: center;"><h4>Doctor List<h4></div>
+    </div>
 
-    <div class="row ">
-        <div class="col-md-2">
-     
-
-        
-        </div>
-        <div class="col-md-10">
+    <div class="row">
+        <div class="col-md-12">
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
@@ -18,12 +15,11 @@
 @endif
   
             <div class="">
-                <div class="row" style="margin-bottom: 30px" >
-                    <div  class="col-md-10"><a href='{{url("doctor/create")}}' class = "btn btn-success float-right">Add</a></div>
-                </div>
+                <div class="row" style="margin-bottom: 0px" >
+                <div class="col-md-10">
                 <form method="post" class="form-class" id="my_frm">
                 @csrf
-                <p class="btn btn-primary" id="mapping">Mapping</p>
+                <p class="btn btn-outline-primary" id="mapping">Mapping</p>
                 <div class="display-mapping" style="display: none; margin-bottom: 10px">
                     <div class="input-group">
                         <div class="input-group col-md-3">
@@ -51,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="btn btn-primary" id="ch">CH</p>
+                <p class="btn btn-outline-primary" id="ch">CH</p>
                 <div class="display-ch" style="display: none;  margin-bottom: 10px">
                     <div class="input-group">
                         <div class="input-group col-md-4">
@@ -66,7 +62,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="btn btn-primary" id="qualification">Qualification</p>
+                <p class="btn btn-outline-primary" id="qualification">Qualification</p>
                 <div class="display-qualification" style="display: none;  margin-bottom: 10px">
                     <div class="input-group">
                         <label class="radio-inline" style="margin-right: 15px">
@@ -77,7 +73,7 @@
                         </label>
                     </div>
                 </div>
-                <p class="btn btn-primary" id="info">Personal Info</p>
+                <p class="btn btn-outline-primary" id="info">Personal Info</p>
                 <div class="display-info" style="display: none; margin-bottom: 10px">
                     <div class="input-group">
                         <div class="input-group col-md-2">
@@ -97,7 +93,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="is-covered">
+                <div class="is-covered col-md-4" style="border: 1px solid #ddd; padding: 10px;">
                     <div class="input-group">
                         <label class="radio-inline" style="margin-right: 15px">
                           <input type="radio" name="is_covered" value="Covered" style="margin-right: 5px">Covered
@@ -107,22 +103,28 @@
                         </label>
                     </div>
                 </div>
-                <div class="input-group" style="cursor: pointer">
-                    <span class="input-group-text red lighten-3" id="srch">Search</span>
+                <div class="input-group" style="cursor: pointer; padding: 10px;">
+                    <span class="btn btn-outline-success" id="srch">Search</span>
                 </div>
                 </form>
+            </div>
+
+            <div  class="col-md-2">
+                <a href='{{url("doctor/create")}}' class = "btn btn-outline-dark">Add</a>
+            </div>
+            </div>
                 <div id ="ajax_content">
 
                 <div class="table-responsive">
-                <table class ="table table-bordered">
+                <table class ="table table-bordered table-sm">
                 <tr class ="table-active">
-                <th>Sl.</th>
-                <th>Name</th>
-                <th>Designation</th>
-                <th>Expertise</th>
-                <th>Add Chember</th>
-
-                <th>action</th>
+                <th style="text-align: center">Sl.</th>
+                <th style="text-align: center">Name</th>
+                <th style="text-align: center">Designation</th>
+                <th style="text-align: center">Expertise</th>
+                <th style="text-align: center">Is Covered</th>
+                <th style="width: 5%; text-align: center;">Chember</th>
+                <th style="width: 15%; text-align: center;">action</th>
                 </tr>
                 <?php $i = 0;
                 ?>
@@ -132,28 +134,22 @@
                 <?php $i++;?>
 
                 <tr>
-                <td>{{$i}}</td>
-                <td>{{$data->name}}</td>
-                <td>{{$data->designation}}</td>
-                <td>{{$data->expertise}}</td>
-                <td><table><tr>
-                    <td><a href="{{url('doctor/chamber')}}/{{$data->id}}" class="btn btn-success">Add Chamber</a></td>
-                </tr></table></td>
+                <td style="text-align: center">{{$i}}</td>
+                <td style="">{{$data->name}}</td>
+                <td style="">{{$data->designation}}</td>
+                <td style="">{{$data->expertise}}</td>
+                <td style="">{{$data->is_covered}}</td>
+                <td style="width: 5%; text-align: center;"><a href="{{url('doctor/chamber')}}/{{$data->id}}" class="btn btn-outline-primary"><i class="fa fa-plus" aria-hidden="true" title="Add Chamber"></i></a></td>
 
-                <td><table><tr><td> <a href='doctor/{{$data->id}}/edit' class="btn btn-warning">E</a><br><br></td>
-                
-               <td> <form action="{{ route('doctor.destroy', $data->id) }}" method="POST">
-                    @method('DELETE')
-                     @csrf
-                    <button class="btn btn-danger">D</button>
-                    </form></td>
-                    <td><a href="doctor/{{$data->id}}"><button class="btn btn-success">V</button></a></td>
-                </tr></table></td>
-                </tr>
+                <td style="width: 15%; text-align: center;"><a href='doctor/{{$data->id}}/edit' class="btn btn-outline-dark"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a href="doctor/{{$data->id}}" class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                   <a href="doctor/{{$data->id}}" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
                 @endforeach
                 <tr>
                     <td  colspan = '4' style="text-align: right; font-weight: bold">Total Doctors</td>
                     <td style="font-weight: bold">{{ $i }}</td>
+                    <td></td>
                     <td></td>
                 </tr>
               
@@ -162,7 +158,6 @@
                 </div>
 
                 </div>
-            </div>
         </div>
     </div>
 </div>

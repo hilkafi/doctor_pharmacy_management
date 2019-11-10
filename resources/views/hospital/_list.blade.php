@@ -1,4 +1,4 @@
-                <div class="table-responsive">
+<div class="table-responsive">
                 <table class ="table table-bordered">
                 <tr class ="table-active">
                 <th>Sl.</th>
@@ -9,7 +9,7 @@
                 <th>Market</th>
                 <th>Doctor Covered</th>
                 <th>C. Pharmacy</th>
-                <th>action</th>
+                <th style="width: 15%; text-align: center;">action</th>
                 </tr>
                 <?php $i = 0;
                 ?>
@@ -27,17 +27,9 @@
                 <td>{{$region->market_name($data->market_id)}}</td>
                 <td>{{ $data->doctor_percentage($data->id) }}%</td>
                 <td>{{$data->pharmacy_covered($data->id)}}</td>
-                <td><table><tr><td> <a href='hospital/{{$data->_key}}/edit' class="btn btn-warning">E</a><br><br></td>
-                
-               <td> <form action="{{ route('hospital.destroy', $data->id) }}" method="POST">
-                    @method('DELETE')
-                     @csrf
-                    <button class="btn btn-danger">D</button>
-                    </form></td>
-                    <td><a href='hospital/{{$data->_key}}/details' class="btn btn-warning">V</a><br><br></td>
-  
-
-                </tr></table></td>
+                 <td style="width: 15%; text-align: center;"> <a href='hospital/{{$data->_key}}/edit' class="btn btn-outline-dark"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                     <a href='hospital/{{$data->_key}}/details' class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                </td>
                 </tr>
                 @endforeach
               

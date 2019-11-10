@@ -1,24 +1,35 @@
 @extends('layouts.app')
-@extends('layouts.sidebar')
 
 @section('content')
 <div class="container">
 
-    <div class="row ">
-        <div class="col-md-2">
-     
-
-        
-        </div>
+    <div class="row justify-content-center">
         <div class="col-md-10">
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
 
     </div>
-@endif          <h1>Hospital Name: <i>{{$d->name}}</i></h1>
+@endif        
+    <div class="card" style="margin-bottom: 15px;">
+      <div class="card-body" style="padding: 10px; text-align: center;"><h4>{{$d->name}} Details<h4></div>
+    </div>
 
-                <b>total doctor coverege  {{ $functionality->doctor_percentage($d->id) }}%</b>
+                <div class="table-responsive">  
+
+            
+               <table class="table table-bordered">
+                <tr>
+                    <th>Total Doctor</th><td></td>
+                 </tr>
+                <tr>
+                    <th>Covered Doctor</th><td></td>
+                 </tr>
+                <tr>
+                    <th>Doctor Coverage Pecentage</th><td> {{ $functionality->doctor_percentage($d->id) }}%</td>
+                 </tr>   
+               </table>
+           </div>
   
                 <div class="table-responsive">
                 <table class ="table table-bordered">
@@ -51,7 +62,6 @@
                 <tr>
                     <td  colspan = '4' style="text-align: right; font-weight: bold">Total Doctors</td>
                     <td style="font-weight: bold">{{ $i }}</td>
-                    <td></td>
                 </tr>
               
                 </table>

@@ -1,24 +1,21 @@
 @extends('layouts.app')
-@extends('layouts.sidebar')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
 
-    <div class="row ">
-        <div class="col-md-2">
-     
-
-        
-        </div>
-        <div class="col-md-10">
+    <div class="card" style="margin-bottom: 15px;">
+      <div class="card-body" style="padding: 10px; text-align: center;"><h4>Market List<h4></div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
 @endif
   
-            <div class="">
-                <div  class=""></div><a href='{{url("market/create")}}' class = "btn btn-success">Add</a><br><br>
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-10">
                 <form method="post" class="form-class" id="my_frm">
                 @csrf
                 <div class="input-group">
@@ -48,23 +45,28 @@
                     </div>
                 </div>
                 </form>
+            </div>
+            <div  class="col-md-2">
+                <a href='{{url("market/create")}}' class = "btn btn-success">Add</a>
+            </div>
+        </div>
                 <div id="ajax_content">
                 <div class="table-responsive">
-                <table class ="table table-bordered">
-                <tr class ="table-active">
+                <table class ="table table-bordered table-striped">
+                <tr>
                 <th>Sl.</th>
                 <th>Name</th>
                 <th>Region</th>
                 <th>Area</th>
                 <th>Teritory</th>
-                <th>Total Doctor</th>
-                <th>Covered Doctor</th>
-                <th>Doctor Covered</th>
+                <th style="text-align: center;">Total Doctor</th>
+                <th style="text-align: center;">Covered Doctor</th>
+                <th style="text-align: center;">Doctor Covered</th>
                
-                <th>Total Pharmacy</th>
-                <th>Covered Pharmacy</th>
-                <th>Pharmacy Covered</th>
-                <th>action</th>
+                <th style="text-align: center;">Total Pharmacy</th>
+                <th style="text-align: center;">Covered Pharmacy</th>
+                <th style="text-align: center;">Pharmacy Covered</th>
+                <th style="width: 15%; text-align: center;">action</th>
                 </tr>
                 <?php $i = 0;
                 ?>
@@ -86,23 +88,16 @@
                 ?>
                 @foreach($fdata as $key => $d)
 
-                <td>{{ $d}}</td>
+                <td style="text-align: center;">{{ $d}}</td>
                 @endforeach
                 @foreach($pdata as $key => $d)
 
-                <td>{{ $d}}</td>
+                <td style="text-align: center;">{{ $d}}</td>
                 @endforeach
-                <td><table><tr><td> <a href='market/{{$data->_key}}/edit' class="btn btn-warning">E</a><br><br></td>
-                
-               <td> <form action="{{ route('market.destroy', $data->id) }}" method="POST">
-                    @method('DELETE')
-                     @csrf
-                    <button class="btn btn-danger">D</button>
-                    </form></td>
-
-                    <td> <a href='market/{{$data->_key}}/details' class="btn btn-warning">V</a><br><br></td>
-                    <td> <a href='market/{{$data->_key}}/view_pharmacy' class="btn btn-warning">Vph</a><br><br></td>
-                </tr></table></td>
+                <td style="width: 15%; text-align: center;"> <a href='market/{{$data->_key}}/edit' class="btn btn-outline-dark"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                     <a href='market/{{$data->_key}}/details' class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                      <a href='market/{{$data->_key}}/view_pharmacy' class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i>PH</a>
+                </td>
                 </tr>
                 @endforeach
               

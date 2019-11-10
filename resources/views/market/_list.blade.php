@@ -1,19 +1,19 @@
-                <div class="table-responsive">
-                <table class ="table table-bordered">
-                <tr class ="table-active">
+<div class="table-responsive">
+                <table class ="table table-bordered table-striped">
+                <tr>
                 <th>Sl.</th>
                 <th>Name</th>
                 <th>Region</th>
                 <th>Area</th>
                 <th>Teritory</th>
-                <th>Total Doctor</th>
-                <th>Covered Doctor</th>
-                <th>Doctor Covered</th>
+                <th style="text-align: center;">Total Doctor</th>
+                <th style="text-align: center;">Covered Doctor</th>
+                <th style="text-align: center;">Doctor Covered</th>
                
-                <th>Total Pharmacy</th>
-                <th>Covered Pharmacy</th>
-                <th>Pharmacy Covered</th>
-                <th>action</th>
+                <th style="text-align: center;">Total Pharmacy</th>
+                <th style="text-align: center;">Covered Pharmacy</th>
+                <th style="text-align: center;">Pharmacy Covered</th>
+                <th style="width: 15%; text-align: center;">action</th>
                 </tr>
                 <?php $i = 0;
                 ?>
@@ -35,23 +35,16 @@
                 ?>
                 @foreach($fdata as $key => $d)
 
-                <td>{{ $d}}</td>
+                <td style="text-align: center;">{{ $d}}</td>
                 @endforeach
                 @foreach($pdata as $key => $d)
 
-                <td>{{ $d}}</td>
+                <td style="text-align: center;">{{ $d}}</td>
                 @endforeach
-                <td><table><tr><td> <a href='market/{{$data->_key}}/edit' class="btn btn-warning">E</a><br><br></td>
-                
-               <td> <form action="{{ route('market.destroy', $data->id) }}" method="POST">
-                    @method('DELETE')
-                     @csrf
-                    <button class="btn btn-danger">D</button>
-                    </form></td>
-
-                    <td> <a href='market/{{$data->_key}}/details' class="btn btn-warning">V</a><br><br></td>
-                    <td> <a href='market/{{$data->_key}}/view_pharmacy' class="btn btn-warning">Vph</a><br><br></td>
-                </tr></table></td>
+                <td style="width: 15%; text-align: center;"> <a href='market/{{$data->_key}}/edit' class="btn btn-outline-dark"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                     <a href='market/{{$data->_key}}/details' class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                      <a href='market/{{$data->_key}}/view_pharmacy' class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i>PH</a>
+                </td>
                 </tr>
                 @endforeach
               

@@ -1,17 +1,12 @@
 @extends('layouts.app')
-@extends('layouts.sidebar')
 
 @section('content')
 <div class="container">
-    <div class="row ">
-        <div class="col-md-2">
-      
+    <div class="row justify-content-center">
 
-        
-        </div>
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
-                <div class="card-header" style="background-color:#007ACC;color:white;">Update Pharmacy</div>
+                <div class="card-header" style="background-color:#333;color:white;">Update Pharmacy</div>
 
                 <div class="card-body">
                 <form method="post" action="{{url('/dispensary')}}/{{$data->id}}">

@@ -1,24 +1,21 @@
 @extends('layouts.app')
-@extends('layouts.sidebar')
 
 @section('content')
 <div class="container">
+    <div class="card" style="margin-bottom: 15px;">
+      <div class="card-body" style="padding: 10px; text-align: center;"><h4>User List<h4></div>
+    </div>
 
-    <div class="row ">
-        <div class="col-md-2">
-     
-
-        
-        </div>
-        <div class="col-md-10">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
 @endif
   
-            <div class="">
-                <div  class=""></div><a href='{{url("user/create")}}' class = "btn btn-success">Add</a><br><br>
+            <div class="row" style="margin-bottom: 20px">
+                <div class="col-md-10">
 
                 <form method="post" class="form-class" id="my_frm">
                 @csrf
@@ -56,6 +53,12 @@
                     </div>
                 </div>
                 </form>
+            </div>
+
+                <div class="">
+                    <a href='{{url("user/create")}}' class = "btn btn-outline-success">Add</a>
+                </div>
+            </div>
                 <div id ="ajax_content">
 
                 <div class="table-responsive">
@@ -83,13 +86,9 @@
                 <td>{{$district->region_name($data->id)}}</td>
                 <td>{{$district->district_name($data->id)}}</td>
                 <td>{{$district->area_name($data->id)}}</td>
-                <td><table><tr><td> <a href='user/{{$data->_key}}/edit' class="btn btn-warning">E</a><br><br></td>
-                
-               <td> <form action="{{ route('user.destroy', $data->id) }}" method="POST">
-                    @method('DELETE')
-                     @csrf
-                    <button class="btn btn-danger">D</button>
-                    </form></td></tr></table></td>
+                 <td style="width: 20%; text-align: center;"> <a href='user/{{$data->_key}}/edit' class="btn btn-outline-dark"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                     <a href='user/{{$data->_key}}' class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                </td>
                 </tr>
                 @endforeach
                     

@@ -1,22 +1,16 @@
 @extends('layouts.app')
-@extends('layouts.sidebar')
 
 @section('content')
 <div class="container">
-    <div class="row ">
-        <div class="col-md-2">
-      
-
-        
-        </div>
-        <div class="col-md-8">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
         @if(session()->has('message'))
         <div class="alert alert-success">
         {{ session()->get('message') }}
         </div>
         @endif 
             <div class="card">
-                <div class="card-header" style="background-color:#007ACC;color:white;">Edit Doctor</div>
+                <div class="card-header" style="background-color:#007ACC;color:white;">{{$data->name}} Details</div>
 
                 <div class="card-body">
                 <form method="post" action="{{url('/dispensary/visit')}}/{{$data->id}}">
@@ -24,10 +18,10 @@
                       <table class="table table-bordered tbl_thin">
                           <tr><th>Dispensary Name:</th><td>{{$data->name}}</td></tr>
                           <tr><th>Market:</th><td>{{$region->market_name($data->market_id)}}</td></tr>
-                          <input type="hidden" name="dispensary_id" value="{{ $data->id }}">
-                          <input type="hidden" name="latitude" id="latitude">
-                          <input type="hidden" name="longitude" id="longitude">
-                          <tr><td></td><td style="column-span: 2"><button id="visit" type="submit" class="btn btn-primary">Visited</button></td></tr>
+                          <tr><th>Teritory:</th><td>{{$region->area_name($data->area_id)}}</td></tr>
+                          <tr><th>Area:</th><td>{{$region->district_name($data->district_id)}}</td></tr>
+                          <tr><th>Region:</th><td>{{$region->region_name($data->region_id)}}</td></tr>
+                          <tr><th>Covered:</th><td>{{$data->is_covered}}</td></tr>
                       </table>
                    </form>
                 </div>

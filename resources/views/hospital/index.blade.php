@@ -1,24 +1,20 @@
 @extends('layouts.app')
-@extends('layouts.sidebar')
 
 @section('content')
-<div class="container">
-
-    <div class="row ">
-        <div class="col-md-2">
-     
-
-        
-        </div>
-        <div class="col-md-10">
+<div class="container-fluid">
+    <div class="card" style="margin-bottom: 15px;">
+      <div class="card-body" style="padding: 10px; text-align: center;"><h4>Hospital List<h4></div>
+    </div>
+    <div class="row"></div>
+        <div class="col-md-12">
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
         @endif
   
-            <div class="">
-                <div  class=""></div><a href='{{url("hospital/create")}}' class = "btn btn-success">Add</a><br><br>
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-10">
                 <form method="post" class="form-class" id="my_frm">
                 @csrf
                 <div class="input-group">
@@ -53,6 +49,11 @@
                     </div>
                 </div>
                 </form>
+            </div>
+                <div  class="col-md-2">
+                    <a href='{{url("hospital/create")}}' class = "btn btn-success">Add</a>
+                </div>
+                </div>
                 <div id ="ajax_content">
 
 
@@ -67,7 +68,7 @@
                 <th>Market</th>
                 <th>Doctor Covered</th>
                 <th>C. Pharmacy</th>
-                <th>action</th>
+                <th style="width: 15%; text-align: center;">action</th>
                 </tr>
                 <?php $i = 0;
                 ?>
@@ -85,17 +86,9 @@
                 <td>{{$region->market_name($data->market_id)}}</td>
                 <td>{{ $data->doctor_percentage($data->id) }}%</td>
                 <td>{{$data->pharmacy_covered($data->id)}}</td>
-                <td><table><tr><td> <a href='hospital/{{$data->_key}}/edit' class="btn btn-warning">E</a><br><br></td>
-                
-               <td> <form action="{{ route('hospital.destroy', $data->id) }}" method="POST">
-                    @method('DELETE')
-                     @csrf
-                    <button class="btn btn-danger">D</button>
-                    </form></td>
-                    <td><a href='hospital/{{$data->_key}}/details' class="btn btn-warning">V</a><br><br></td>
-  
-
-                </tr></table></td>
+                 <td style="width: 15%; text-align: center;"> <a href='hospital/{{$data->_key}}/edit' class="btn btn-outline-dark"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                     <a href='hospital/{{$data->_key}}/details' class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                </td>
                 </tr>
                 @endforeach
               

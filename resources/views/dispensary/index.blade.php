@@ -1,27 +1,23 @@
 @extends('layouts.app')
-@extends('layouts.sidebar')
 
 @section('content')
-<div class="container">
-
-    <div class="row ">
-        <div class="col-md-2">
-     
-
-        
-        </div>
-        <div class="col-md-10">
+<div class="container-fluid">
+    <div class="card" style="margin-bottom: 15px;">
+      <div class="card-body" style="padding: 10px; text-align: center;"><h4>Pharmacy List<h4></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
 @endif
   
-            <div class="">
-                <div  class=""></div><a href='{{url("dispensary/create")}}' class = "btn btn-success">Add</a><br><br>
+            <div class="row">
+                <div  class="col-md-10">
                 <form method="post" class="form-class" id="my_frm">
                 @csrf
-                <p class="btn btn-primary" id="mapping">Mapping</p>
+                <p class="btn btn-outline-primary" id="mapping">Mapping</p>
                 <div class="display-mapping" style="display: none; margin-bottom: 10px">
                     <div class="input-group">
                         <div class="input-group col-md-3">
@@ -49,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                                <div class="is-covered">
+                <div class="is-covered col-md-4" style="border: 1px solid #ddd; padding: 5px; margin-bottom: 10px;">
                     <div class="input-group">
                         <label class="radio-inline" style="margin-right: 15px">
                           <input type="radio" name="is_covered" value="Covered" style="margin-right: 5px">Covered
@@ -59,23 +55,29 @@
                         </label>
                     </div>
                 </div>
-                <div class="input-group" style="cursor: pointer">
-                    <span class="input-group-text red lighten-3" id="srch">Search</span>
+                <div class="input-group" style="cursor: pointer; margin-bottom: 10px;">
+                    <span class="btn btn-outline-success" id="srch">Search</span>
                 </div>
                 </form>
+            </div>
+            <div class="col-md-2">
+                <a href='{{url("dispensary/create")}}' class = "btn btn-outline-success">Add</a><br><br>
+            </div>
+        </div>
                 <div id ="ajax_content">
 
 
                 <div class="table-responsive">
-                <table class ="table table-bordered">
+                <table class ="table table-bordered table-sm" style="font-size: 15px;">
                 <tr class ="table-active">
                 <th>Sl.</th>
-                <th>Name</th>
-                <th>Region</th>
-                <th>District</th>
-                <th>Area</th>
-                <th>Market</th>
-                <th>action</th>
+                <th style="text-align: center;">Name</th>
+                <th style="text-align: center;">Region</th>
+                <th style="text-align: center;">District</th>
+                <th style="text-align: center;">Area</th>
+                <th style="text-align: center;">Market</th>
+                <th style="text-align: center;">Covered</th>
+                <th style="width: 15%; text-align: center;">action</th>
                 </tr>
                 <?php $i = 0;
                 ?>
@@ -91,21 +93,20 @@
                 <td>{{$region->district_name($data->district_id)}}</td>
                 <td>{{$region->area_name($data->area_id)}}</td>
                 <td>{{$region->market_name($data->market_id)}}</td>
-                <td><table><tr><td> <a href='dispensary/{{$data->_key}}/edit' class="btn btn-warning">E</a><br><br></td>
-                
-               <td> <form action="{{ route('dispensary.destroy', $data->id) }}" method="POST">
-                    @method('DELETE')
-                     @csrf
-                    <button class="btn btn-danger">D</button>
-                    </form></td>
-                 <td><a href="dispensary/{{$data->_key}}/visit"><button class="btn btn-success">V</button></a></td>    
+                <td>{{ $data->is_covered }}</td>
+                <td style="width: 15%; text-align: center;">
+                 <a href='dispensary/{{$data->_key}}/edit' class="btn btn-outline-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                 <a href="dispensary/{{$data->_key}}/visit"><button class="btn outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
+                <a href="doctor/{{$data->id}}" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a> 
 
-                </tr></table></td>
+                </td>
                 </tr>
                 @endforeach
                     <tr>
                     <td  colspan = '4' style="text-align: right; font-weight: bold">Total Pharamcy</td>
                     <td style="font-weight: bold">{{ $i }}</td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                 </tr>
               

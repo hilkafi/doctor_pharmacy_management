@@ -14,6 +14,10 @@ use App\Dispensary;
 
 class MarketController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -110,7 +114,8 @@ class MarketController extends Controller
         $dataset_three = Area::where('is_deleted',0)->get();
         $dataset_two = District::where('is_deleted',0)->get();
         $dataset = Region::where('is_deleted',0)->get();
-        return view('market.edit',compact('data','dataset','dataset_two','dataset_three'));
+        $dis = new District;
+        return view('market.edit',compact('data','dataset','dataset_two','dataset_three','dis'));
     }
 
     /**

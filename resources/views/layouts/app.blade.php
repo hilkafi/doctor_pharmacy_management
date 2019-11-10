@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
     <style>
     body {
   overflow-x: hidden;
@@ -129,15 +130,34 @@
       -webkit-box-shadow: 0 0 10px #ccc;
       box-shadow: 0 0 10px #ccc;
 }
+
+.dropdown-menu a {
+  border-bottom: 1px solid #ccc;
+}
+.dropdown-menu a:last-child {
+  border-bottom: none;
+}
+a#navbarDropdown{
+  color: white;
+}
+.tbl-thin{
+
+}
+.table tr {
+  padding: 5px;
+}
+th, td{
+  padding: 2px;
+}
     
     </style>
 </head>
 <body>
     <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light  " style = "background-color:#007ACC;height:80px;" >
-            <div class="container">
+    <nav class="navbar navbar-inverse navbar-expand-md navbar-light fixed-top" style = "background-color:#222;" >
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                <h2 style="color:white;margin-left:-100px;"><b>Pharmasia</b></h2>
+                <h2 style="color:white;"><b>Pharmasia</b></h2>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -145,10 +165,42 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @guest
+
+                    @else
                     <ul class="navbar-nav mr-auto">
+                      <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Mapping<span class="caret"></span>
+                                </a>
 
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{url('/region')}}">Region</a>
+                                    <a class="dropdown-item" href="{{url('/area')}}">Area</a>
+                                    <a class="dropdown-item" href="{{url('teritory')}}">Teritory</a>
+                                    <a class="dropdown-item" href="{{url('market')}}">Market</a>
+                                </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Institutes<span class="caret"></span>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{{url('/hospital')}}">Hospital</a>
+                              <a class="dropdown-item" href="{{url('/consulting_center')}}">C. Center</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('/doctor')}}" style="color: white;">Doctors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('/dispensary')}}" style="color: white;">Pharmacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('/user')}}" style="color: white;">Users</a>
+                        </li>
                     </ul>
-
+                    @endguest
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -163,7 +215,9 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div id="right-menu" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="{{url('/home')}}">Dashboard</a>
+                                  <a class="dropdown-item" href="{{url('/user')}}/{{Auth::user()->_key}}">Profile</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -180,8 +234,7 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
+        <main class="py-5 my-5">
             @yield('content')
         </main>
     </div>
