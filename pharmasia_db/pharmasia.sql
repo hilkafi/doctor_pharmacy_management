@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2019 at 11:06 AM
+-- Generation Time: Nov 11, 2019 at 04:49 AM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -79,7 +79,7 @@ CREATE TABLE `chamber` (
 INSERT INTO `chamber` (`id`, `doctor_id`, `region_id`, `area_id`, `teritory_id`, `market_id`, `consulting_center_id`, `hospital_id`, `address`, `contact`, `visiting_hour`, `fee`, `is_deleted`, `_key`) VALUES
 (1, 9, 4, 2, 2, 4, NULL, NULL, 'this is address', '01751465611', NULL, '500', 0, '56465f592024999a3551332e1630cec3'),
 (2, 8, 4, 2, 2, 4, NULL, NULL, 'fgsdgs', '01751465611', '4pm-5pm', '1000', 0, '91195c5f7c92cf2326030e31e8a0150d'),
-(3, 9, 4, 2, 3, 5, NULL, NULL, 'address', '01751465611', '4pm-8pm', '1000', 0, 'ced39e530a90f0ab24f5daa5522de54a'),
+(3, 10, 4, 2, 3, 5, NULL, NULL, 'address', '01751465611', '4pm-8pm', '1000', 0, 'ced39e530a90f0ab24f5daa5522de54a'),
 (4, 6, 4, 2, 2, 4, NULL, NULL, 'dfgd', '01751465611', '4pm-5pm', '1000', 0, '3a9b4c78966736edbb2c91026ab6fa48'),
 (5, 6, 4, 2, 2, 4, 2, NULL, 'dfsdfsd', '01751465611', '4pm-5pm', '500', 0, 'dc7b1e416a1bc80d7b0c80128b2fa0e9'),
 (6, 10, 4, 2, 2, 4, 2, NULL, 'dfsfsdfs', '01751465611', '4pm-5pm', '1000', 0, 'ba8652dc8a693e8b59faf230df42e9d0'),
@@ -248,7 +248,7 @@ INSERT INTO `doctor` (`id`, `name`, `designation`, `expertise`, `degree`, `depar
 (7, 'dfsdfd', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'b3ec8b943c956c140b48386f50d7772e'),
 (8, 'sujon sir', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'b4a3be6078fc7487aa1b8ba68f96f210'),
 (9, 'Dr. ABS Ruman', 'Assistant Professor', 'Sargon', 'MBBS, MD, FCPS', 'Nefrology', 'Panchagar Medical College', NULL, NULL, NULL, 'yes', 'yes', NULL, 0, '72d266cbc39ac47554f320e63a9fe566'),
-(10, 'rashikul', 'bolod', 'sexology', 'MBBS, MD, FCPS', 'Sexology and women gender', 'Park more sexual university', NULL, NULL, NULL, 'yes', 'no', 'Covered', 0, '398d7ec4b2692c256381d93ee424477f'),
+(10, 'rashikul', 'Assistant Professor', 'Nefrology', 'MBBS, MD, FCPS', 'Sexology and women gender', 'Park more sexual university', '01751465611', 'mhpitom007@gmail.com', 'fgsdgs', 'yes', 'yes', 'Covered', 0, '398d7ec4b2692c256381d93ee424477f'),
 (11, 'kazal', 'dfdsf', 'dsfsfd', 'MBBS, MD, FCPS', 'Vvhv', 'Panchagar Medical College', '01751465611', 'mhpitom007@gmail.com', 'this is address', 'yes', 'yes', 'Covered', 0, 'a3ba69a193596ee5ae3037beaea5fb2b');
 
 -- --------------------------------------------------------
@@ -329,7 +329,7 @@ INSERT INTO `market` (`id`, `name`, `area_id`, `district_id`, `region_id`, `is_d
 (1, NULL, 2, 2, 4, 1, '31b3b3e66298e102549dc43272c262c2'),
 (2, NULL, 2, 2, 3, 1, '551c52c89fa75f0b9730d8fec2d58e11'),
 (3, 'something', 3, 3, 3, 1, '5e85bbc89b9000d5945f419c5d12aca7'),
-(4, 'pirgachha', 2, 2, 4, 0, '46f5849109ef1b286dcc0eecc9e2b713'),
+(4, 'pirgachha', 2, 4, 4, 0, '46f5849109ef1b286dcc0eecc9e2b713'),
 (5, 'hhdjfkjk', 3, 2, 4, 0, '12ee5fedbf38580b7c227f824012a809'),
 (6, 'abcd', 2, 2, 4, 0, '8a6e85151e0698ca99fb304b675e6729'),
 (7, 'dfdddddddd', 5, 3, 4, 0, '60a6e7b89fac97ba0c4a0e891ebda276');
@@ -397,8 +397,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `user_role`, `created_at`, `updated_at`, `created_by`, `modified_by`, `is_deleted`, `_key`) VALUES
-(1, 'pitom', 'mhpitom007@gmail.com', NULL, '$2y$10$Pfccp0XrXufGsmi8R.ABquHGBxqa.JY0/OHMdrm//3rBMvKDxkVfK', 'fq5koZ5nJUL76g4orpiHDRR6pvY8PVE16KCGr4IDH968pRB61ED9aJ810Q9b', '0', '2019-10-09', '2019-10-09', NULL, NULL, 0, NULL),
-(2, 'Ratul', 'ratul@gmail.com', NULL, '$2y$10$euhSXfAgs2PWLKKn2Rsm8.IXHoJxzWwBkPY0VBmkWs3v5n/jFKDsS', NULL, '2', '2019-10-20', '2019-10-20', NULL, NULL, 0, '2a085bcff52de41c225c315cb8a99e3b'),
+(1, 'pitom', 'mhpitom007@gmail.com', NULL, '$2y$10$Pfccp0XrXufGsmi8R.ABquHGBxqa.JY0/OHMdrm//3rBMvKDxkVfK', 'y4Rha0CmVWQTm802AWZhTkYnH9wzFpyvrVAjPGYdKY7rw0xD3NESC2S8enFF', '0', '2019-10-09', '2019-10-09', NULL, NULL, 0, '2a085bcff52de41c225c315cb8a99e3b'),
+(2, 'Ratul', 'ratul@gmail.com', NULL, '$2y$10$euhSXfAgs2PWLKKn2Rsm8.IXHoJxzWwBkPY0VBmkWs3v5n/jFKDsS', NULL, '2', '2019-10-20', '2019-10-20', NULL, NULL, 0, ''),
 (3, '@hasin', 'mridula@gmail.com', NULL, '$2y$10$3j1hu1vYg63AwuiLn8C12.m76CLM7yq7ImHrJXLuiUusuPrWVEXxy', NULL, '3', '2019-10-21', '2019-11-06', NULL, NULL, 1, '205a995e9ef7b052805d0ef4d5dbcbab'),
 (4, 'Medi ded', 'csebrur.hasinmanjare34@gmail.com', NULL, '$2y$10$vUISx0T5HMybtz/KPM1e0.pKuFLX/TiDztWtrSdFsEoRDVwRyLa96', NULL, '4', '2019-10-21', '2019-11-06', NULL, NULL, 1, '609df2951dce3c0b85df16c59d4872a6');
 
