@@ -73,6 +73,9 @@ class HospitalController extends Controller
                 $model->area_id = $request->area_id;
                 $model->teritory_id = $request->teritory_id;
                 $model->region_id = $request->region_id;
+                $model->type = $request->type;
+                $model->sub_type = $request->subtype;
+
 
 
                 $model->_key = md5(microtime().rand());
@@ -228,5 +231,20 @@ class HospitalController extends Controller
             $message = "Data is not deletd successfully";
         }
         return redirect()->back()->with('message',$message);
+    }
+    public function hospitals(){
+
+        $dataset = Hospital::where('is_deleted','0')->paginate(10);
+        $region = new District;
+        $regions = Region::where('is_deleted',0)->get();
+
+        return view('hospital.hospitalindex',compact('dataset','region','regions'));
+    }
+        public function show_clinics(){
+        $dataset = Hospital::where('is_deleted','0')->where('type','clinic')->paginate(10);
+        $region = new District;
+        $regions = Region::where('is_deleted',0)->get();
+
+        return view('hospital.clinic',compact('dataset','region','regions'));
     }
 }

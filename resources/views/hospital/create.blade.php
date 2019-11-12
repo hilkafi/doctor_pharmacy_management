@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style="background-color:#007ACC;color:white;">Add Hospital</div>
+                <div class="card-header" style="background-color:#007ACC;color:white;">Add Institue</div>
 
                 <div class="card-body">
                 <form method="post" action="{{url('/hospital')}}">
@@ -81,6 +81,36 @@
 
                             </div>
                         </div>
+
+                            <div class="form-group row">
+                                <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control" id="type" name ="type">
+                                        <option value="">Select Type</option>
+                                        <option value="hospital">Hospital</option>
+                                        <option value="clinic">Clinic</option>
+                                        <option value="others">Others</option>
+
+                                    </select>
+
+                                </div>
+                             </div>
+
+                                <div id="subtype" class="form-group row" style="display: none;">
+                                <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Subtype') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control" id="" name ="subtype">
+                                        <option value="">Select Type</option>
+                                        <option value="public">Public</option>
+                                        <option value="private">Private</option>
+
+
+                                    </select>
+
+                                </div>
+                             </div>
 
 
 
@@ -203,6 +233,15 @@ $(document).ready(function(){
          $('#longitude').val(longitude);
 
     }
+
+    $("#type").change(function(){
+    if($(this).val() != 'hospital'){
+      $("#subtype").hide();
+    }else{
+      $("#subtype").show();
+    }
+
+});
 
 
 

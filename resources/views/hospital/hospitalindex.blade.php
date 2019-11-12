@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="card" style="margin-bottom: 15px;">
-      <div class="card-body" style="padding: 10px; text-align: center;"><h4>Institue List<h4></div>
+      <div class="card-body" style="padding: 10px; text-align: center;"><h4>Hospital List<h4></div>
     </div>
     <div class="row"></div>
         <div class="col-md-12">

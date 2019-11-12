@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2019 at 04:49 AM
+-- Generation Time: Nov 12, 2019 at 06:25 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -291,6 +291,8 @@ CREATE TABLE `hospital` (
   `area_id` int(11) DEFAULT NULL,
   `region_id` int(11) DEFAULT NULL,
   `market_id` int(11) DEFAULT NULL,
+  `type` enum('hospital','clinic','others') DEFAULT NULL,
+  `sub_type` enum('public','private') DEFAULT NULL,
   `address` text NOT NULL,
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `_key` varchar(256) DEFAULT NULL
@@ -300,10 +302,11 @@ CREATE TABLE `hospital` (
 -- Dumping data for table `hospital`
 --
 
-INSERT INTO `hospital` (`id`, `name`, `teritory_id`, `area_id`, `region_id`, `market_id`, `address`, `is_deleted`, `_key`) VALUES
-(1, 'test hos', 3, 2, 4, 5, 'this is address', 1, '39d9ca85942c3d96dd9e55b03d3eed71'),
-(2, 'Medi ded', 2, 2, 4, 6, 'this is address', 0, '06c2e027fd129b8d2a0ffd2508fef555'),
-(4, 'pirgachha upazila health complex', 2, 2, 4, 4, 'this is address', 0, '793c7ccf5a7a673b59ad7f9ab163e3cf');
+INSERT INTO `hospital` (`id`, `name`, `teritory_id`, `area_id`, `region_id`, `market_id`, `type`, `sub_type`, `address`, `is_deleted`, `_key`) VALUES
+(1, 'test hos', 3, 2, 4, 5, NULL, NULL, 'this is address', 1, '39d9ca85942c3d96dd9e55b03d3eed71'),
+(2, 'Medi ded', 2, 2, 4, 6, NULL, NULL, 'this is address', 0, '06c2e027fd129b8d2a0ffd2508fef555'),
+(4, 'pirgachha upazila health complex', 2, 2, 4, 4, NULL, NULL, 'this is address', 0, '793c7ccf5a7a673b59ad7f9ab163e3cf'),
+(5, 'Rangpur Medical college', 2, 2, 4, 4, 'hospital', 'public', 'rtgdfg', 0, '97e2629732d3571a39c5d544d3a683db');
 
 -- --------------------------------------------------------
 
@@ -590,7 +593,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `hospital`
 --
 ALTER TABLE `hospital`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `market`

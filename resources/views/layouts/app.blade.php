@@ -173,7 +173,7 @@ th, td{
                     <ul class="navbar-nav mr-auto">
                       <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Section<span class="caret"></span>
+                                    Zone<span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -185,12 +185,18 @@ th, td{
                         </li>
                         <li class="nav-item dropdown">
                           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Institutes<span class="caret"></span>
+                          Institutes<span class="caret"></span>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="{{url('/hospital')}}">Hospital</a>
-                              <a class="dropdown-item" href="{{url('/consulting_center')}}">C. Center</a>
+                              <a class="dropdown-item" href="{{url('/hospital')}}" style="color: black;">Institues</a>
+                              <a class="dropdown-item" href="{{url('/hospital/hospitals')}}">Hospital</a>
+                              <a class="dropdown-item" href="{{url('/hospital/clinic')}}">Clinic</a>
+                              <a class="dropdown-item" href="{{url('/hospital')}}">Others</a>
+                              
                             </div>
+                        </li>
+                        <li class="nav-item">
+                         <a  class="nav-link" href="{{url('/consulting_center')}}" style="color: white;">Consultation Center</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/doctor')}}" style="color: white;">Doctors</a>

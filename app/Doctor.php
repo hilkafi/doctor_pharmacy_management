@@ -90,8 +90,12 @@ class Doctor extends Model
 	public function employee_name($id)
 	{
 		$qry = Employee::where('area_id',$id)->first();
+		if(!empty($qry)){
+			
 		$user = User::where('is_deleted','0')->where('id',$qry->user_id)->first();
 
 		return $user->name;
+
+		}
 	}
 }

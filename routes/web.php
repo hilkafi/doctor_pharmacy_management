@@ -54,6 +54,9 @@ Route::get('/consulting_center/{id}/details', 'ConsultingCenterController@view_d
 Route::resource('/hospital', 'HospitalController');
 Route::post('/hospital/search', 'HospitalController@search');
 Route::get('/hospital/{id}/details', 'HospitalController@view_details');
+Route::get('hospital/hospitals', 'HospitalController@hospitals');
+Route::get('/hospital/clinic','HospitalController@show_clinics');
+
 
 //Doctor related Route
 Route::resource('/doctor', 'DoctorController');
