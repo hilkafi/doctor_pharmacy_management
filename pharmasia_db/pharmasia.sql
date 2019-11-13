@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2019 at 06:25 PM
+-- Generation Time: Nov 13, 2019 at 05:00 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -352,6 +352,32 @@ CREATE TABLE `migrations` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `personal_info`
+--
+
+CREATE TABLE `personal_info` (
+  `id` int(11) NOT NULL,
+  `doc_id` int(11) NOT NULL,
+  `wife_name` varchar(256) DEFAULT NULL,
+  `is_married` enum('yes','no') DEFAULT NULL,
+  `child` int(11) DEFAULT NULL,
+  `grad_school` varchar(256) DEFAULT NULL,
+  `passing_year` varchar(256) DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `hobby` varchar(256) DEFAULT NULL,
+  `marriage_anniversary` date DEFAULT NULL,
+  `fav_writer` varchar(256) DEFAULT NULL,
+  `fav_color` varchar(256) DEFAULT NULL,
+  `fav_brand` varchar(256) DEFAULT NULL,
+  `fav_musician` varchar(256) DEFAULT NULL,
+  `fav_dish` varchar(256) DEFAULT NULL,
+  `home_town` varchar(256) DEFAULT NULL,
+  `current_city` varchar(256) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `region`
 --
 
@@ -520,6 +546,12 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `personal_info`
+--
+ALTER TABLE `personal_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `region`
 --
 ALTER TABLE `region`
@@ -606,6 +638,12 @@ ALTER TABLE `market`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `personal_info`
+--
+ALTER TABLE `personal_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `region`

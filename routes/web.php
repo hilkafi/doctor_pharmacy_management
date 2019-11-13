@@ -72,6 +72,11 @@ Route::get('doctor/visit/{id}/details', 'DoctorController@visited_doctor_details
 Route::get('/doctor/chamber/{id}', 'DoctorController@add_chamber');
 Route::post('/doctor/add_chamber', 'DoctorController@final_add_chamber');
 
+
+//personal info related route
+Route::get('/personalinfo/{id}', 'PersonalInfoController@personal_info');
+
+
 Route::resource('/dispensary', 'DispensaryController');
 Route::post('/dispensary/search', 'DispensaryController@search');
 Route::get('/dispensary/{id}/visit', 'DispensaryController@visit_view');

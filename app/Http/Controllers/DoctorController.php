@@ -355,6 +355,13 @@ class DoctorController extends Controller
 
          }
 
+         public function add_personal_info()
+         {
+            
+            return view('personal_info.create');
+
+         }
+
 
 
 }
