@@ -175,6 +175,7 @@ class DoctorController extends Controller
         $area_id = $r->area_id;
         $market_id = $r->market_id;
         $hospital_id = $r->hospital_id;
+        
         $cc_id = $r->cc_id;
         $qualification = $r->qualification;
         $speciality = $r->speciality;

@@ -189,9 +189,9 @@ th, td{
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="{{url('/hospital')}}" style="color: black;">Institues</a>
-                              <a class="dropdown-item" href="{{url('/hospital/hospitals')}}">Hospital</a>
-                              <a class="dropdown-item" href="{{url('/hospital/clinic')}}">Clinic</a>
-                              <a class="dropdown-item" href="{{url('/hospital')}}">Others</a>
+                              <a class="dropdown-item" href="{{url('/hospitals')}}">Hospital</a>
+                              <a class="dropdown-item" href="{{url('/clinics')}}">Clinic</a>
+                              <a class="dropdown-item" href="{{url('/others')}}">Others</a>
                               
                             </div>
                         </li>

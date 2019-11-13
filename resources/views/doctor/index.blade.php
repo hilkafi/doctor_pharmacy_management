@@ -19,7 +19,7 @@
                 <div class="col-md-10">
                 <form method="post" class="form-class" id="my_frm">
                 @csrf
-                <p class="btn btn-outline-primary" id="mapping">Section</p>
+                <p class="btn btn-outline-primary" id="mapping">Zone</p>
                 <div class="display-mapping" style="display: none; margin-bottom: 10px">
                     <div class="input-group">
                         <div class="input-group col-md-3">
@@ -52,14 +52,31 @@
                     <div class="input-group">
                         <div class="input-group col-md-4">
                                 <select class="form-control" id="hospital" name="hospital_id">
-                                    <option value="">Select Medical</option>
+                                    <option value="">Select Institute</option>
                                 </select>
                         </div>
                         <div class="input-group col-md-4">
-                                <select class="form-control" id="cc" name="cc_id">
-                                    <option value="">Select CC</option>
+                                <select class="form-control" id="clinic" name="clinic">
+                                    <option value="">Select Clinic</option>
                                 </select>
                         </div>
+                        <div class="input-group col-md-4">
+                                <select class="form-control" id="others" name="others">
+                                    <option value="">Select Others</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+                <p class="btn btn-outline-primary" id="consulting">Consultation Center</p>
+                <div class="display-consulting" style="display: none;  margin-bottom: 10px">
+                    <div class="input-group">
+                        <div class="input-group col-md-4">
+                                <select class="form-control" id="cc" name="cc_id">
+                                    <option value="">Select Consultation Center</option>
+                                </select>
+                        </div>
+  
+  
                     </div>
                 </div>
                 <p class="btn btn-outline-primary" id="qualification">Qualification</p>
@@ -171,6 +188,11 @@ $(document).ready(function(){
         $('.display-ch').toggle(
             function(){$("display-ch").css({"display": "block"});});
     });
+     $('#consulting').click(function(){
+        $('.display-consulting').toggle(
+            function(){$("display-cc").css({"display": "block"});});
+    });
+
     $('#qualification').click(function(){
         $('.display-qualification').toggle(
             function(){$("display-qualification").css({"display": "block"});});

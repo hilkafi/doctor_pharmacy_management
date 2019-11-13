@@ -194,6 +194,91 @@ class HospitalController extends Controller
         return view('hospital._list', compact('dataset', 'region'));
  }
 
+        public function hospital_search(Request $r){
+        $region = new District();
+        $search = $r->search;
+        $region_id = $r->region_id;
+        $teritory_id = $r->teritory_id;
+        $area_id = $r->area_id;
+        $market_id = $r->market_id;
+        $data = Hospital::where('type', 'hospital')->where('is_deleted','0');
+        if(!empty($search)){
+            $data = $data->where('name', 'like', '%'.trim($search).'%' );
+        }
+        if(!empty($region_id)){
+            $data = $data->where('region_id', $region_id);
+        }
+        if(!empty($area_id)){
+            $data = $data->where('area_id', $area_id);
+        }
+        if(!empty($teritory_id)){
+            $data = $data->where('teritory_id', $teritory_id);
+        }
+        if(!empty($market_id)){
+            $data = $data->where('market_id', $market_id);
+        }
+
+        $dataset = $data->paginate(10);
+        return view('hospital._hos_list', compact('dataset', 'region'));
+ }
+
+        public function clinic_search(Request $r){
+        $region = new District();
+        $search = $r->search;
+        $region_id = $r->region_id;
+        $teritory_id = $r->teritory_id;
+        $area_id = $r->area_id;
+        $market_id = $r->market_id;
+        $data = Hospital::where('is_deleted', 0)->where('type','clinic');
+        if(!empty($search)){
+            $data = $data->where('name', 'like', '%'.trim($search).'%' );
+        }
+        if(!empty($region_id)){
+            $data = $data->where('region_id', $region_id);
+        }
+        if(!empty($area_id)){
+            $data = $data->where('area_id', $area_id);
+        }
+        if(!empty($teritory_id)){
+            $data = $data->where('teritory_id', $teritory_id);
+        }
+        if(!empty($market_id)){
+            $data = $data->where('market_id', $market_id);
+        }
+        $dataset = $data->paginate(10);
+        return view('hospital._clinic_list', compact('dataset', 'region'));
+ }
+
+        public function others_search(Request $r){
+        $region = new District();
+        $search = $r->search;
+        $region_id = $r->region_id;
+        $teritory_id = $r->teritory_id;
+        $area_id = $r->area_id;
+        $market_id = $r->market_id;
+        $data = Hospital::where('is_deleted', 0)->where('type','other');
+        if(!empty($search)){
+            $data = $data->where('name', 'like', '%'.trim($search).'%' );
+        }
+        if(!empty($region_id)){
+            $data = $data->where('region_id', $region_id);
+        }
+        if(!empty($area_id)){
+            $data = $data->where('area_id', $area_id);
+        }
+        if(!empty($teritory_id)){
+            $data = $data->where('teritory_id', $teritory_id);
+        }
+        if(!empty($market_id)){
+            $data = $data->where('market_id', $market_id);
+        }
+
+        $dataset = $data->paginate(10);
+        return view('hospital._others_list', compact('dataset', 'region'));
+ }
+
+
+
         public function view_details($id)
         {
           $functionality = new Hospital;
@@ -212,14 +297,37 @@ class HospitalController extends Controller
 
         }
 
+        public function hospitals(){
+
+            $dataset = Hospital::where('is_deleted','0')->where('type','hospital')->paginate(10);
+            $region = new District;
+            $regions = Region::where('is_deleted',0)->get();
+
+            return view('hospital.hospitalindex',compact('dataset','region','regions'));
+        }
+        public function show_clinics(){
+            $dataset = Hospital::where('is_deleted','0')->where('type','clinic')->paginate(10);
+            $region = new District;
+            $regions = Region::where('is_deleted',0)->get();
+
+            return view('hospital.clinic',compact('dataset','region','regions'));
+        }
+            public function show_others(){
+            $dataset = Hospital::where('is_deleted','0')->where('type','other')->paginate(10);
+            $region = new District;
+            $regions = Region::where('is_deleted',0)->get();
+
+            return view('hospital.others',compact('dataset','region','regions'));
+        }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+        public function destroy($id)
+        {
         //
         $data = Hospital::find($id);
         $data->is_deleted = 1;
@@ -232,19 +340,5 @@ class HospitalController extends Controller
         }
         return redirect()->back()->with('message',$message);
     }
-    public function hospitals(){
 
-        $dataset = Hospital::where('is_deleted','0')->paginate(10);
-        $region = new District;
-        $regions = Region::where('is_deleted',0)->get();
-
-        return view('hospital.hospitalindex',compact('dataset','region','regions'));
-    }
-        public function show_clinics(){
-        $dataset = Hospital::where('is_deleted','0')->where('type','clinic')->paginate(10);
-        $region = new District;
-        $regions = Region::where('is_deleted',0)->get();
-
-        return view('hospital.clinic',compact('dataset','region','regions'));
-    }
 }

@@ -17,7 +17,7 @@
                 <div  class="col-md-10">
                 <form method="post" class="form-class" id="my_frm">
                 @csrf
-                <p class="btn btn-outline-primary" id="mapping">Section</p>
+                <p class="btn btn-outline-primary" id="mapping">Zone</p>
                 <div class="display-mapping" style="display: none; margin-bottom: 10px">
                     <div class="input-group">
                         <div class="input-group col-md-3">

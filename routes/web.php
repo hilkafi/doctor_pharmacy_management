@@ -54,8 +54,12 @@ Route::get('/consulting_center/{id}/details', 'ConsultingCenterController@view_d
 Route::resource('/hospital', 'HospitalController');
 Route::post('/hospital/search', 'HospitalController@search');
 Route::get('/hospital/{id}/details', 'HospitalController@view_details');
-Route::get('hospital/hospitals', 'HospitalController@hospitals');
-Route::get('/hospital/clinic','HospitalController@show_clinics');
+Route::get('/hospitals', 'HospitalController@hospitals');
+Route::get('/clinics','HospitalController@show_clinics');
+Route::get('/others','HospitalController@show_others');
+Route::post('/hospitals/search', 'HospitalController@hospital_search');
+Route::post('/clinicsearch', 'HospitalController@clinic_search');
+Route::post('/otherssearch', 'HospitalController@others_search');
 
 
 //Doctor related Route
@@ -74,12 +78,12 @@ Route::get('/dispensary/{id}/visit', 'DispensaryController@visit_view');
 Route::post('/dispensary/visit/{id}', 'DispensaryController@visit_confirm');
 
 
-Route::resource('/clinic', 'ClinicController');
-Route::post('/clinic/search', 'ClinicController@search');
-Route::get('/clinic/{id}/visit', 'ClinicController@visit_view');
-Route::post('/clinic/visit/{id}', 'ClinicController@visit_confirm');
+//Route::resource('/clinic', 'ClinicController');
+//Route::post('/clinic/search', 'ClinicController@search');
+//Route::get('/clinic/{id}/visit', 'ClinicController@visit_view');
+//Route::post('/clinic/visit/{id}', 'ClinicController@visit_confirm');
 
-Route::resource('/employee', 'EmployeeController');
+//Route::resource('/employee', 'EmployeeController');
 
 
 //Employee Related Route
