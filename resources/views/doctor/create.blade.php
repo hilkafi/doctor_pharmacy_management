@@ -20,6 +20,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Degree') }}</label>
+
+                            <div class="col-md-6">
+                                <input  type="text" class="form-control @error('degree') is-invalid @enderror" name="degree" value="" required autocomplete="" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Designation') }}</label>
 
                             <div class="col-md-6">
@@ -27,19 +35,20 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Expertise') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Especiality') }}</label>
 
                             <div class="col-md-6">
                                 <input  type="text" class="form-control @error('name') is-invalid @enderror" name="expertise" value="" required autocomplete="" autofocus>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Degree') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Mailing Address') }}</label>
 
                             <div class="col-md-6">
-                                <input  type="text" class="form-control @error('degree') is-invalid @enderror" name="degree" value="" required autocomplete="" autofocus>
+                                <input type="text" name="address" class="form-control" id="">
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Department') }}</label>
 
@@ -68,13 +77,7 @@
                                 <input type="email" name="mail" class="form-control" id="">
                             </div>
                         </div>
-                            <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Mailing Address') }}</label>
 
-                            <div class="col-md-6">
-                                <input type="text" name="address" class="form-control" id="">
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Qualified ') }}</label>
 

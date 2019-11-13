@@ -55,16 +55,7 @@
                                     <option value="">Select Institute</option>
                                 </select>
                         </div>
-                        <div class="input-group col-md-4">
-                                <select class="form-control" id="clinic" name="clinic">
-                                    <option value="">Select Clinic</option>
-                                </select>
-                        </div>
-                        <div class="input-group col-md-4">
-                                <select class="form-control" id="others" name="others">
-                                    <option value="">Select Others</option>
-                                </select>
-                        </div>
+
                     </div>
                 </div>
                 <p class="btn btn-outline-primary" id="consulting">Consultation Center</p>
