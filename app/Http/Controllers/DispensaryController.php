@@ -69,6 +69,8 @@ class DispensaryController extends Controller
                 $model->hospital_id = $request->hospital_id;
                 $model->name = $request->name;
                 $model->owner = $request->owner;
+                $model->contact = $request->contact;
+                $model->mail = $request->mail;
                 $model->address = $request->address;
                 $model->market_id = $request->market_id;
                 $model->area_id = $request->area_id;

@@ -16,21 +16,22 @@
         ?>
             <div class="card">
                 <div class="card-header" style="background-color:#ddd;color:black;"><b>Doctor Details</b>
-                   <div  style="text-align: right;"> <a href="{{url('/personalinfo')}}/{{$key}}" ><i>personal info</i></a> </div>  
+                   <div  style="text-align: right;"> <a href="{{url('/personalinfo/show')}}/{{$key}}" ><i>personal info</i></a> </div>  
                 </div>
 
                 <div class="card-body">
 
                       <table class="table table-bordered">
                           <tr><th>Doctor Name:</th><td>{{$data->name}}</td></tr>
-                          <tr><th>Designation:</th><td>{{$data->designation}}</td></tr>
-                          <tr><th>Speciality:</th><td>{{$data->expertise}}</td></tr>
                           <tr><th>Degree:</th><td>{{$data->degree}}</td></tr>
+                          <tr><th>Designation:</th><td>{{$data->designation}}</td></tr>
+                          <tr><th>Especiality:</th><td>{{$data->expertise}}</td></tr>
+                          <tr><th>Mailing Address:</th><td>{{ $data->address }}</td></tr>
                           <tr><th>Department:</th><td>{{$data->department}}</td></tr>
                           <tr><th>Institute:</th><td>{{ $data->institute }}</td></tr>
                           <tr><th>Contact:</th><td>{{ $data->contact }}</td></tr>
                           <tr><th>Mail:</th><td>{{ $data->mail }}</td></tr>
-                          <tr><th>Mailing Address:</th><td>{{ $data->address }}</td></tr>
+                          
                           <tr><th>Qualified:</th><td>{{$data->is_qualified}}</td></tr>
                           <tr><th>Is Covered:</th><td>{{$data->is_covered}}</td></tr>
                       </table>

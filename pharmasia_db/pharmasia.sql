@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2019 at 05:00 PM
+-- Generation Time: Nov 14, 2019 at 02:18 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -158,6 +158,8 @@ CREATE TABLE `dispensary` (
   `hospital_id` int(11) DEFAULT NULL,
   `name` varchar(256) DEFAULT NULL,
   `owner` varchar(100) DEFAULT NULL,
+  `contact` varchar(256) DEFAULT NULL,
+  `mail` varchar(256) DEFAULT NULL,
   `address` varchar(256) DEFAULT NULL,
   `market_id` int(11) DEFAULT NULL,
   `area_id` int(11) DEFAULT NULL,
@@ -172,17 +174,17 @@ CREATE TABLE `dispensary` (
 -- Dumping data for table `dispensary`
 --
 
-INSERT INTO `dispensary` (`id`, `consulting_center_id`, `hospital_id`, `name`, `owner`, `address`, `market_id`, `area_id`, `district_id`, `region_id`, `is_covered`, `is_deleted`, `_key`) VALUES
-(1, 2, NULL, 'Medicine Dispesary', 'Mr. John Doe', 'dfsfsdfs', 4, 2, 2, 4, 'Covered', 0, '73fad14e185045f73568cfb5aeb72ee6'),
-(2, NULL, NULL, 'Medicine', 'Mr. John Doe', NULL, 3, 2, 2, 4, NULL, 0, '36192e4b2fab561c9cd2b72cc84a42a7'),
-(3, NULL, NULL, 'Medicine Dispesary Dispesary', 'Mr. John Doe', NULL, 3, 2, 2, 4, NULL, 1, '314073335f8a6c564dcea7acd633445d'),
-(4, NULL, NULL, 'Medi ded', 'Mr. John Doe', NULL, 3, 2, 2, 4, NULL, 0, '08656ae511fa6f8a8b4d647a265d2f9b'),
-(5, NULL, NULL, 'Surjer Hasi clinic', 'fhsdg', NULL, 4, 2, 2, 4, NULL, 0, '69cdaf150ac675ae8294e31a22904ad4'),
-(6, NULL, NULL, '@hasin', 'Mr. John Doe', NULL, 4, 2, 2, 4, NULL, 0, 'b312ef52d2f1c31da3d718b49d909d20'),
-(7, NULL, 2, 'jononi drug house', 'parvej ahmed', 'dfgd', 6, 2, 2, 4, 'Covered', 0, '72cc75a7e990bcdce6b731ab578d31df'),
-(8, NULL, NULL, 'jhon drug house', 'Mr. John Doe', 'this is address', 4, 2, 2, 4, 'Not Covered', 0, '0de7888514763442d169b3a749ade73f'),
-(9, 3, NULL, 'dfgdfgdfgfdgfdg', 'Mr. John Doe', 'dfsdfsd', 4, 2, 2, 4, 'Not Covered', 0, 'bc856b8cc76224153f194b2870963a20'),
-(10, NULL, NULL, 'fdf', 'Mr. John Doe', 'dfsfsdfs', 7, 5, 3, 4, 'Covered', 0, 'ad952c91d38e9303b29dd11bd60b6df5');
+INSERT INTO `dispensary` (`id`, `consulting_center_id`, `hospital_id`, `name`, `owner`, `contact`, `mail`, `address`, `market_id`, `area_id`, `district_id`, `region_id`, `is_covered`, `is_deleted`, `_key`) VALUES
+(1, 2, NULL, 'Medicine Dispesary', 'Mr. John Doe', NULL, NULL, 'dfsfsdfs', 4, 2, 2, 4, 'Covered', 0, '73fad14e185045f73568cfb5aeb72ee6'),
+(2, NULL, NULL, 'Medicine', 'Mr. John Doe', NULL, NULL, NULL, 3, 2, 2, 4, NULL, 0, '36192e4b2fab561c9cd2b72cc84a42a7'),
+(3, NULL, NULL, 'Medicine Dispesary Dispesary', 'Mr. John Doe', NULL, NULL, NULL, 3, 2, 2, 4, NULL, 1, '314073335f8a6c564dcea7acd633445d'),
+(4, NULL, NULL, 'Medi ded', 'Mr. John Doe', NULL, NULL, NULL, 3, 2, 2, 4, NULL, 0, '08656ae511fa6f8a8b4d647a265d2f9b'),
+(5, NULL, NULL, 'Surjer Hasi clinic', 'fhsdg', NULL, NULL, NULL, 4, 2, 2, 4, NULL, 0, '69cdaf150ac675ae8294e31a22904ad4'),
+(6, NULL, NULL, '@hasin', 'Mr. John Doe', NULL, NULL, NULL, 4, 2, 2, 4, NULL, 0, 'b312ef52d2f1c31da3d718b49d909d20'),
+(7, NULL, 2, 'jononi drug house', 'parvej ahmed', NULL, NULL, 'dfgd', 6, 2, 2, 4, 'Covered', 0, '72cc75a7e990bcdce6b731ab578d31df'),
+(8, NULL, NULL, 'jhon drug house', 'Mr. John Doe', NULL, NULL, 'this is address', 4, 2, 2, 4, 'Not Covered', 0, '0de7888514763442d169b3a749ade73f'),
+(9, 3, NULL, 'dfgdfgdfgfdgfdg', 'Mr. John Doe', NULL, NULL, 'dfsdfsd', 4, 2, 2, 4, 'Not Covered', 0, 'bc856b8cc76224153f194b2870963a20'),
+(10, NULL, NULL, 'fdf', 'Mr. John Doe', NULL, NULL, 'dfsfsdfs', 7, 5, 3, 4, 'Covered', 0, 'ad952c91d38e9303b29dd11bd60b6df5');
 
 -- --------------------------------------------------------
 
@@ -374,6 +376,13 @@ CREATE TABLE `personal_info` (
   `home_town` varchar(256) DEFAULT NULL,
   `current_city` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `personal_info`
+--
+
+INSERT INTO `personal_info` (`id`, `doc_id`, `wife_name`, `is_married`, `child`, `grad_school`, `passing_year`, `date_of_birth`, `hobby`, `marriage_anniversary`, `fav_writer`, `fav_color`, `fav_brand`, `fav_musician`, `fav_dish`, `home_town`, `current_city`) VALUES
+(4, 11, 'somethisng', 'yes', 0, NULL, NULL, '2019-11-08', NULL, '2019-11-16', NULL, NULL, NULL, NULL, NULL, NULL, 'Khulna');
 
 -- --------------------------------------------------------
 
@@ -643,7 +652,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_info`
 --
 ALTER TABLE `personal_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `region`

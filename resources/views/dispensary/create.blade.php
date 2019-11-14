@@ -39,6 +39,32 @@
                                 @enderror
                             </div>
                         </div>
+                            <div class="form-group row">
+                            <label for="owner" class="col-md-4 col-form-label text-md-right">{{ __('Contact') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="owner" type="text" class="form-control @error('owner') is-invalid @enderror" name="contact" value="" required autocomplete="" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                            <div class="form-group row">
+                            <label for="owner" class="col-md-4 col-form-label text-md-right">{{ __('Mail') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="owner" type="text" class="form-control @error('owner') is-invalid @enderror" name="mail" value="" autocomplete="" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Region') }}</label>
 

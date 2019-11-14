@@ -75,6 +75,8 @@ Route::post('/doctor/add_chamber', 'DoctorController@final_add_chamber');
 
 //personal info related route
 Route::get('/personalinfo/{id}', 'PersonalInfoController@personal_info');
+Route::post('/personalinfo/add', 'PersonalInfoController@add_personal_info');
+Route::get('/personalinfo/show/{key}', 'PersonalInfoController@show_personal_index');
 
 
 Route::resource('/dispensary', 'DispensaryController');

@@ -76,6 +76,8 @@
                 <th style="text-align: center;">District</th>
                 <th style="text-align: center;">Area</th>
                 <th style="text-align: center;">Market</th>
+                <th style="text-align: center;">Contact</th>
+
                 <th style="text-align: center;">Covered</th>
                 <th style="width: 15%; text-align: center;">action</th>
                 </tr>
@@ -93,6 +95,7 @@
                 <td>{{$region->district_name($data->district_id)}}</td>
                 <td>{{$region->area_name($data->area_id)}}</td>
                 <td>{{$region->market_name($data->market_id)}}</td>
+                <td>{{ $data->contact }}</td>
                 <td>{{ $data->is_covered }}</td>
                 <td style="width: 15%; text-align: center;">
                  <a href='dispensary/{{$data->_key}}/edit' class="btn btn-outline-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

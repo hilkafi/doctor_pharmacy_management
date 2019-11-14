@@ -22,6 +22,9 @@
                           <tr><th>Teritory:</th><td>{{$region->area_name($data->area_id)}}</td></tr>
                           <tr><th>Area:</th><td>{{$region->district_name($data->district_id)}}</td></tr>
                           <tr><th>Region:</th><td>{{$region->region_name($data->region_id)}}</td></tr>
+                         <tr><th>Contact:</th><td>{{$data->contact}}</td></tr>
+                         <tr><th>Mail:</th><td>{{$data->mail}}</td></tr>
+                         <tr><th>Address:</th><td>{{$data->address}}</td></tr>
                           <tr><th>Covered:</th><td>{{$data->is_covered}}</td></tr>
                       </table>
                    </form>
