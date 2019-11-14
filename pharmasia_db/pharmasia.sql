@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2019 at 02:18 PM
+-- Generation Time: Nov 14, 2019 at 05:41 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -261,24 +261,25 @@ INSERT INTO `doctor` (`id`, `name`, `designation`, `expertise`, `degree`, `depar
 
 CREATE TABLE `employee` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
   `designation` varchar(256) DEFAULT NULL,
+  `name` varchar(256) DEFAULT NULL,
   `phone` varchar(11) DEFAULT NULL,
+  `mail` varchar(256) DEFAULT NULL,
   `area_id` int(11) DEFAULT NULL,
   `district_id` int(11) DEFAULT NULL,
   `region_id` int(11) DEFAULT NULL,
-  `address` varchar(256) DEFAULT NULL
+  `address` varchar(256) DEFAULT NULL,
+  `_key` varchar(256) DEFAULT NULL,
+  `is_deleted` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`id`, `user_id`, `designation`, `phone`, `area_id`, `district_id`, `region_id`, `address`) VALUES
-(1, 1, 'bhai', '01751465611', 2, 2, 4, 'this is address'),
-(3, 2, 'dfdsf', '01751465611', 4, 3, 4, 'this is address'),
-(4, 3, 'test', '01751465611', 2, 2, 4, 'dfd'),
-(5, 4, NULL, '01751465611', 6, 5, 3, 'this is address');
+INSERT INTO `employee` (`id`, `designation`, `name`, `phone`, `mail`, `area_id`, `district_id`, `region_id`, `address`, `_key`, `is_deleted`) VALUES
+(6, '1', 'pitom', '01751465611', 'mhpitom007@gmail.com', NULL, NULL, 4, 'this is address', 'a6297bdd6321c082d005addcea32e762', 0),
+(7, '3', 'rashikul', '25929', 'mridula@gmail.com', 2, 2, 4, 'dfgd', '1c6cab6bd0ff03d751882336af81d561', 0);
 
 -- --------------------------------------------------------
 
@@ -628,7 +629,7 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `hospital`

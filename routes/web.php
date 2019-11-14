@@ -90,7 +90,7 @@ Route::post('/dispensary/visit/{id}', 'DispensaryController@visit_confirm');
 //Route::get('/clinic/{id}/visit', 'ClinicController@visit_view');
 //Route::post('/clinic/visit/{id}', 'ClinicController@visit_confirm');
 
-//Route::resource('/employee', 'EmployeeController');
+Route::resource('/employee', 'EmployeeController');
 
 
 //Employee Related Route

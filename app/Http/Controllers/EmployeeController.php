@@ -27,8 +27,9 @@ class EmployeeController extends Controller
     public function index()
     {
         $dataset = Employee::where('is_deleted',0)->orderBy('id','DESC')->paginate(20);
-        $region = new District();
-        return view('employee.index', compact('dataset','region'));
+        $district = new District();
+        $regions = Region::where('is_deleted', 0)->get();
+        return view('mpo.index', compact('dataset','district','regions'));
     }
 
     /**
@@ -43,7 +44,7 @@ class EmployeeController extends Controller
         $dataset_two = District::where('is_deleted',0)->get();
         $dataset_three = Area::where('is_deleted',0)->get();
        
-        return view('employee.create', compact('dataset','dataset_two','dataset_three'));
+        return view('mpo.create', compact('dataset','dataset_two','dataset_three'));
     }
 
     /**
@@ -56,36 +57,31 @@ class EmployeeController extends Controller
     {
         //
         $validatedData = $request->validate([
-            'emp_name' => ['required','string'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'designation' => 'required',
+
 
             'region_id' => 'required',
             
         ]);
 
         $model = new Employee();
-         
-                $model->name = $request->emp_name;
-                $model->designation = $request->designation;
-                $model->email = $request->email;
-                $model->phone = $request->phone;
-                $model->password = Hash::make( $request->password);
-                $model->address = $request->address;
-                $model->area_id = $request->area_id;
-                $model->district_id = $request->district_id;
-                $model->region_id = $request->region_id;
 
-                $model->_key = md5(microtime().rand());
+        $model->name = $request->name;
+        $model->designation = $request->designation;
+        $model->phone = $request->phone;
+        $model->mail = $request->email;
+        $model->area_id = $request->area_id;
+        $model->district_id = $request->district_id;
+        $model->region_id = $request->region_id;
+        $model->address = $request->address;     
+        $model->_key = md5(microtime().rand());
                     
         
         
-               if($model->save()){
+            if($model->save()){
                 $message = "Succssfully added data";
-               }
-               else{
-                   $message = "Data Entry Error";
+            }
+            else{
+                $message = "Data Entry Error";
                
                 
             }
@@ -93,7 +89,7 @@ class EmployeeController extends Controller
               
             
 
-            return redirect('/employee')->with('message',$message);
+            return view('mpo.index')->with('message',$message);
     }
 
     /**
@@ -122,7 +118,7 @@ class EmployeeController extends Controller
         $dataset_two = District::where('is_deleted',0)->get();
         $dataset_three = Area::where('is_deleted',0)->get();
         $region = new District();
-        return view('employee.edit',compact('data','dataset','dataset_two','dataset_three','region'));
+        return view('mpo.edit',compact('data','dataset','dataset_two','dataset_three','region'));
     }
 
     /**

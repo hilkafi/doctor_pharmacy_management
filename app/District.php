@@ -25,7 +25,7 @@ public function region_name($id)
         {
             $data = $qry->where('id',$id)->first();
         }
-        return !empty($data) ? $data->name : " ";
+        return !empty($data) ? $data->name : "N/A";
 
 }
 
@@ -36,7 +36,7 @@ public function district_name($id)
         {
             $data = $qry->where('id',$id)->first();
         }
-        return !empty($data) ? $data->name : " ";
+        return !empty($data) ? $data->name : "N/A";
 
 }
 
@@ -47,7 +47,7 @@ public function area_name($id)
         {
             $data = $qry->where('id',$id)->first();
         }
-        return !empty($data) ? $data->name : " ";
+        return !empty($data) ? $data->name : "N/A";
 
 }
 

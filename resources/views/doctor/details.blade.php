@@ -40,7 +40,7 @@
             <div class="card">
                 <div class="card-header" style="background-color:#ddd;color:black; text-align: center;"><b>Chambers</b></div>
                 <div class="card-body">
-                    <table class="table table-bordered tbl_thin">
+                    <table class="table table-responsive table-bordered tbl_thin">
                         <tr>
                             <th>Region</th>
                             <th>Area</th>
@@ -60,17 +60,24 @@
                             <td>{{ $data->district_name($chamber->area_id) }}</td>
                             <td>{{ $data->area_name($chamber->teritory_id) }}</td>
 
-                            <?php 
+                            <?php
                             if($data->is_covered!='Covered'){
                                 $mpo = null;
                             }
                             else{
+
                                 $mpo = $user->employee_name($chamber->teritory_id);
+
                             }
 
                             ?>
+                       
+                            
+                               
+                          
+                            
                          
-                             <td>{{$mpo}}</td>
+                             <td>{{ $mpo }}</td>
 
                             <td>{{ $data->market_name($chamber->market_id) }}</td>
                             <td>{{ $data->consalting_center_name($chamber->consulting_center_id) }}</td>

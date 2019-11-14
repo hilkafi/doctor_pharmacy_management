@@ -5,37 +5,37 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header" style="background-color:#333;color:white;">Add Employee</div>
+                <div class="card-header" style="background-color:#5bcfa2;color:white;">Update Employee</div>
 
                 <div class="card-body">
-                <form method="post" action="{{url('/user')}}">
+                <form method="post" action="{{url('/employee/')}}">
                       @csrf
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$data->name}}" required autocomplete="" autofocus>
 
 
                             </div>
                             </div>
+
+
                             <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Designation') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="designation" value="" required autocomplete="" autofocus>
+                                <?php
+                                    if($data->designation==1) $designation = "RSM";
+                                    elseif($data->designation==2) $designation = "AM";
+                                    elseif($data->designation== 3) $designation = "MPO";
+                                    else $designation = null;
 
 
-                            </div>
-                        </div>
-
-                            <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' User Role') }}</label>
-
-                            <div class="col-md-6">
-                                <select class="form-control" id="user_role" name="user_role">
-                                    <option value="">Select User Role</option>
+                                ?>
+                                <select class="form-control" id="user_role" name="designation">
+                                    <option value="{{$data->designation}}">{{$designation}}</option>
                                     <option value="1">RSM</option>
                                     <option value="2">AM</option>
                                     <option value="3">MPO</option>
@@ -48,32 +48,12 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="email" class="form-control @error('name') is-invalid @enderror" name="email" value="" required autocomplete="" autofocus>
+                                <input id="name" type="email" class="form-control @error('name') is-invalid @enderror" name="email" value="{{$data->mail}}" required autocomplete="" autofocus>
                             </div>
 
                             </div>
-                            <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
 
 
                         
@@ -81,7 +61,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Contact No.') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="{{$data->phone}}" required autocomplete="" autofocus>
 
                             </div>
                         </div>
@@ -90,7 +70,7 @@
                        
 
 
-                        <div class="form-group row">
+                        <div class="form-group row" id = "rgn" style="display: none;">
                             <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Region') }}</label>
 
                             <div class="col-md-6">
@@ -104,11 +84,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
+                        <div class="form-group row" id ="dstrct" style="display: none;">
+                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
 
                             <div class="col-md-6">
-                            <select class="form-control" id="district" name ="district_id" required>
+                            <select class="form-control" id="district" name ="district_id" >
                             <option value="">Select District</option>
                             </select>
 
@@ -116,11 +96,11 @@
                         </div>
 
 
-                        <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
+                        <div class="form-group row" id = 'teri' style="display: none;">
+                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Teritory') }}</label>
 
                             <div class="col-md-6">
-                            <select class="form-control" id="area" name ="area_id" required>
+                            <select class="form-control" id="area" name ="area_id" >
                             <option value="">Select Area</option>
                             </select>
 
@@ -131,7 +111,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="address" value="" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="address" value=""  autocomplete="" autofocus>
 
                             </div>
                         </div>
@@ -151,7 +131,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-outline-dark">
-                                    {{ __('Add') }}
+                                    {{ __('Update') }}
                                 </button>
                             </div>
                         </div>
@@ -164,6 +144,27 @@
 </div>
 <script>
 $(document).ready(function(){
+
+        $("#user_role").change(function(){
+        if($(this).val() ==1 ){
+            $("#rgn").show();
+            $("#dstrct").hide();
+            $("#teri").hide();
+        }   
+        else if($(this).val() == 2){
+            $("#rgn").show();
+            $("#dstrct").show();
+            $("#teri").hide();
+        }
+        else if($(this).val() == 3){
+            $("#rgn").show();
+            $("#dstrct").show();
+            $("#teri").show();
+        }
+
+
+
+});
 
     $('#region').change(function(){
 

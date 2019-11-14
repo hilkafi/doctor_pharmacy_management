@@ -205,7 +205,7 @@ th, td{
                             <a class="nav-link" href="{{url('/dispensary')}}" style="color: white;">Pharmacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/user')}}" style="color: white;">Users</a>
+                            <a class="nav-link" href="{{url('/employee/')}}" style="color: white;">Employee</a>
                         </li>
                     </ul>
                     @endguest
