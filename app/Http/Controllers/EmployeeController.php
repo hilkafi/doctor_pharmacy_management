@@ -89,7 +89,7 @@ class EmployeeController extends Controller
               
             
 
-            return view('mpo.index')->with('message',$message);
+            return redirect('employee')->with('message',$message);
     }
 
     /**
@@ -101,6 +101,10 @@ class EmployeeController extends Controller
     public function show($id)
     {
         //
+        $data = Employee::where('_key',$id)->first();
+        $district = new District;
+
+        return view('mpo.details',compact('data','district'));
     }
 
     /**
@@ -112,13 +116,13 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         //
-        $data = Employee::where('_key',$id)->first();
+        $datas = Employee::where('_key',$id)->first();
 
         $dataset = Region::where('is_deleted',0)->get();
         $dataset_two = District::where('is_deleted',0)->get();
         $dataset_three = Area::where('is_deleted',0)->get();
         $region = new District();
-        return view('mpo.edit',compact('data','dataset','dataset_two','dataset_three','region'));
+        return view('mpo.edit',compact('datas','dataset','dataset_two','dataset_three','region'));
     }
 
     /**
@@ -132,19 +136,15 @@ class EmployeeController extends Controller
     {
         //
         $validatedData = $request->validate([
-            'emp_name' => ['required','string'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'designation' => 'required',
-            'district_id' => 'required',
-            'area_id' => 'required',
+
             'region_id' => 'required',
             
         ]);
 
-        $model = Employee::where('id',$id)->first();
-        $model->name = $request->emp_name;
+        $model = Employee::where('_key',$id)->first();
+        $model->name = $request->name;
         $model->designation = $request->designation;
-        $model->email = $request->email;
+        $model->mail = $request->email;
         $model->phone = $request->phone;
         $model->address = $request->address;
         $model->area_id = $request->area_id;
@@ -158,7 +158,7 @@ class EmployeeController extends Controller
            $message = "Data Entry Error";
        }
        
-        return redirect('/employee')->with('message',$message);
+        return redirect('employee')->with('message',$message);
     }
 
     /**

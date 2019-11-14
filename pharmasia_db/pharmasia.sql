@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2019 at 05:41 PM
+-- Generation Time: Nov 14, 2019 at 07:12 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -279,7 +279,8 @@ CREATE TABLE `employee` (
 
 INSERT INTO `employee` (`id`, `designation`, `name`, `phone`, `mail`, `area_id`, `district_id`, `region_id`, `address`, `_key`, `is_deleted`) VALUES
 (6, '1', 'pitom', '01751465611', 'mhpitom007@gmail.com', NULL, NULL, 4, 'this is address', 'a6297bdd6321c082d005addcea32e762', 0),
-(7, '3', 'rashikul', '25929', 'mridula@gmail.com', 2, 2, 4, 'dfgd', '1c6cab6bd0ff03d751882336af81d561', 0);
+(7, '3', 'rashikul', '25929', 'mridula@gmail.com', 2, 2, 4, 'dfgd', '1c6cab6bd0ff03d751882336af81d561', 0),
+(10, '3', 'kazal', '01751465611', 'mhpitom007@gmail.com', 6, 5, 5, 'dfsdfsd', '0c4735727ca5ee0366b231bdce9a1d63', 0);
 
 -- --------------------------------------------------------
 
@@ -629,7 +630,7 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `hospital`
