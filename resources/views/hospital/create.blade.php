@@ -8,7 +8,7 @@
                 <div class="card-header" style="background-color:#007ACC;color:white;">Add Institue</div>
 
                 <div class="card-body">
-                <form method="post" action="{{url('/hospital')}}">
+                <form enctype="multipart/form-data" method="post" action="{{url('/hospital')}}">
                       @csrf
 
                         <div class="form-group row">
@@ -137,6 +137,17 @@
                                 @enderror
                             </div>
                         </div>
+
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Cover Image') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="" type="file" class="form-control @error('name') is-invalid @enderror" name="image" value=""  autocomplete="" autofocus>
+
+                               
+                            </div>
+                        </div>
+
 
 
 

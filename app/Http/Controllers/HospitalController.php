@@ -61,6 +61,7 @@ class HospitalController extends Controller
             'name' => 'required',
             'market_id' => 'required',
             'teritory_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
             
         ]);
@@ -75,6 +76,22 @@ class HospitalController extends Controller
                 $model->region_id = $request->region_id;
                 $model->type = $request->type;
                 $model->sub_type = $request->subtype;
+                    if($files = $request->file('image'))
+                    {
+                        //$files = $files->resize(150,150);
+                        $destination = "public/images/";
+                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+                        $insert = $files->move($destination, $profile);
+                            if($insert)
+                            {
+                                $model->img_loc = $destination.$profile;
+                            }
+                            else{
+                                echo "Say some error";
+                            }
+
+                    }
+
 
 
 
@@ -138,6 +155,7 @@ class HospitalController extends Controller
             'name' => 'required',
             'market_id' => 'required',
             'teritory_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
 
@@ -149,6 +167,22 @@ class HospitalController extends Controller
                 $model->teritory_id = $request->teritory_id;
                 $model->area_id = $request->area_id;
                 $model->region_id = $request->region_id;
+                    if($files = $request->file('image'))
+                    {
+                        //$files = $files->resize(150,150);
+                        $destination = "public/images/";
+                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+                        $insert = $files->move($destination, $profile);
+                            if($insert)
+                            {
+                                $model->img_loc = $destination.$profile;
+                            }
+                            else{
+                                echo "Say some error";
+                            }
+
+                    }
+
                     
         
         

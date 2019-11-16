@@ -88,21 +88,67 @@
 
 
 
+                            <div class="form-group row">
+                                <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control" id="type" name ="type">
+   
+                                        <option value="{{$data->type}}">{{$data->type}}</option>
+                                        <option value="hospital">Hospital</option>
+                                        <option value="clinic">Clinic</option>
+                                        <option value="others">Others</option>
+
+                                    </select>
+
+                                </div>
+                             </div>
+
+                                <div id="subtype" class="form-group row" style="">
+                                <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Subtype') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control" id="" name ="subtype">
+                                        <option value="{{$data->sub_type}}">{{$data->sub_type}}</option>
+                                        <option value="public">Public</option>
+                                        <option value="private">Private</option>
+
+
+                                    </select>
+
+                                </div>
+                             </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="address" value="" required autocomplete="" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="address" value="{{$data->address}}" required autocomplete="" autofocus>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
+
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Cover Image') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="" type="file" class="form-control @error('name') is-invalid @enderror" name="image" value="{{$data->img_loc}}"  autocomplete="" autofocus>
+
+                               
+                            </div>
+                        </div
 
 
 

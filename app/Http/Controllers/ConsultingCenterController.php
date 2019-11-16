@@ -60,6 +60,7 @@ class ConsultingCenterController extends Controller
             'name' => 'required',
             'market_id' => 'required',
             'teritory_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
             
         ]);
@@ -72,6 +73,23 @@ class ConsultingCenterController extends Controller
                 $model->area_id = $request->area_id;
                 $model->teritory_id = $request->teritory_id;
                 $model->region_id = $request->region_id;
+
+                  if($files = $request->file('image'))
+                  {
+                        //$files = $files->resize(150,150);
+                        $destination = "public/images/";
+                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+                        $insert = $files->move($destination, $profile);
+                            if($insert)
+                            {
+                                $model->img_loc = $destination.$profile;
+                            }
+                            else{
+                                echo "Say some error";
+                            }
+
+                }
+
 
 
                 $model->_key = md5(microtime().rand());

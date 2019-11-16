@@ -19,9 +19,14 @@
 
             <?php
             $doc=$functionality->doctor_percentage($d->id);
+                if($d->img_loc!=null) $img_loc = $d->img_loc;
+                else $img_loc = "not available";
 
             ?>
                <table class="table table-bordered">
+                <tr>
+                    <img src ="{{url($img_loc)}}" width="1000" height="300" alt="Cover Photo">
+                </tr>
                 <tr>
                     <th>Total Doctor</th><td>{{$doc[0]}}</td>
                  </tr>

@@ -18,11 +18,16 @@
                 <div class="table-responsive"> 
                 <?php
                 $doc = $functionality->doctor_percentage($d->id);
+                if($d->img_loc!= null) $img_loc = $d->img_loc;
+                else $img_loc = "not available";
 
                 ?> 
 
             
                <table class="table table-bordered">
+                <tr class="table-responsive">
+                <img src='{{url($img_loc)}}' width="1000" height="300" alt = "Hospital cover Photo">
+                </tr>
                 <tr>
                     <th>Total Doctor</th><td>{{$doc[0]}}</td>
                  </tr>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2019 at 07:12 PM
+-- Generation Time: Nov 16, 2019 at 12:28 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -133,6 +133,7 @@ CREATE TABLE `consulting_center` (
   `teritory_id` int(11) DEFAULT NULL,
   `market_id` int(11) DEFAULT NULL,
   `address` text,
+  `img_loc` varchar(256) DEFAULT NULL,
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `_key` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -141,10 +142,11 @@ CREATE TABLE `consulting_center` (
 -- Dumping data for table `consulting_center`
 --
 
-INSERT INTO `consulting_center` (`id`, `name`, `region_id`, `area_id`, `teritory_id`, `market_id`, `address`, `is_deleted`, `_key`) VALUES
-(1, 'test', 4, 2, 2, 4, 'rtgdfg', 1, '02f08c49f2dd84ce85f582097d38810b'),
-(2, 'Surjer Hasi clinic', 4, 2, 2, 4, 'dfsfsdfs', 0, '7d2c228e8c876f73cd84ad3365be0338'),
-(3, 'dip eye care', 4, 2, 2, 4, 'this is address', 0, '2537f9d0384770c0063c5518e25e7d63');
+INSERT INTO `consulting_center` (`id`, `name`, `region_id`, `area_id`, `teritory_id`, `market_id`, `address`, `img_loc`, `is_deleted`, `_key`) VALUES
+(1, 'test', 4, 2, 2, 4, 'rtgdfg', NULL, 1, '02f08c49f2dd84ce85f582097d38810b'),
+(2, 'Surjer Hasi clinic', 4, 2, 2, 4, 'dfsfsdfs', NULL, 0, '7d2c228e8c876f73cd84ad3365be0338'),
+(3, 'dip eye care', 4, 2, 2, 4, 'this is address', NULL, 0, '2537f9d0384770c0063c5518e25e7d63'),
+(4, 'rashikul_ali', 4, 2, 2, 4, 'this is address', 'public/images/20191116112148.jpg', 0, '13afa162406558a7d3d2dfbb9c3aa866');
 
 -- --------------------------------------------------------
 
@@ -231,6 +233,8 @@ CREATE TABLE `doctor` (
   `address` varchar(256) DEFAULT NULL,
   `is_qualified` enum('yes','no') DEFAULT NULL,
   `mul_chamber` enum('yes','no') NOT NULL DEFAULT 'no',
+  `img_loc` varchar(256) DEFAULT NULL,
+  `visiting_card` varchar(256) DEFAULT NULL,
   `is_covered` enum('Covered','Not Covered') DEFAULT NULL,
   `is_deleted` int(11) NOT NULL DEFAULT '0',
   `_key` varchar(256) NOT NULL
@@ -240,18 +244,18 @@ CREATE TABLE `doctor` (
 -- Dumping data for table `doctor`
 --
 
-INSERT INTO `doctor` (`id`, `name`, `designation`, `expertise`, `degree`, `department`, `institute`, `contact`, `mail`, `address`, `is_qualified`, `mul_chamber`, `is_covered`, `is_deleted`, `_key`) VALUES
-(1, 'nk', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'd4b0a117f289aae6176ccee4b4028ea5'),
-(2, 'Medicine dispensary', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'fd98712f0bf1a5c62d9a340146e6b0a0'),
-(3, 'dfsdfd', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, 0, '53265e74de5a6440ae3516898106b86a'),
-(4, 'sdfgdsfgd', 'sdfdf', 'dsfsfdsdfsdf', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, 0, '164fe71a31f75c26248cb94a54cf4acb'),
-(5, 'dfsdfd', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, 0, '615c08266ec29f433288779a6bd9b87b'),
-(6, 'test', 'dfdsf', 'dsfsfdsdfsdf', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, 0, '606ff19edaf60e8becc8307a12040fd4'),
-(7, 'dfsdfd', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'b3ec8b943c956c140b48386f50d7772e'),
-(8, 'sujon sir', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, 0, 'b4a3be6078fc7487aa1b8ba68f96f210'),
-(9, 'Dr. ABS Ruman', 'Assistant Professor', 'Sargon', 'MBBS, MD, FCPS', 'Nefrology', 'Panchagar Medical College', NULL, NULL, NULL, 'yes', 'yes', NULL, 0, '72d266cbc39ac47554f320e63a9fe566'),
-(10, 'rashikul', 'Assistant Professor', 'Nefrology', 'MBBS, MD, FCPS', 'Sexology and women gender', 'Park more sexual university', '01751465611', 'mhpitom007@gmail.com', 'fgsdgs', 'yes', 'yes', 'Covered', 0, '398d7ec4b2692c256381d93ee424477f'),
-(11, 'kazal', 'dfdsf', 'dsfsfd', 'MBBS, MD, FCPS', 'Vvhv', 'Panchagar Medical College', '01751465611', 'mhpitom007@gmail.com', 'this is address', 'yes', 'yes', 'Covered', 0, 'a3ba69a193596ee5ae3037beaea5fb2b');
+INSERT INTO `doctor` (`id`, `name`, `designation`, `expertise`, `degree`, `department`, `institute`, `contact`, `mail`, `address`, `is_qualified`, `mul_chamber`, `img_loc`, `visiting_card`, `is_covered`, `is_deleted`, `_key`) VALUES
+(1, 'nk', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, NULL, NULL, 0, 'd4b0a117f289aae6176ccee4b4028ea5'),
+(2, 'Medicine dispensary', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, NULL, NULL, 0, 'fd98712f0bf1a5c62d9a340146e6b0a0'),
+(3, 'dfsdfd', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, NULL, NULL, 0, '53265e74de5a6440ae3516898106b86a'),
+(4, 'sdfgdsfgd', 'sdfdf', 'dsfsfdsdfsdf', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, NULL, NULL, 0, '164fe71a31f75c26248cb94a54cf4acb'),
+(5, 'dfsdfd', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, NULL, NULL, 0, '615c08266ec29f433288779a6bd9b87b'),
+(6, 'test', 'dfdsf', 'dsfsfdsdfsdf', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, NULL, NULL, 0, '606ff19edaf60e8becc8307a12040fd4'),
+(7, 'dfsdfd', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, NULL, NULL, 0, 'b3ec8b943c956c140b48386f50d7772e'),
+(8, 'sujon sir', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, NULL, NULL, 0, 'b4a3be6078fc7487aa1b8ba68f96f210'),
+(9, 'Dr. ABS Ruman', 'Assistant Professor', 'Sargon', 'MBBS, MD, FCPS', 'Nefrology', 'Panchagar Medical College', NULL, NULL, NULL, 'yes', 'yes', NULL, NULL, NULL, 0, '72d266cbc39ac47554f320e63a9fe566'),
+(10, 'rashikul', 'Assistant Professor', 'Nefrology', 'MBBS, MD, FCPS', 'Sexology and women gender', 'Park more sexual university', '01751465611', 'mhpitom007@gmail.com', 'fgsdgs', 'yes', 'yes', NULL, NULL, 'Covered', 0, '398d7ec4b2692c256381d93ee424477f'),
+(11, 'kazal', 'dfdsf', 'dsfsfd', 'MBBS, MD, FCPS', 'Vvhv', 'Panchagar Medical College', '01751465611', 'mhpitom007@gmail.com', 'this is address', 'yes', 'yes', NULL, NULL, 'Covered', 0, 'a3ba69a193596ee5ae3037beaea5fb2b');
 
 -- --------------------------------------------------------
 
@@ -298,6 +302,7 @@ CREATE TABLE `hospital` (
   `type` enum('hospital','clinic','others') DEFAULT NULL,
   `sub_type` enum('public','private') DEFAULT NULL,
   `address` text NOT NULL,
+  `img_loc` varchar(256) DEFAULT NULL,
   `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
   `_key` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -306,11 +311,13 @@ CREATE TABLE `hospital` (
 -- Dumping data for table `hospital`
 --
 
-INSERT INTO `hospital` (`id`, `name`, `teritory_id`, `area_id`, `region_id`, `market_id`, `type`, `sub_type`, `address`, `is_deleted`, `_key`) VALUES
-(1, 'test hos', 3, 2, 4, 5, NULL, NULL, 'this is address', 1, '39d9ca85942c3d96dd9e55b03d3eed71'),
-(2, 'Medi ded', 2, 2, 4, 6, NULL, NULL, 'this is address', 0, '06c2e027fd129b8d2a0ffd2508fef555'),
-(4, 'pirgachha upazila health complex', 2, 2, 4, 4, NULL, NULL, 'this is address', 0, '793c7ccf5a7a673b59ad7f9ab163e3cf'),
-(5, 'Rangpur Medical college', 2, 2, 4, 4, 'hospital', 'public', 'rtgdfg', 0, '97e2629732d3571a39c5d544d3a683db');
+INSERT INTO `hospital` (`id`, `name`, `teritory_id`, `area_id`, `region_id`, `market_id`, `type`, `sub_type`, `address`, `img_loc`, `is_deleted`, `_key`) VALUES
+(1, 'test hos', 3, 2, 4, 5, NULL, NULL, 'this is address', NULL, 1, '39d9ca85942c3d96dd9e55b03d3eed71'),
+(2, 'Medi ded', 2, 2, 4, 6, NULL, NULL, 'this is address', NULL, 0, '06c2e027fd129b8d2a0ffd2508fef555'),
+(4, 'pirgachha upazila health complex', 2, 2, 4, 4, NULL, NULL, 'this is address', NULL, 0, '793c7ccf5a7a673b59ad7f9ab163e3cf'),
+(5, 'Rangpur Medical college', 2, 2, 4, 4, 'hospital', 'public', 'rtgdfg', NULL, 0, '97e2629732d3571a39c5d544d3a683db'),
+(9, 'test', 2, 2, 4, 4, 'hospital', 'public', 'dfsfsdfs', 'public/images/20191116103907.jpg', 0, '0f25949f99f95550b59e3c3db017f16f'),
+(10, 'rashikul_ali', 2, 2, 4, 4, 'clinic', NULL, 'this is address', 'public/images/20191116110409.jpg', 0, '2383c27f392dc8fd24f48d423eb89df5');
 
 -- --------------------------------------------------------
 
@@ -606,7 +613,7 @@ ALTER TABLE `clinic`
 -- AUTO_INCREMENT for table `consulting_center`
 --
 ALTER TABLE `consulting_center`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `dispensary`
@@ -636,7 +643,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `hospital`
 --
 ALTER TABLE `hospital`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `market`
