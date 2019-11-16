@@ -57,7 +57,8 @@ class DoctorController extends Controller
         //
         $validatedData = $request->validate([
             'doc_name' => 'required',
-            'designation' => 'required'
+            'designation' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
 
@@ -75,6 +76,39 @@ class DoctorController extends Controller
                 $model->is_qualified = $request->is_qualified;
                 $model->mul_chamber = $request->mul_chamber;
                 $model->is_covered = $request->is_covered;
+
+                    if($files = $request->file('pro_pic'))
+                    {
+                        //$files = $files->resize(150,150);
+                        $destination = "public/images/";
+                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+                        $insert = $files->move($destination, $profile);
+                            if($insert)
+                            {
+                                $model->img_loc = $destination.$profile;
+                            }
+                            else{
+                                echo "Say some error";
+                            }
+
+                    }
+                            if($files = $request->file('visiting_card'))
+                            {
+                            //$files = $files->resize(150,150);
+                             $destination = "public/images/";
+                             $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+                             $insert = $files->move($destination, $profile);
+                              if($insert)
+                              {
+                                $model->visiting_card = $destination.$profile;
+                              }
+                              else{
+                                echo "Say some error";
+                              }
+
+                    }
+
+
                 $model->_key = md5(microtime().rand());
 
                if($model->save()){
@@ -135,6 +169,7 @@ class DoctorController extends Controller
         //
         $validatedData = $request->validate([
             'doc_name' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
 
@@ -151,6 +186,38 @@ class DoctorController extends Controller
         $model->is_qualified = $request->is_qualified;
         $model->mul_chamber = $request->mul_chamber;
         $model->is_covered = $request->is_covered;
+                            if($files = $request->file('pro_pic'))
+                    {
+                        //$files = $files->resize(150,150);
+                        $destination = "public/images/";
+                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+                        $insert = $files->move($destination, $profile);
+                            if($insert)
+                            {
+                                $model->img_loc = $destination.$profile;
+                            }
+                            else{
+                                echo "Say some error";
+                            }
+
+                    }
+                            if($files = $request->file('visiting_card'))
+                            {
+                            //$files = $files->resize(150,150);
+                             $destination = "public/images/";
+                             $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+                             $insert = $files->move($destination, $profile);
+                              if($insert)
+                              {
+                                $model->visiting_card = $destination.$profile;
+                              }
+                              else{
+                                echo "Say some error";
+                              }
+
+                    }
+
+        
        
        if($model->save()){
         $message = "Succssfully updated department";

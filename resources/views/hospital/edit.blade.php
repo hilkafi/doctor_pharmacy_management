@@ -8,7 +8,7 @@
                 <div class="card-header" style="background-color:#007ACC;color:white;">Update Hospital</div>
 
                 <div class="card-body">
-                <form method="post" action="{{url('/hospital')}}/{{$data->id}}">
+                <form enctype="multipart/form-data" method="post" action="{{url('/hospital')}}/{{$data->id}}">
                       @csrf
                 {{method_field('PUT')}}
 

@@ -120,6 +120,21 @@
                             </div>
                         </div>
 
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Profile Picture') }}</label>
+
+                            <div class="col-md-6">
+                               <input type="file" name="pro_pic" class="form-control" value="{{$data->img_loc}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Visiting Card') }}</label>
+
+                            <div class="col-md-6">
+                               <input type="file" name="visiting_card" class="form-control" value="{{$data->visiting_card}}">
+                            </div>
+                        </div>
+
 
 
 

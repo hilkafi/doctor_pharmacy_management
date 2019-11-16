@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2019 at 12:28 PM
+-- Generation Time: Nov 16, 2019 at 03:05 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -255,7 +255,8 @@ INSERT INTO `doctor` (`id`, `name`, `designation`, `expertise`, `degree`, `depar
 (8, 'sujon sir', 'dfdsf', 'dsfsfd', NULL, NULL, NULL, NULL, NULL, NULL, 'yes', 'no', NULL, NULL, NULL, 0, 'b4a3be6078fc7487aa1b8ba68f96f210'),
 (9, 'Dr. ABS Ruman', 'Assistant Professor', 'Sargon', 'MBBS, MD, FCPS', 'Nefrology', 'Panchagar Medical College', NULL, NULL, NULL, 'yes', 'yes', NULL, NULL, NULL, 0, '72d266cbc39ac47554f320e63a9fe566'),
 (10, 'rashikul', 'Assistant Professor', 'Nefrology', 'MBBS, MD, FCPS', 'Sexology and women gender', 'Park more sexual university', '01751465611', 'mhpitom007@gmail.com', 'fgsdgs', 'yes', 'yes', NULL, NULL, 'Covered', 0, '398d7ec4b2692c256381d93ee424477f'),
-(11, 'kazal', 'dfdsf', 'dsfsfd', 'MBBS, MD, FCPS', 'Vvhv', 'Panchagar Medical College', '01751465611', 'mhpitom007@gmail.com', 'this is address', 'yes', 'yes', NULL, NULL, 'Covered', 0, 'a3ba69a193596ee5ae3037beaea5fb2b');
+(11, 'kazal', 'dfdsf', 'dsfsfd', 'MBBS, MD, FCPS', 'Vvhv', 'Panchagar Medical College', '01751465611', 'mhpitom007@gmail.com', 'this is address', 'yes', 'yes', NULL, NULL, 'Covered', 0, 'a3ba69a193596ee5ae3037beaea5fb2b'),
+(12, 'Ratul ali', 'Assistant Professor', 'Nefrology', 'MBBS, MD, FCPS', 'Nefrology', 'Panchagar Medical College', NULL, 'mhpitom007@gmail.com', 'this is address', 'yes', 'yes', 'public/images/20191116130900.jpg', 'public/images/20191116130900.jpg', 'Covered', 0, '5bb0e7bd7312d1967ca05d5d1d246e1a');
 
 -- --------------------------------------------------------
 
@@ -631,7 +632,7 @@ ALTER TABLE `district`
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `employee`

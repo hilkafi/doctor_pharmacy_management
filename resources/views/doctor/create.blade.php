@@ -9,7 +9,7 @@
                 <div class="card-header" style="background-color:#333;color:white;">Add Doctor</div>
 
                 <div class="card-body">
-                <form method="post" action="{{url('/doctor')}}">
+                <form enctype="multipart/form-data" method="post" action="{{url('/doctor')}}">
                       @csrf
 
                         <div class="form-group row">
@@ -106,6 +106,21 @@
                                     <option value="Covered">Covered</option>
                                     <option value="Not Covered">No</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Profile Picture') }}</label>
+
+                            <div class="col-md-6">
+                               <input type="file" name="pro_pic" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Visiting Card') }}</label>
+
+                            <div class="col-md-6">
+                               <input type="file" name="visiting_card" class="form-control">
                             </div>
                         </div>
 

@@ -26,7 +26,8 @@
             
                <table class="table table-bordered">
                 <tr class="table-responsive">
-                <img src='{{url($img_loc)}}' width="1000" height="300" alt = "Hospital cover Photo">
+                <center><img src='{{url($img_loc)}}' width="600" height="300" alt = "Hospital cover Photo">
+                </center>
                 </tr>
                 <tr>
                     <th>Total Doctor</th><td>{{$doc[0]}}</td>

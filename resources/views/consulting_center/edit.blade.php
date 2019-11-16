@@ -8,7 +8,7 @@
                 <div class="card-header" style="background-color:#333;color:white;">Update Consulting Center</div>
 
                 <div class="card-body">
-                <form method="post" action="{{url('/consulting_center')}}/{{$data->id}}">
+                <form enctype="multipart/form-data" method="post" action="{{url('/consulting_center')}}/{{$data->id}}">
                       @csrf
                 {{method_field('PUT')}}
 

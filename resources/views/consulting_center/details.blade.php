@@ -25,7 +25,9 @@
             ?>
                <table class="table table-bordered">
                 <tr>
-                    <img src ="{{url($img_loc)}}" width="1000" height="300" alt="Cover Photo">
+                    <center>
+                    <img src ="{{url($img_loc)}}" width="600" height="300" alt="Cover Photo">
+                    </center>
                 </tr>
                 <tr>
                     <th>Total Doctor</th><td>{{$doc[0]}}</td>

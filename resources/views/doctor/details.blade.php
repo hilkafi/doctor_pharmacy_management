@@ -20,8 +20,20 @@
                 </div>
 
                 <div class="card-body">
+                    <?php
+                        if($data->img_loc !=null) $img_loc = $data->img_loc;
+                        else $img_loc = " not available ";
+
+                        if($data->visiting_card != null) $visiting_card = $data->visiting_card;
+                        else $visiting_card = " not available ";
+
+                    ?>
 
                       <table class="table table-bordered">
+                          <tr>
+                              <img src="{{url($img_loc)}}" width="300" height="300" alt="Profile Picture"></tr> <br><br>
+                          </tr>
+
                           <tr><th>Doctor Name:</th><td>{{$data->name}}</td></tr>
                           <tr><th>Degree:</th><td>{{$data->degree}}</td></tr>
                           <tr><th>Designation:</th><td>{{$data->designation}}</td></tr>
