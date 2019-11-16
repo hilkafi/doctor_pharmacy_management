@@ -9,7 +9,7 @@
                 <div class="card-header" style="background-color:#333;color:white;">Add Dispensary</div>
 
                 <div class="card-body">
-                <form method="post" action="{{url('/dispensary')}}">
+                <form enctype="multipart/form-data" method="post" action="{{url('/dispensary')}}">
                       @csrf
 
                         <div class="form-group row">
@@ -179,13 +179,15 @@
                             </div>
                         </div>
 
-                                <div class="col-md-6">
-                                <input id="latitude" type="hidden" class="form-control @error('name') is-invalid @enderror"  name="latitude" value="" required autocomplete="" autofocus>
-                                 <input id="longitude" type="hidden" class="form-control @error('name') is-invalid @enderror"  name="longitude" value="" required autocomplete="" autofocus>
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Cover Image') }}</label>
 
-
+                            <div class="col-md-6">
+                                <input type="file" name="image" class="form-control">
 
                             </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-outline-primary">

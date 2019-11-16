@@ -16,8 +16,24 @@
                 <form method="post" action="{{url('/dispensary/visit')}}/{{$data->id}}">
                       @csrf
                       <table class="table table-bordered tbl_thin">
+                        <tr>
+                            <?php
+                                if($data->img_loc!=null) $img_loc = $data->img_loc;
+                                else $img_loc = " not available";
+
+                            ?>
+                            <center>
+                            <img alt="Cover Image" src = "{{url($img_loc)}}" width="300" height="200">
+                            </center>
+
+                        </tr>
                           <tr><th>Dispensary Name:</th><td>{{$data->name}}</td></tr>
-                             <tr><th>MPO Name:</th><td>{{$user->name}}</td></tr>
+                          <?php
+                            if($data->is_covered == 'Covered') $employee_name = $employee->name;
+                            else $employee_name = null;
+
+                          ?>
+                          <tr><th>MPO Name:</th><td>{{$employee_name}}</td></tr>
                           <tr><th>Market:</th><td>{{$region->market_name($data->market_id)}}</td></tr>
                           <tr><th>Teritory:</th><td>{{$region->area_name($data->area_id)}}</td></tr>
                           <tr><th>Area:</th><td>{{$region->district_name($data->district_id)}}</td></tr>

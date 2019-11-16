@@ -60,6 +60,7 @@ class DispensaryController extends Controller
             'owner' => 'required',
             'market_id' => 'required',
             'district_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
 
@@ -78,6 +79,22 @@ class DispensaryController extends Controller
                 $model->region_id = $request->region_id;
 
                 $model->is_covered = $request->is_covered;
+
+                    if($files = $request->file('image'))
+                    {
+                        //$files = $files->resize(150,150);
+                        $destination = "public/images/";
+                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+                        $insert = $files->move($destination, $profile);
+                            if($insert)
+                            {
+                                $model->img_loc = $destination.$profile;
+                            }
+                            else{
+                                echo "Say some error";
+                            }
+
+                    }
 
                 $model->_key = md5(microtime().rand());
                     
@@ -138,6 +155,7 @@ class DispensaryController extends Controller
             'owner' => 'required',
             'market_id' => 'required',
             'district_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
 
@@ -153,6 +171,23 @@ class DispensaryController extends Controller
                 $model->district_id = $request->district_id;
                 $model->region_id = $request->region_id;
                 $model->is_covered = $request->is_covered;
+
+                
+                    if($files = $request->file('image'))
+                    {
+                        //$files = $files->resize(150,150);
+                        $destination = "public/images/";
+                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+                        $insert = $files->move($destination, $profile);
+                            if($insert)
+                            {
+                                $model->img_loc = $destination.$profile;
+                            }
+                            else{
+                                echo "Say some error";
+                            }
+
+                    }
                     
         
         
@@ -215,8 +250,8 @@ class DispensaryController extends Controller
         $dataset = Region::where('is_deleted',0)->get();
         $region = new District();
         $employee = Employee::where('area_id',$data->area_id)->first();
-        $user = User::where('is_deleted','0')->where('id',$employee->user_id)->first();
-        return view('dispensary.visit', compact('data', 'dataset', 'region','user'));
+        //$user = Employee::where('is_deleted','0')->where('id',$employee->user_id)->first();
+        return view('dispensary.visit', compact('data', 'dataset', 'region','employee'));
     }
 
 

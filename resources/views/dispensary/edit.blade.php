@@ -9,7 +9,7 @@
                 <div class="card-header" style="background-color:#333;color:white;">Update Pharmacy</div>
 
                 <div class="card-body">
-                <form method="post" action="{{url('/dispensary')}}/{{$data->id}}">
+                <form enctype="multipart/form-data" method="post" action="{{url('/dispensary')}}/{{$data->id}}">
                       @csrf
                       {{method_field('PUT')}}
 
@@ -120,6 +120,17 @@
                                     <option value="Covered">Covered</option>
                                     <option value="Not Covered">No</option>
                                 </select>
+                            </div>
+                        </div>
+
+
+
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Cover Image') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="file" name="image" class="form-control">
+
                             </div>
                         </div>
 
