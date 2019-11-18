@@ -146,7 +146,15 @@
                 <td style="">{{$data->name}}</td>
                 <td style="">{{$data->designation}}</td>
                 <td style="">{{$data->expertise}}</td>
-                <td style="">{{$data->is_covered}}</td>
+                <td style="text-align: center; width: 15%;">
+                    <?php if ($data->is_covered == 'Covered') { ?>
+                        {{$data->is_covered}} 
+                    <button id="uncover" class="btn btn-outline-primary">UnCover</button>
+                    <?php }else{ ?>
+                        N/A 
+                    <button id="cover" class="btn btn-outline-primary">Cover</button>
+                    <?php } ?>
+                </td>
                 <td style="width: 5%; text-align: center;"><a href="{{url('doctor/chamber')}}/{{$data->id}}" class="btn btn-outline-primary"><i class="fa fa-plus" aria-hidden="true" title="Add Chamber"></i></a></td>
 
                 <td style="width: 15%; text-align: center;"><a href='doctor/{{$data->id}}/edit' class="btn btn-outline-dark"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

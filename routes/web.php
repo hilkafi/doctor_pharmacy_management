@@ -51,12 +51,12 @@ Route::post('/consulting_center/search', 'ConsultingCenterController@search');
 Route::get('/consulting_center/{id}/details', 'ConsultingCenterController@view_details');
 
 //hospital related routes
-Route::resource('/hospital', 'HospitalController');
-Route::post('/hospital/search', 'HospitalController@search');
 Route::get('/hospital/{id}/details', 'HospitalController@view_details');
 Route::get('/hospitals', 'HospitalController@hospitals');
 Route::get('/clinics','HospitalController@show_clinics');
 Route::get('/others','HospitalController@show_others');
+Route::resource('/hospital', 'HospitalController');
+Route::post('/hospital/search', 'HospitalController@search');
 Route::post('/hospitals/search', 'HospitalController@hospital_search');
 Route::post('/clinicsearch', 'HospitalController@clinic_search');
 Route::post('/otherssearch', 'HospitalController@others_search');
@@ -91,6 +91,7 @@ Route::post('/dispensary/visit/{id}', 'DispensaryController@visit_confirm');
 //Route::post('/clinic/visit/{id}', 'ClinicController@visit_confirm');
 
 Route::resource('employee', 'EmployeeController');
+Route::post('employee/search', 'EmployeeController@search');
 
 
 //Employee Related Route

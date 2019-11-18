@@ -229,31 +229,35 @@ class HospitalController extends Controller
  }
 
         public function hospital_search(Request $r){
-        $region = new District();
-        $search = $r->search;
-        $region_id = $r->region_id;
-        $teritory_id = $r->teritory_id;
-        $area_id = $r->area_id;
-        $market_id = $r->market_id;
-        $data = Hospital::where('type', 'hospital')->where('is_deleted','0');
-        if(!empty($search)){
-            $data = $data->where('name', 'like', '%'.trim($search).'%' );
-        }
-        if(!empty($region_id)){
-            $data = $data->where('region_id', $region_id);
-        }
-        if(!empty($area_id)){
-            $data = $data->where('area_id', $area_id);
-        }
-        if(!empty($teritory_id)){
-            $data = $data->where('teritory_id', $teritory_id);
-        }
-        if(!empty($market_id)){
-            $data = $data->where('market_id', $market_id);
-        }
+            $region = new District();
+            $search = $r->search;
+            $region_id = $r->region_id;
+            $teritory_id = $r->teritory_id;
+            $area_id = $r->area_id;
+            $market_id = $r->market_id;
+            $hospital_type = $r->hospital_type;
+            $data = Hospital::where('type', 'hospital')->where('is_deleted','0');
+            if(!empty($search)){
+                $data = $data->where('name', 'like', '%'.trim($search).'%' );
+            }
+            if(!empty($region_id)){
+                $data = $data->where('region_id', $region_id);
+            }
+            if(!empty($area_id)){
+                $data = $data->where('area_id', $area_id);
+            }
+            if(!empty($teritory_id)){
+                $data = $data->where('teritory_id', $teritory_id);
+            }
+            if(!empty($market_id)){
+                $data = $data->where('market_id', $market_id);
+            }
+            if(!empty($hospital_type)){
+                $data = $data->where('sub_type', $hospital_type);
+            }
 
-        $dataset = $data->paginate(10);
-        return view('hospital._hos_list', compact('dataset', 'region'));
+            $dataset = $data->paginate(10);
+            return view('hospital._hos_list', compact('dataset', 'region'));
  }
 
         public function clinic_search(Request $r){

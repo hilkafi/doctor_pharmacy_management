@@ -51,10 +51,10 @@
                 <div class="display-hostype" style="display: none;  margin-bottom: 10px">
                     <div class="input-group">
                         <label class="radio-inline" style="margin-right: 15px">
-                          <input type="radio" name="hospital_type" style="margin-right: 5px" value="yes">Public
+                          <input type="radio" name="hospital_type" style="margin-right: 5px" value="public">Public
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="hospital_type" style="margin-right: 5px" value="no">Private
+                          <input type="radio" name="hospital_type" style="margin-right: 5px" value="private">Private
                         </label>
                     </div>
                 </div>
