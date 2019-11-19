@@ -55,6 +55,7 @@
 
 
                 <th>Is Covered?</th>
+                <th>Action</th>
 
                 </tr>
                 <?php $i = 0;
@@ -70,13 +71,15 @@
                 <td>{{$dis->market_name($data->market_id)}}</td>
  
                 <td>{{$data->is_covered}}</td>
+                <td> <a href="{{url('dispensary')}}/{{$data->_key}}" class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+
 
 
   
                 </tr>
                 @endforeach
                 <tr>
-                    <td  colspan = '3' style="text-align: right; font-weight: bold">Total Doctors</td>
+                    <td  colspan = '3' style="text-align: right; font-weight: bold">Total Pharmacy</td>
                     <td style="font-weight: bold">{{ $i }}</td>
                 </tr>
               

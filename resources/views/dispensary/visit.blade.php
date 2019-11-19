@@ -29,8 +29,18 @@
                         </tr>
                           <tr><th>Dispensary Name:</th><td>{{$data->name}}</td></tr>
                           <?php
-                            if($data->is_covered == 'Covered') $employee_name = $employee->name;
-                            else $employee_name = null;
+                            if($employee== null){
+                                $employee_name = "N/A";
+                            }
+
+                            else{
+                                if($data->is_covered == 'Covered') $employee_name = $employee->name;
+                                else $employee_name = null;
+                            }
+
+
+
+
 
                           ?>
                           <tr><th>MPO Name:</th><td>{{$employee_name}}</td></tr>

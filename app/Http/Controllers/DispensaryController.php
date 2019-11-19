@@ -124,6 +124,15 @@ class DispensaryController extends Controller
     public function show($id)
     {
         //
+        $data = Dispensary::where('_key', $id)->first();
+        $dataset = Region::where('is_deleted',0)->get();
+        $region = new District();
+     
+        $employee = Employee::where('area_id',$data->area_id)->first();
+            
+
+        //$user = Employee::where('is_deleted','0')->where('id',$employee->user_id)->first();
+        return view('dispensary.visit', compact('data', 'dataset', 'region','employee'));
     }
 
     /**
