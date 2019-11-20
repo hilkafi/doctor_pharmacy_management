@@ -52,7 +52,7 @@
                                     <a href="{{url('/hospital')}}" style="color: white;">
                                     <p style="font-size: 150px; text-align: center;"><i class="fa fa-medkit" aria-hidden="true"></i></p>
                                     <div class="b-body" style="margin-top: -50px;">
-                                        <h3><a href = "{{url('/hospital')}}" style="color: white;" >Total Hospital: <i>{{$hospital}}</i></a></h3>
+                                        <h3><a href = "{{url('/hospital')}}" style="color: white;" >Total Institute: <i>{{$hospital}}</i></a></h3>
                                         <h3><a href = "{{url('/consulting_center')}}" style="color: white;" >Total Consulting Center: <i>{{$con_cen}}</i></h3><br>
 
                                     </div>

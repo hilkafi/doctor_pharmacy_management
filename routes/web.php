@@ -91,10 +91,11 @@ Route::post('/doctor/visit/{id}', 'DoctorController@visit_confirm');
 
 //personal info related route
 Route::get('/personalinfo/{id}', 'PersonalInfoController@personal_info');
-Route::post('/personalinfo/add', 'PersonalInfoController@add_personal_info');
 Route::get('/personalinfo/show/{key}', 'PersonalInfoController@show_personal_index');
 Route::get('/birthday', 'PersonalInfoController@show_birthday');
 Route::get('/marriage-anniversary', 'PersonalInfoController@show_marriage_anniversary');
+Route::resource('/doctorpersonalinfo', 'PersonalInfoController');
+Route::post('/personalinfo/add', 'PersonalInfoController@add_personal_info');
 
 
 

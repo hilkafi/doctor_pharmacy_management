@@ -207,6 +207,14 @@ th, td{
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/employee/')}}" style="color: white;">Employee</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link nav-link dropdown-toggle" data-toggle="dropdown" role="button" id="navbarDropdown" href="{{url('#')}}" aria-haspopup="true" aria-expanded="false" v-pre style="color: white;"><span class="fa fa-bell"></span></a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{url('/birthday')}}">Birthday</a>
+                                    <a class="dropdown-item" href="{{url('/marriage-anniversary')}}">Marriage Anniversary</a>
+
+                                </div>
+                        </li>
        
                     </ul>
                     @endguest

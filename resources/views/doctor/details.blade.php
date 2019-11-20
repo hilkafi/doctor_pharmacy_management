@@ -13,7 +13,12 @@
         @endif 
         <?php
         $key = $data->id;
+
         ?>
+            <div  class="col-md-2">
+                <a href="{{url('/personalinfo')}}/{{$data->id}}" class = "btn btn-outline-dark">Add Personal Info</a>
+            </div>
+            <br><br>
             <div class="card">
                 <div class="card-header" style="background-color:#ddd;color:black;"><b>Doctor Details</b>
                    <div  style="text-align: right;"> <a href="{{url('/personalinfo/show')}}/{{$key}}" ><i>personal info</i></a> </div>  

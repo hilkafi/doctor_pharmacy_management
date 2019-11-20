@@ -12,7 +12,9 @@
         </div>
         @endif 
         <?php
-        $key = $data->id;
+        //$key = $data->id;
+       
+
             if($personal->is_married=='yes'){
                 $marrital_status = "Married";
                 $better_half = $personal->wife_name;
@@ -26,10 +28,12 @@
                 $marriage_anniversary = 'N/A';   
 
             }
+        
+
         ?>
             <div class="card">
                 <div class="card-header" style="background-color:#ddd;color:black;"><b>Personal Details of {{$data->name}}</b>
-                   <div  style="text-align: right;"> <a href="{{url('/personalinfo')}}/{{$key}}" ><i>Edit personal info</i></a> </div>  
+                   <div  style="text-align: right;"> <a href="{{url('/doctorpersonalinfo')}}/{{$data->id}}/edit" ><i>Edit personal info</i></a> </div>  
                 </div>
 
                 <div class="card-body">
@@ -37,7 +41,8 @@
                       <table class="table table-bordered">
                         <tr class ="card-header"><h1>Personal Info:</h1></tr>
                           <tr><th>Doctor Name:</th><td>{{$data->name}}</td></tr>
-                          <tr><th>Home Town:</th><td>{{$personal->current_city}}</td></tr>
+                          <tr><th>Current City:</th><td>{{$personal->current_city}}</td></tr>
+                          <tr><th>Home Town:</th><td>{{$personal->home_town}}</td></tr>
                           <tr><th>Date of Birth:</th><td>{{$personal->date_of_birth}}</td></tr>
                       </table>
                      <table class="table table-bordered">

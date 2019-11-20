@@ -61,6 +61,10 @@ class PersonalInfoController extends Controller
     public function edit($id)
     {
         //
+        $data = Doctor::where('id',$id)->where('is_deleted','0')->first();
+        $personal = PersonalInfo::where('doc_id',$data->id)->first();
+
+        return view('personal_info.edit',compact('data','personal'));
     }
 
     /**
@@ -73,6 +77,36 @@ class PersonalInfoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $model =PersonalInfo::where('doc_id',$id)->first();
+        $model->doc_id = $request->doc_id;
+        $model->wife_name = $request->better_half; 
+        $model->is_married = $request->is_married;
+        $model->child = $request->childrens;
+        $model->grad_school = $request->grad_school;
+        $model->passing_year = $request->passing_year;
+        $model->date_of_birth = $request->date_of_birth;
+        $model->hobby = $request->hobby;
+        $model->marriage_anniversary = $request->marriage_anniversary;
+        $model->fav_writer = $request->fav_writer;
+        $model->fav_color = $request->fav_color;
+        $model->fav_brand = $request->fav_brand;
+        $model->fav_musician = $request->fav_musician;
+        $model->fav_dish = $request->fav_dish;
+        $model->home_town = $request->hometown;
+        $model->current_city = $request->current_city;
+            if($model->save()){
+                $message = "Succssfully added data";
+            }
+            else{
+                $message = "Data Entry Error";
+               
+                
+            }
+           
+              
+            
+
+            return redirect()->back()->with('message',$message); 
     }
 
     /**
@@ -89,7 +123,8 @@ class PersonalInfoController extends Controller
     public function personal_info($id)
     {   
         $data = Doctor::where('id',$id)->where('is_deleted','0')->first();
-        $personal = DB::table('doctor')->join('personal_info','doctor.id', '=','personal_info.doc_id')->first();
+       // $personal = DB::table('doctor')->join('personal_info','doctor.id', '=','personal_info.doc_id')->first();
+        $personal = PersonalInfo::where('doc_id',$data->id)->first();
         return view('personal_info.create',compact('data','personal'));
     }
 
@@ -110,7 +145,7 @@ class PersonalInfoController extends Controller
         $model->fav_brand = $request->fav_brand;
         $model->fav_musician = $request->fav_musician;
         $model->fav_dish = $request->fav_dish;
-        $model->home_town = $request->home_town;
+        $model->home_town = $request->hometown;
         $model->current_city = $request->current_city;
             if($model->save()){
                 $message = "Succssfully added data";
@@ -124,7 +159,7 @@ class PersonalInfoController extends Controller
               
             
 
-            return view('personal_info.index')->with('message',$message);  
+            return redirect()->back()->with('message',$message);  
     }
 
 
@@ -132,9 +167,20 @@ class PersonalInfoController extends Controller
     public function show_personal_index($id){
 
         $data = Doctor::where('id',$id)->where('is_deleted','0')->first();
-        $personal = DB::table('doctor')->join('personal_info','doctor.id', '=','personal_info.doc_id')->first();
+        //$personal = DB::table('doctor')->join('personal_info','doctor.id', '=','personal_info.doc_id')->first();
 
-        return view('personal_info.index',compact('data','personal'));
+        $personal = PersonalInfo::where('doc_id',$data->id)->first();
+            if(!empty($personal))
+            {
+                return view('personal_info.index',compact('data','personal'));
+            }
+            else{
+
+                $message = "No Personal Info to display.Please add personal info first";
+                return redirect()->back()->with('message',$message);
+            }
+
+        
     }
 
 
