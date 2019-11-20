@@ -15,7 +15,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center">                        
                         <div class="col-md-4">
                             <div class="card" style="border-radius: 25px; padding: 0px; margin: 0px; background: #5757f7; color: #fff">
                                 <div class="card-body" style="padding: 0px; margin: 0px; text-align: center;">
@@ -124,6 +124,7 @@
                         </div>
              
                     <br><br>
+
 
                
                

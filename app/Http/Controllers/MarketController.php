@@ -182,7 +182,7 @@ class MarketController extends Controller
         return view('market._list', compact('dataset', 'region'));
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
         //
         $data = Market::find($id);

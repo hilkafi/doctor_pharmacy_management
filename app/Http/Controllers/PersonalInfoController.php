@@ -136,4 +136,45 @@ class PersonalInfoController extends Controller
 
         return view('personal_info.index',compact('data','personal'));
     }
+
+
+    public function show_birthday(){
+        $date = date('Y-m_d');
+        $doctor[] = null;
+
+        $date_of_birth = PersonalInfo::where('date_of_birth',$date)->get();
+            
+            if(!empty($date_of_birth)){
+                foreach ($date_of_birth as $db) {
+
+                    $doctor[] = $db->doc_id;
+      
+                    
+                }
+            }
+
+             $num_doc = Doctor::whereIn('id', $doctor)->where('is_deleted','0')->get();
+             return view('doctor.birthday',compact('num_doc'));
+    }
+
+    public function show_marriage_anniversary()
+    {
+        $date = date('Y-m_d');
+        $doctor[] = null;
+
+        $anniversary = PersonalInfo::where('marriage_anniversary',$date)->get();
+            
+            if(!empty($anniversary)){
+                foreach ($anniversary as $anni) {
+
+                    $doctor[] = $anni->doc_id;
+      
+                    
+                }
+            }
+
+             $num_doc = Doctor::whereIn('id', $doctor)->where('is_deleted','0')->get();
+             return view('doctor.anniversary',compact('num_doc'));
+
+    }
 }

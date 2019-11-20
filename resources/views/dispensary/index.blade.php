@@ -100,7 +100,7 @@
                 <td style="width: 15%; text-align: center;">
                  <a href='dispensary/{{$data->_key}}/edit' class="btn btn-outline-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                  <a href="dispensary/{{$data->_key}}/visit"><button class="btn outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                <a href="doctor/{{$data->id}}" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a> 
+                <a href="{{url('/dispensary/delete')}}/{{$data->id}}" onclick="return confirm('Data will be delete permanently.Are you sure about delete?')" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a> 
 
                 </td>
                 </tr>

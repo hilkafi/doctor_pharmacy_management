@@ -289,7 +289,7 @@ class DispensaryController extends Controller
 
 
 
-    public function destroy($id)
+    public function delete($id)
     {
         $data = Dispensary::find($id);
         $data->is_deleted = 1;

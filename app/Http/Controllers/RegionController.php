@@ -199,7 +199,7 @@ class RegionController extends Controller
         }
 
 
-    public function destroy($id)
+    public function delete($id)
     {
         //
          $user_role = Auth::user()->user_role;

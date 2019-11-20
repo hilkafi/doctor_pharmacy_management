@@ -96,6 +96,8 @@
                 <td>{{ $data->pharmacy_covered($data->id)}}</td>
                  <td style="width: 15%; text-align: center;"> <a href='consulting_center/{{$data->_key}}/edit' class="btn btn-outline-dark"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                      <a href='consulting_center/{{$data->_key}}/details' class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+                    <a href="{{url('/consulting_center/delete')}}/{{$data->id}}" onclick="return confirm('Data will be deleted permanently.Are you sure about delete?')" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a> 
                 </td>
                 </tr>
                 @endforeach

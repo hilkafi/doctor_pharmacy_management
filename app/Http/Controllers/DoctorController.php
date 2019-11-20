@@ -307,7 +307,7 @@ class DoctorController extends Controller
 
 
 
-    public function destroy($id)
+    public function delete($id)
     {
         //
         $data = Doctor::find($id);

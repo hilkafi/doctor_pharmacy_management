@@ -207,6 +207,7 @@ th, td{
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/employee/')}}" style="color: white;">Employee</a>
                         </li>
+       
                     </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->

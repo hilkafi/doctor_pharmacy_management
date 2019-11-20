@@ -183,7 +183,7 @@ class DistrictController extends Controller
         return view('area._list', compact('dataset', 'region'));
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
         //
          $user_role = Auth::user()->user_role;
