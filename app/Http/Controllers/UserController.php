@@ -22,12 +22,12 @@ class UserController extends Controller
 	  public function index()
 
     {
-         $dataset = DB::table('users')->join('employee', 'users.id', '=', 'employee.user_id')->where('is_deleted',0)->paginate(20);
+         $dataset = User::where('is_deleted',0)->paginate(20);
         //$dataset = User::where('is_deleted',0)->orderBy('id','DESC')->paginate(20);
-        $employee= Employee::all();
+        //$employee= Employee::all();
         $region = Region::where('is_deleted', 0)->get();
         $district = new District();
-         return view('user.index', compact('dataset','employee','district', 'region'));
+         return view('user.index', compact('dataset','district', 'region'));
     }
 
     /**
@@ -77,22 +77,22 @@ class UserController extends Controller
                		throw new Exception("Error Processing Request");
                }
 
-            	$lastId = DB::getPdo()->lastInsertId();
+            	//$lastId = DB::getPdo()->lastInsertId();
 
-            	$modelEmp = new Employee();             
-                $modelEmp->user_id = $lastId;
-                $modelEmp->phone = $request->phone;
-                $modelEmp->address = $request->address;
-                $modelEmp->designation = $request->designation;
-                $modelEmp->area_id = $request->area_id;
-                $modelEmp->district_id = $request->district_id;
-                $modelEmp->region_id = $request->region_id;
-               	if(!$modelEmp->save()){
-               		throw new Exception("Error Processing Request");
+            	//$modelEmp = new Employee();             
+                //$modelEmp->user_id = $lastId;
+               // $modelEmp->phone = $request->phone;
+                //$modelEmp->address = $request->address;
+                //$modelEmp->designation = $request->designation;
+                //$modelEmp->area_id = $request->area_id;
+                //$modelEmp->district_id = $request->district_id;
+                //$modelEmp->region_id = $request->region_id;
+               	//if(!$modelEmp->save()){
+               		//throw new Exception("Error Processing Request");
                		
-               }
+              // }
 
-               DB::commit();
+              // DB::commit();
                return redirect('/user')->with('message', 'User Created Successfully');
 
           	}catch(Exception $e){
@@ -110,9 +110,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::where('_key', $id)->first();
-        $employee = Employee::where('user_id',$user->id)->first();
+        //$employee = Employee::where('user_id',$user->id)->first();
         $district = new District();
-        return view('user.details', compact('user', 'district','employee'));
+        return view('user.details', compact('user', 'district'));
     }
 
     /**
@@ -171,7 +171,7 @@ class UserController extends Controller
 
               
 
-                $modelEmp = Employee::where('user_id',$id)->first();             
+                $modelEmp = Employee::where('id',$id)->first();             
                 $modelEmp->user_id = $id;
                 $modelEmp->phone = $request->phone;
                 $modelEmp->address = $request->address;

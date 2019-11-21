@@ -10,6 +10,8 @@ use App\Market;
 use App\Consulting_Center;
 use App\Chamber;
 use App\Doctor;
+use App\Dispensary;
+use App\Employee;
 use auth;
 
 class ConsultingCenterController extends Controller
@@ -245,5 +247,29 @@ class ConsultingCenterController extends Controller
             $message = "Data is not deletd successfully";
         }
         return redirect()->back()->with('message',$message);
+    }
+
+    public function visit_cc_pharmacy($id){
+
+        $data = Dispensary::where('consulting_center_id',$id)->where('is_deleted','0')->first();
+
+            if(!empty($data))
+            {
+
+                $dataset = Region::where('is_deleted',0)->get();
+                $region = new District();
+                $employee = Employee::where('area_id',$data->area_id)->first();
+
+                return view('consulting_center.pharmacy_details',compact('data','dataset','region','employee'));
+
+            }
+
+            else{
+
+                $message = "This Consultation Center has no pharmacy record yet. Please Add a pharmacy first ";
+                return redirect()->back()->with('message',$message);
+            }
+
+
     }
 }

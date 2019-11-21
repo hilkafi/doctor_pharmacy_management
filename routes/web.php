@@ -57,11 +57,13 @@ Route::post('/market/search', 'MarketController@search');
 //consulting center related route
 Route::get('/consulting_center/{id}/details', 'ConsultingCenterController@view_details');
 Route::get('/consulting_center/delete/{id}', 'ConsultingCenterController@delete');
+Route::get('/view_pharmacys/{id}', 'ConsultingCenterController@visit_cc_pharmacy');
 Route::resource('/consulting_center', 'ConsultingCenterController');
 Route::post('/consulting_center/search', 'ConsultingCenterController@search');
 
 
 //hospital related routes
+Route::get('/hospital/view_pharmacy/{id}', 'HospitalController@view_pharmacy');
 Route::get('/hospital/{id}/details', 'HospitalController@view_details');
 Route::get('/hospitals', 'HospitalController@hospitals');
 Route::get('/clinics','HospitalController@show_clinics');

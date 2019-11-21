@@ -68,8 +68,8 @@
                     <th>Name</th>
                     <th>Designation</th>
                     <th>Region</th>
-                    <th>District</th>
                     <th>Area</th>
+                    <th>Teritory</th>
                     <th>action</th>
                 </tr>
                 <?php $i = 0;
