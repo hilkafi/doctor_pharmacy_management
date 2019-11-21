@@ -67,6 +67,7 @@
                             <th>C Center</th>
                             <th>Hospital</th>
                             <th>Contact</th>
+                            <th>Address</th>
                             <th>visiting Hour</th>
                             <th>Fee</th>
                             <th>Action</th>
@@ -99,10 +100,11 @@
                             <td>{{ $data->market_name($chamber->market_id) }}</td>
                             <td>{{ $data->consalting_center_name($chamber->consulting_center_id) }}</td>
                             <td>{{ $data->hospital_name($chamber->hospital_id) }}</td>
-                              <td>{{ $chamber->contact }}</td>
+                            <td>{{ $chamber->contact }}</td>
+                            <td>{{ $chamber->address }}</td>
                             <td>{{ $chamber->visiting_hour }}</td>
                             <td>{{ $chamber->fee }}</td>
-                            <td><a href="#" class="btn btn-outline-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a href="#" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                            <td><a href="{{url('/chamber/edit')}}/{{$chamber->id}}" class="btn btn-outline-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a href="{{url('/chamber/delete')}}/{{$chamber->id}}" onclick="confirm('Chamber will be deleted permanently.Are you sure?')" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                         </tr>
                         @endforeach
                     </table>

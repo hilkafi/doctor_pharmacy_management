@@ -77,8 +77,10 @@ Route::post('/otherssearch', 'HospitalController@others_search');
 
 
 //Doctor related Route
-
-
+Route::get('/doctor/cover/{id}', 'DoctorController@cover');
+Route::get('/doctor/uncover/{id}', 'DoctorController@uncover');
+Route::get('/chamber/edit/{id}', 'DoctorController@edit_chamber');
+Route::get('/chamber/delete/{id}', 'DoctorController@delete_chamber');
 Route::get('/doctor/{id}/visit', 'DoctorController@visit_view');
 Route::get('doctor/visit/log', 'DoctorController@visit_log');
 Route::get('doctor/visit/{id}/details', 'DoctorController@visited_doctor_details');
@@ -88,8 +90,7 @@ Route::resource('/doctor', 'DoctorController');
 Route::post('/doctor/add_chamber', 'DoctorController@final_add_chamber');
 Route::post('/doctor/search', 'DoctorController@search');
 Route::post('/doctor/visit/{id}', 'DoctorController@visit_confirm');
-Route::get('/doctor/cover/{id}', 'DoctorController@cover');
-Route::get('/doctor/uncover/{id}', 'DoctorController@uncover');
+Route::post('/chamber/chamedit/{id}','DoctorController@edit_store');
 
 
 

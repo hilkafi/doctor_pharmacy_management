@@ -135,7 +135,7 @@ class DoctorController extends Controller
     public function show($id)
     {
         $data = Doctor::where('id', $id)->first();
-        $chambers = Chamber::where('doctor_id',$data->id)->get();
+        $chambers = Chamber::where('doctor_id',$data->id)->where('is_deleted','0')->get();
         $user = new Doctor;
 
         return view('doctor.details', compact('data', 'chambers','user'));
@@ -376,7 +376,7 @@ class DoctorController extends Controller
         public function add_chamber($id){
 
             $data = Doctor::where('id',$id)->first();
-              $dataset = Region::where('is_deleted',0)->get();
+            $dataset = Region::where('is_deleted',0)->get();
 
             return view('doctor.add_chamber',compact('data','dataset'));
 
@@ -399,7 +399,7 @@ class DoctorController extends Controller
                 $model->consulting_center_id = $request->consulting_center_id;
                 $model->hospital_id = $request->hospital_id;
                 $model->address = $request->address;
-                 $model->contact = $request->contact;
+                $model->contact = $request->contact;
                 $model->visiting_hour = $request->visiting_hour;
                 $model->fee = $request->fee;
                 $model->_key = md5(microtime().rand());
@@ -421,6 +421,87 @@ class DoctorController extends Controller
 
 
          }
+
+         public function delete_chamber($id){
+
+          $chamber = Chamber::find($id);
+          $chamber->is_deleted = 1;
+
+            if($chamber->save()){
+              $message = "Deleted Successfully";
+            }
+            else{
+            $message = "Data is not deletd successfully";
+            }
+
+        return redirect()->back()->with('message',$message);
+
+
+
+
+
+
+
+         }
+
+         public function edit_chamber($id)
+         {
+          
+          $chamber = Chamber::where('id',$id)->where('is_deleted','0')->first();
+          $data = Doctor::where('id',$chamber->doctor_id)->where('is_deleted','0')->first();
+          $dataset = Region::where('is_deleted',0)->get();
+          $district = new District;
+
+          return view('doctor.chamber_edit',compact('data','chamber','dataset','district'));
+
+
+
+
+         }
+
+
+         public function edit_store(Request $request,$id)
+         {
+             $validatedData = $request->validate([
+            'doctor_id' => 'required',
+            'teritory_id' => 'required'
+            
+        ]);
+                $model =Chamber::find($id);
+         
+                $model->doctor_id= $request->doctor_id;
+                $model->region_id = $request->region_id;
+                $model->area_id = $request->area_id;
+                $model->teritory_id = $request->teritory_id;
+                $model->market_id = $request->market_id;
+                $model->consulting_center_id = $request->consulting_center_id;
+                $model->hospital_id = $request->hospital_id;
+                $model->address = $request->address;
+                $model->contact = $request->contact;
+                $model->visiting_hour = $request->visiting_hour;
+                $model->fee = $request->fee;
+           
+
+
+               if($model->save()){
+                $message = "Succssfully updated data";
+               }
+               else{
+                   $message = "Data Entry Error";
+               
+                
+            }
+           
+              
+            
+
+            return redirect('/doctor')->with('message',$message);
+
+
+         }
+
+
+
 
          public function cover($id){
           $doctor = Doctor::where('id', $id)->first();
