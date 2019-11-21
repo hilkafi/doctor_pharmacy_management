@@ -302,4 +302,26 @@ class DispensaryController extends Controller
         }
         return redirect()->back()->with('message',$message);
     }
+
+    public function cover($id){
+          $pharmacy = Dispensary::where('id', $id)->first();
+          $pharmacy->is_covered = 'Covered';
+
+          if(!$pharmacy->save()){
+            return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
+            }
+
+          return redirect()->back()->with('message', 'Pharmacy Has Been Covered Succssfully');
+         }
+
+         public function uncover($id){
+          $pharmacy = Dispensary::where('id', $id)->first();
+          $pharmacy->is_covered = 'Not Covered';
+
+          if(!$pharmacy->save()){
+            return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
+            }
+
+          return redirect()->back()->with('message', 'Pharmacy Has Been UnCovered Succssfully');
+         }
 }

@@ -147,13 +147,18 @@
                 <td style="">{{$data->designation}}</td>
                 <td style="">{{$data->expertise}}</td>
                 <td style="text-align: center; width: 15%;">
-                    <?php if ($data->is_covered == 'Covered') { ?>
-                        {{$data->is_covered}} 
-                    <button id="uncover" class="btn btn-outline-primary">UnCover</button>
-                    <?php }else{ ?>
-                        N/A 
-                    <button id="cover" class="btn btn-outline-primary">Cover</button>
-                    <?php } ?>
+                    <?php  
+                        if($data->is_covered == "Not Covered"){ ?>
+                            Not Covered
+                            <a href="{{url('doctor/cover')}}/{{$data->id}}" onclick="return confirm('Are you sure!')" class="btn btn-outline-primary">Cover</a>
+
+                      <?php  }elseif($data->is_covered == "Covered"){ ?>
+                            Covered
+                            <a href="{{url('doctor/uncover')}}/{{$data->id}}" onclick="return confirm('Are you sure!')" class="btn btn-outline-primary">UnCover</a>
+                      <?php }else{ ?>
+                            N/A
+                            <a href="{{url('doctor/cover')}}/{{$data->id}}" onclick="return confirm('Are you sure!')" class="btn btn-outline-primary">Cover</a>
+                      <?php } ?>
                 </td>
                 <td style="width: 5%; text-align: center;"><a href="{{url('doctor/chamber')}}/{{$data->id}}" class="btn btn-outline-primary"><i class="fa fa-plus" aria-hidden="true" title="Add Chamber"></i></a></td>
 

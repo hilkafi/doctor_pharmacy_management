@@ -422,6 +422,27 @@ class DoctorController extends Controller
 
          }
 
+         public function cover($id){
+          $doctor = Doctor::where('id', $id)->first();
+          $doctor->is_covered = 'Covered';
+
+          if(!$doctor->save()){
+            return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
+            }
+
+          return redirect()->back()->with('message', 'Doctor Has Been Covered Succssfully');
+         }
+
+         public function uncover($id){
+          $doctor = Doctor::where('id', $id)->first();
+          $doctor->is_covered = 'Not Covered';
+
+          if(!$doctor->save()){
+            return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
+            }
+
+          return redirect()->back()->with('message', 'Doctor Has Been UnCovered Succssfully');
+         }
  
 
 

@@ -96,7 +96,20 @@
                 <td>{{$region->area_name($data->area_id)}}</td>
                 <td>{{$region->market_name($data->market_id)}}</td>
                 <td>{{ $data->contact }}</td>
-                <td>{{ $data->is_covered }}</td>
+                <td>
+                    <?php  
+                        if($data->is_covered == "Not Covered"){ ?>
+                            Not Covered
+                            <a href="{{url('dispensary/cover')}}/{{$data->id}}" onclick="return confirm('Are you sure!')" class="btn btn-outline-primary">Cover</a>
+
+                      <?php  }elseif($data->is_covered == "Covered"){ ?>
+                            Covered
+                            <a href="{{url('dispensary/uncover')}}/{{$data->id}}" onclick="return confirm('Are you sure!')" class="btn btn-outline-primary">UnCover</a>
+                      <?php }else{ ?>
+                            N/A
+                            <a href="{{url('dispensary/cover')}}/{{$data->id}}" onclick="return confirm('Are you sure!')" class="btn btn-outline-primary">Cover</a>
+                      <?php } ?>
+                </td>
                 <td style="width: 15%; text-align: center;">
                  <a href='dispensary/{{$data->_key}}/edit' class="btn btn-outline-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                  <a href="dispensary/{{$data->_key}}/visit"><button class="btn outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></button></a>

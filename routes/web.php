@@ -86,6 +86,8 @@ Route::resource('/doctor', 'DoctorController');
 Route::post('/doctor/add_chamber', 'DoctorController@final_add_chamber');
 Route::post('/doctor/search', 'DoctorController@search');
 Route::post('/doctor/visit/{id}', 'DoctorController@visit_confirm');
+Route::get('/doctor/cover/{id}', 'DoctorController@cover');
+Route::get('/doctor/uncover/{id}', 'DoctorController@uncover');
 
 
 
@@ -104,6 +106,8 @@ Route::get('/dispensary/delete/{id}', 'DispensaryController@delete');
 Route::resource('/dispensary', 'DispensaryController');
 Route::post('/dispensary/search', 'DispensaryController@search');
 Route::post('/dispensary/visit/{id}', 'DispensaryController@visit_confirm');
+Route::get('/dispensary/cover/{id}', 'DispensaryController@cover');
+Route::get('/dispensary/uncover/{id}', 'DispensaryController@uncover');
 
 
 //Route::resource('/clinic', 'ClinicController');

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
@@ -76,7 +76,20 @@
                 <td>{{$data->expertise}}</td>
                 <td>{{$data->address}}</td>
                 <td>{{$data->mul_chamber}}</td>
-                <td>{{$data->is_covered}}</td>
+                <td>
+                    <?php  
+                        if($data->is_covered == "Not Covered"){ ?>
+                            Not Covered
+                            <a href="{{url('doctor/cover')}}/{{$data->id}}" onclick="return confirm('Are you sure!')" class="btn btn-outline-primary">Cover</a>
+
+                      <?php  }elseif($data->is_covered == "Covered"){ ?>
+                            Covered
+                            <a href="{{url('doctor/uncover')}}/{{$data->id}}" onclick="return confirm('Are you sure!')" class="btn btn-outline-primary">UnCover</a>
+                      <?php }else{ ?>
+                            N/A
+                            <a href="{{url('doctor/cover')}}/{{$data->id}}" onclick="return confirm('Are you sure!')" class="btn btn-outline-primary">Cover</a>
+                      <?php } ?>
+                </td>
                 <td> <a href="{{url('doctor')}}/{{$data->id}}" class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
 
 
