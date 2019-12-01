@@ -77,6 +77,10 @@ class PersonalInfoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $b_date = date('m-d', strtotime($request->date_of_birth));
+        $m_date = date('m-d', strtotime($request->marriage_anniversary));
+
+
         $model =PersonalInfo::where('doc_id',$id)->first();
         $model->doc_id = $request->doc_id;
         $model->wife_name = $request->better_half; 
@@ -84,9 +88,11 @@ class PersonalInfoController extends Controller
         $model->child = $request->childrens;
         $model->grad_school = $request->grad_school;
         $model->passing_year = $request->passing_year;
-        $model->date_of_birth = $request->date_of_birth;
+        $model->date_of_birth = date('Y-m-d', strtotime($request->date_of_birth));
         $model->hobby = $request->hobby;
-        $model->marriage_anniversary = $request->marriage_anniversary;
+        $model->marriage_anniversary = date('Y-m-d', strtotime($request->marriage_anniversary));
+        $model->b_date = $b_date;
+        $model->m_date = $m_date;
         $model->fav_writer = $request->fav_writer;
         $model->fav_color = $request->fav_color;
         $model->fav_brand = $request->fav_brand;
@@ -130,6 +136,9 @@ class PersonalInfoController extends Controller
 
     public function add_personal_info(Request $request)
     {
+        $b_date = date('m-d', strtotime($request->date_of_birth));
+        $m_date = date('m-d', strtotime($request->marriage_anniversary));
+
         $model = new PersonalInfo();
         $model->doc_id = $request->doc_id;
         $model->wife_name = $request->better_half; 
@@ -137,9 +146,11 @@ class PersonalInfoController extends Controller
         $model->child = $request->childrens;
         $model->grad_school = $request->grad_school;
         $model->passing_year = $request->passing_year;
-        $model->date_of_birth = $request->date_of_birth;
+        $model->date_of_birth = date('Y-m-d', strtotime($request->date_of_birth));
         $model->hobby = $request->hobby;
-        $model->marriage_anniversary = $request->marriage_anniversary;
+        $model->marriage_anniversary = date('Y-m-d', strtotime($request->marriage_anniversary));
+        $model->b_date = $b_date;
+        $model->m_date = $m_date;
         $model->fav_writer = $request->fav_writer;
         $model->fav_color = $request->fav_color;
         $model->fav_brand = $request->fav_brand;
@@ -185,10 +196,11 @@ class PersonalInfoController extends Controller
 
 
     public function show_birthday(){
-        $date = date('Y-m_d');
+        $date = date('m-d');
+        //return $date;
         $doctor[] = null;
 
-        $date_of_birth = PersonalInfo::where('date_of_birth',$date)->get();
+        $date_of_birth = PersonalInfo::where('b_date', $date)->get();
             
             if(!empty($date_of_birth)){
                 foreach ($date_of_birth as $db) {
@@ -205,10 +217,10 @@ class PersonalInfoController extends Controller
 
     public function show_marriage_anniversary()
     {
-        $date = date('Y-m_d');
+        $date = date('m-d');
         $doctor[] = null;
 
-        $anniversary = PersonalInfo::where('marriage_anniversary',$date)->get();
+        $anniversary = PersonalInfo::where('m_date', $date)->get();
             
             if(!empty($anniversary)){
                 foreach ($anniversary as $anni) {
@@ -223,4 +235,41 @@ class PersonalInfoController extends Controller
              return view('doctor.anniversary',compact('num_doc'));
 
     }
+
+    public function count_notification(){
+        $str = '';
+        $date = date('m-d');
+        $birthday = PersonalInfo::where('b_date', $date)->get();
+        $anniversary = PersonalInfo::where('m_date', $date)->get();
+        $number = count($birthday) + count($anniversary);
+
+        !empty($number) ? $str .= '<span class="badge" >'.$number.'</span>' : '';
+
+        return $number;
+    }
+
+    public function notification(){
+        $date = date('m-d');
+        $doctor[] = null;
+        $date_of_birth = PersonalInfo::where('b_date', $date)->get(); 
+            if(!empty($date_of_birth)){
+                foreach ($date_of_birth as $db) {
+                    $doctor[] = $db->doc_id;        
+                }
+            }
+        $number_birthday = Doctor::whereIn('id', $doctor)->where('is_deleted','0')->get();
+
+        $m_anni[] = null;
+        $anniversary = PersonalInfo::where('m_date', $date)->get();
+            if(!empty($anniversary)){
+                foreach ($anniversary as $anni) {
+                    $m_anni[] = $anni->doc_id; 
+                }
+            }
+        $number_anniversary = Doctor::whereIn('id', $m_anni)->where('is_deleted','0')->get();
+
+        return view('doctor.brith_anni', compact('number_birthday', 'number_anniversary'));
+    }
+
+
 }

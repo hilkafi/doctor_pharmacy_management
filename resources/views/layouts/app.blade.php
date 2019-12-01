@@ -151,12 +151,40 @@ th, td{
   padding: 2px;
 }
 
+.icon-wrapper{
+    position:relative;
+    float:left;
+    margin-top: 5px;
+}
+
+*.icon-blue {color: #0088cc}
+*.icon-grey {color: grey}
+i {   
+    width:10px;
+    height: 10px;
+    text-align:center;
+    vertical-align:middle;
+    color: white;
+}
+.badge{
+    background: red;
+    border-radius: 5px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    position:absolute;
+    top:-6px;
+    right:0px;
+    font-size: 12px;
+    padding:5px;
+    color: #fff;
+}
     
     </style>
 </head>
 <body>
     <div id="app">
-    <nav class="navbar navbar-inverse navbar-expand-md navbar-light fixed-top" style = "background-color:#5bcfa2;" >
+    <nav class="navbar navbar-inverse navbar-expand-md navbar-light fixed-top" style = "background-color:#090257;" >
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/home') }}">
                 <h2 style="color:white;"><b>Pharmasia</b></h2>
@@ -215,7 +243,6 @@ th, td{
 
                                 </div>
                         </li>
-       
                     </ul>
                     @endguest
                     <!-- Right Side Of Navbar -->
@@ -227,6 +254,14 @@ th, td{
                             </li>
                            
                         @else
+                        <li class="nav-item" style="margin-right: 10px">
+                          <a href="{{url('personal-info/notification')}}">
+                          <div class="icon-wrapper" >
+                             <i class="fa fa-bell"></i>
+                             <span class="badge" id="notification_count"></span>
+                            </div>
+                          </a>
+                        </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -256,4 +291,28 @@ th, td{
         </main>
     </div>
 </body>
+    <script>
+    $( document ).ready(function() {
+
+      $( window ).on( "load", function() {
+          var _url = "{{URL::to('/personalinfo/count_notification')}}";
+          $.ajax({
+            url: _url,
+            method:"GET",
+            success: function(result)
+            {
+            $('#notification_count').html(result);
+            },
+            error: function(xhr, error){
+                alert('There is something wrong. Try again');
+            }
+      });
+
+      $(document).on('click', '#notification_count', function(){
+        $('#notification_count').css('display', 'none');
+      });
+    });
+  });
+ 
+    </script>
 </html>
