@@ -159,7 +159,7 @@ th, td{
 
 *.icon-blue {color: #0088cc}
 *.icon-grey {color: grey}
-i {   
+.icon-wrapper i {   
     width:10px;
     height: 10px;
     text-align:center;

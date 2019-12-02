@@ -8,4 +8,5 @@ class PersonalInfo extends Model
 {
     public $timestamps = false;
     protected $table = 'personal_info';
+
 }

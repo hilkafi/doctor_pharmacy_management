@@ -8,6 +8,7 @@ use App\Market;
 use App\Consulting_Center;
 use App\Hospital;
 use App\Employee;
+use App\PersonalInfo;
 use App\User;
 
 use Illuminate\Database\Eloquent\Model;
@@ -99,4 +100,25 @@ class Doctor extends Model
 
 		}
 	}
+
+	 public function get_birthday($id){
+    	$query = '';
+    	if(!empty($id)){
+    		$query = PersonalInfo::where('doc_id', $id);
+    	}
+    	$data = $query->first();
+
+    	return !empty($data) ? date('j M', strtotime($data->date_of_birth)) : '' ;
+
+    }
+  	 public function get_anniversary($id){
+    	$query = '';
+    	if(!empty($id)){
+    		$query = PersonalInfo::where('doc_id', $id);
+    	}
+    	$data = $query->first();
+
+    	return !empty($data) ? date('j M', strtotime($data->marriage_anniversary )) : '' ;
+
+    }
 }

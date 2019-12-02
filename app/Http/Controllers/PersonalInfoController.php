@@ -259,6 +259,19 @@ class PersonalInfoController extends Controller
             }
         $number_birthday = Doctor::whereIn('id', $doctor)->where('is_deleted','0')->get();
 
+    //upcoming birthday
+        $tomorrow = date('m-d', strtotime('+1 day'));
+        $upcoming_date = date('m-d', strtotime('+7 day'));
+        $upcoming[] = null;
+        $upcoming_birth = PersonalInfo::whereBetween('b_date', [$tomorrow, $upcoming_date])->get(); 
+            if(!empty($upcoming_birth)){
+                foreach ($upcoming_birth as $db) {
+                    $upcoming[] = $db->doc_id;        
+                }
+            }
+        $upcoming_birthday = Doctor::whereIn('id', $upcoming)->where('is_deleted','0')->get();
+
+    //Marriage Annivesary
         $m_anni[] = null;
         $anniversary = PersonalInfo::where('m_date', $date)->get();
             if(!empty($anniversary)){
@@ -268,7 +281,17 @@ class PersonalInfoController extends Controller
             }
         $number_anniversary = Doctor::whereIn('id', $m_anni)->where('is_deleted','0')->get();
 
-        return view('doctor.brith_anni', compact('number_birthday', 'number_anniversary'));
+    //upcoming Marriage anniversary
+        $upcoming_anni[] = null;
+        $upcoming_anniversary = PersonalInfo::whereBetween('m_date', [$tomorrow, $upcoming_date])->get(); 
+            if(!empty($upcoming_anniversary)){
+                foreach ($upcoming_anniversary as $db) {
+                    $upcoming_anni[] = $db->doc_id;        
+                }
+            }
+        $upcoming_anniversary = Doctor::whereIn('id', $upcoming_anni)->where('is_deleted','0')->get();
+
+        return view('doctor.brith_anni', compact('number_birthday', 'number_anniversary', 'upcoming_birthday', 'upcoming_anniversary'));
     }
 
 
