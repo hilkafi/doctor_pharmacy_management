@@ -95,12 +95,14 @@ Route::post('/chamber/chamedit/{id}','DoctorController@edit_store');
 
 
 //personal info related route
+Route::get('/personalinfo/count_notification', 'PersonalInfoController@count_notification');
 Route::get('/personalinfo/{id}', 'PersonalInfoController@personal_info');
 Route::get('/personalinfo/show/{key}', 'PersonalInfoController@show_personal_index');
 Route::get('/birthday', 'PersonalInfoController@show_birthday');
 Route::get('/marriage-anniversary', 'PersonalInfoController@show_marriage_anniversary');
 Route::resource('/doctorpersonalinfo', 'PersonalInfoController');
 Route::post('/personalinfo/add', 'PersonalInfoController@add_personal_info');
+Route::get('personal-info/notification', 'PersonalInfoController@notification');
 
 
 
