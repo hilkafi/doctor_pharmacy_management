@@ -41,6 +41,7 @@
                       <table class="table table-bordered">
                         <tr class ="card-header"><h1>Personal Info:</h1></tr>
                           <tr><th>Doctor Name:</th><td>{{$data->name}}</td></tr>
+                          <tr><th>Nick Name:</th><td>{{$personal->nick_name}}</td></tr>
                           <tr><th>Current City:</th><td>{{$personal->current_city}}</td></tr>
                           <tr><th>Home Town:</th><td>{{$personal->home_town}}</td></tr>
                           <tr><th>Date of Birth:</th><td>{{$personal->date_of_birth}}</td></tr>
@@ -48,7 +49,7 @@
                      <table class="table table-bordered">
                         <tr class ="card-header"><h1>Familly Info:</h1></tr>
                           <tr><th>Marrital Status:</th><td>{{$marrital_status}}</td></tr>
-                          <tr><th>Better Half:</th><td>{{$better_half}}</td></tr>
+                          <tr><th>Spouse's Name:</th><td>{{$better_half}}</td></tr>
                           <tr><th>Number of Child:</th><td>{{$child}}</td></tr>
                           <tr><th>Marriage Anniversary:</th><td>{{$marriage_anniversary}}</td></tr>
                     </table>
@@ -57,6 +58,10 @@
                         <tr class ="card-header"><h1>Academic Info:</h1></tr>
                           <tr><th>Grad. School:</th><td>{{$personal->grad_school}}</td></tr>
                           <tr><th>Class of:</th><td>{{$personal->passing_year}}</td></tr>
+                          <tr><th>College:</th><td>{{$personal->college}}</td></tr>
+                          <tr><th>Class of:</th><td>{{$personal->hsc_year}}</td></tr>
+                          <tr><th>High School:</th><td>{{$personal->high_school}}</td></tr>
+                          <tr><th>Class of:</th><td>{{$personal->ssc_year}}</td></tr>
 
                     </table>
 

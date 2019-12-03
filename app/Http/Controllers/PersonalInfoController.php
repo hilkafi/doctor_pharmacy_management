@@ -100,6 +100,11 @@ class PersonalInfoController extends Controller
         $model->fav_dish = $request->fav_dish;
         $model->home_town = $request->hometown;
         $model->current_city = $request->current_city;
+        $model->nick_name = $request->nick_name;
+        $model->high_school = $request->high_school;
+        $model->ssc_year = $request->ssc_year;
+        $model->college = $request->college;
+        $model->hsc_year = $request->hsc_year;
             if($model->save()){
                 $message = "Succssfully added data";
             }
@@ -158,6 +163,12 @@ class PersonalInfoController extends Controller
         $model->fav_dish = $request->fav_dish;
         $model->home_town = $request->hometown;
         $model->current_city = $request->current_city;
+        $model->nick_name = $request->nick_name;
+        $model->high_school = $request->high_school;
+        $model->ssc_year = $request->ssc_year;
+        $model->college = $request->college;
+        $model->hsc_year = $request->hsc_year;
+
             if($model->save()){
                 $message = "Succssfully added data";
             }

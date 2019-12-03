@@ -221,6 +221,8 @@ $(document).ready(function(){
 
     });
     });
+
+
     $('#district').change(function(){
 
     var district_id = $(this).val();

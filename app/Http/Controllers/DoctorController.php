@@ -43,7 +43,9 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        return view('doctor.create');
+
+        $dataset = Region::where('is_deleted',0)->get();
+        return view('doctor.create', compact('dataset'));
     }
 
     /**
@@ -58,10 +60,12 @@ class DoctorController extends Controller
         $validatedData = $request->validate([
             'doc_name' => 'required',
             'designation' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
 
+        DB::beginTransaction();
+        try {
+          
         $model = new Doctor();
          
                 $model->name = $request->doc_name;
@@ -111,20 +115,42 @@ class DoctorController extends Controller
 
                 $model->_key = md5(microtime().rand());
 
-               if($model->save()){
-                $message = "Succssfully added data";
+               if(!$model->save()){
+                  throw new Exception("Error Processing Request");
                }
-               else{
-                   $message = "Data Entry Error";
-               
-                
-            }
-           
-              
-            
 
-            return redirect('/doctor')->with('message',$message);
-    }
+               $last_id = DB::getPdo()->lastInsertId();
+
+               $modelChamber = new Chamber();
+         
+                $modelChamber->doctor_id= $last_id;
+                $modelChamber->region_id = $request->region_id;
+                $modelChamber->area_id = $request->area_id;
+                $modelChamber->teritory_id = $request->teritory_id;
+                $modelChamber->market_id = $request->market_id;
+                $modelChamber->consulting_center_id = $request->consulting_center_id;
+                $modelChamber->hospital_id = $request->hospital_id;
+                $modelChamber->address = $request->address;
+                $modelChamber->contact = $request->contact;
+                $modelChamber->visiting_hour = $request->visiting_hour;
+                $modelChamber->fee = $request->fee;
+                $modelChamber->_key = md5(microtime().rand());
+
+
+               if(!$modelChamber->save()){
+                throw new Exception("Error Processing Request");
+               }
+
+               DB::commit();
+              return redirect('/doctor')->with('message', 'Record Added Successfully');
+
+
+            } catch (Exception $e) {
+              DB::rollback();
+              return redirect()->back()->with('message', 'There is some Error');
+          
+        }
+      }
 
     /**
      * Display the specified resource.

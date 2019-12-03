@@ -17,6 +17,14 @@
                 <form method="post" action="{{url('/personalinfo/add')}}">
                       @csrf
 
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nick Name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="" type="text" class="form-control @error('name') is-invalid @enderror" name="nick_name" value=""  autocomplete="" autofocus>
+                            </div>
+                            </div>
+
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Home Town') }}</label>
 
@@ -57,7 +65,7 @@
                         </div>
                         <div id="display-marrital_status" style="display: none;">
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Better Half') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Spouse Name') }}</label>
 
                             <div class="col-md-6">
                                 <input type="text" name="better_half" class="form-control" id="" value="">
@@ -81,6 +89,34 @@
                         </div>
                        </div>
                             <div id="display-academic" style="display: none;"> 
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('High School') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="high_school" class="form-control" value="">
+                            </div>
+                            </div>
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Passing Year') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="ssc_year" class="form-control" value="">
+                            </div>
+                            </div>    
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('College') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="college" class="form-control" value="">
+                            </div>
+                            </div>
+                            <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Passing Year') }}</label>
+
+                            <div class="col-md-6">
+                                <input type="text" name="hsc_year" class="form-control" value="">
+                            </div>
+                            </div>    
                             <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Grad. School') }}</label>
 
