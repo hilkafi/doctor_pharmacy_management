@@ -34,7 +34,7 @@
                 </div>
                 <div class="input-group col-md-3">
                     <select class="form-control" id="area" name="area_id">
-                        <option value="">Select Area</option>
+                        <option value="">Select Teritory</option>
                     </select>
                 </div>
                     <div class="input-group md-form form-sm form-2 pl-0 col-md-3">

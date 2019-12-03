@@ -46,7 +46,7 @@
                  </tr>
               
                 <tr>
-                    <th>Teritory</th><td>{{$district->area_name($data->area_id)}}</td>
+                    <th>Teritory</th><td><a href="{{url('teritory')}}/{{$teritory->_key}}/details" >{{$district->area_name($data->area_id)}}</a></td>
                  </tr>
                 <tr>
                     <th>Area</th><td>{{$district->district_name($data->district_id)}}</td>

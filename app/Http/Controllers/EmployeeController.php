@@ -103,8 +103,9 @@ class EmployeeController extends Controller
         //
         $data = Employee::where('_key',$id)->first();
         $district = new District;
+        $teritory = Area::where('id',$data->area_id)->where('is_deleted',0)->first();
 
-        return view('mpo.details',compact('data','district'));
+        return view('mpo.details',compact('data','district','teritory'));
     }
 
     /**

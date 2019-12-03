@@ -183,7 +183,7 @@ class TeritoryController extends Controller
          $dataset = District::where([['is_deleted', 0], ['region_id', $r->region]])->get();
          $str = "";
          if(!empty($dataset)){
-            $str .="<option value = ''>Select District</option>";
+            $str .="<option value = ''>Select Area</option>";
              foreach($dataset as $data){
                 $str .= "<option value='{$data->id}'>{$data->name}</option>";
              }
@@ -195,7 +195,7 @@ class TeritoryController extends Controller
         $dataset = Area::where([['is_deleted', 0], ['district_id', $r->district]])->get();
         $str = "";
         if(!empty($dataset)){
-           $str .="<option value = ''>Select Area</option>";
+           $str .="<option value = ''>Select Teritory</option>";
             foreach($dataset as $data){
                $str .= "<option value='{$data->id}'>{$data->name}</option>";
             }

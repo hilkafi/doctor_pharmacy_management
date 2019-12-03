@@ -24,6 +24,8 @@
                 $pdata= $functionality->pharmacy_covered($d->id);
 
                 ?>
+                <a href="{{url('market')}}/{{$d->_key}}/details" class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i>Doctor</a>
+                    <br><br> 
                <table class="table table-bordered">
                 <tr class="table table-active">
                     <th>Total Pharmacy</th>

@@ -31,12 +31,12 @@
                 </div>
                 <div class="input-group col-md-2">
                     <select class="form-control" id="district" name="district_id">
-                        <option value="">Select District</option>
+                        <option value="">Select Area</option>
                     </select>
                 </div>
                 <div class="input-group col-md-2">
                     <select class="form-control" id="area" name="area_id">
-                        <option value="">Select Area</option>
+                        <option value="">Select Teritory</option>
                     </select>
                 </div>
                 <div class="input-group col-md-2">

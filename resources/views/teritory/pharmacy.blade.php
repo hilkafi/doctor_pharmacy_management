@@ -15,7 +15,9 @@
                 <h3>{{$d->name}} Teritory Details</h3>
             </div> 
             <div class="card-body">
-                <div class="table-responsive">  
+                <div class="table-responsive"> 
+                  <a href="{{url('teritory')}}/{{$d->_key}}/details" class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i>Doctor</a>
+                  <br><br> 
 
                 
                <?php

@@ -18,6 +18,8 @@
             <div class="card-body">  
 
                 <div class="table-responsive">
+                    <a href="{{url('market')}}/{{$d->_key}}/view_pharmacy" class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i>PH</a>
+                    <br><br> 
                 <table class="table table-bordered">
                  <tr class="table-active">
                  <th>Total Doctor</th>

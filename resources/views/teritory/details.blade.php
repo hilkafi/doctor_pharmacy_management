@@ -13,9 +13,11 @@
         @endif   
             <div class="card">
             <div class="card-header" style="text-align: center;">
-                <h3>{{$d->name}} Region Details</h3>
+                <h3>{{$d->name}} Teritory Details</h3>
             </div> 
             <div class="card-body"> 
+                  <a href="{{url('teritory')}}/{{$d->_key}}/view_pharmacy" class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i>PH</a>
+                  <br><br>
 
                 <div class="table-responsive">
                 <table class="table table-bordered">
