@@ -74,6 +74,7 @@ class HomeController extends Controller
 
 
 
+
         return view('home',compact('pharmacy','cov_phar','percentage','doctor','cov_doc','doc_per','region','area','teritory','market','hospital','con_cen'));
     }
 }

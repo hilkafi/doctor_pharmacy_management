@@ -26,6 +26,10 @@ Route::get('region/{id}/view_pharmacy', 'RegionController@view_pharmacy_details'
 Route::get('region/delete/{id}', 'RegionController@delete');
 Route::resource('/region', 'RegionController');
 Route::post('/region/search', 'RegionController@search');
+Route::post('/region/list_sub_area', 'RegionController@list_submenu_area');
+Route::post('/region/list_sub_teritory', 'RegionController@list_submenu_teritory');
+Route::post('/region/list_sub_market', 'RegionController@list_submenu_market');
+
 
 //district as area in new version
 Route::get('/area/{id}/details', 'DistrictController@view_details');
@@ -77,6 +81,7 @@ Route::post('/otherssearch', 'HospitalController@others_search');
 
 
 //Doctor related Route
+//Route::get('/doctor/show_app', 'DoctorController@show_app');
 Route::get('/doctor/cover/{id}', 'DoctorController@cover');
 Route::get('/doctor/uncover/{id}', 'DoctorController@uncover');
 Route::get('/chamber/edit/{id}', 'DoctorController@edit_chamber');

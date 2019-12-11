@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Region;
 use App\Chamber;
 use App\Doctor;
+use App\Market;
+use App\Area;
 use App\Dispensary;
 use App\District;
 use Auth;
@@ -221,4 +223,43 @@ class RegionController extends Controller
         }
         return redirect()->back()->with('message',$message);
     }
+
+
+    // for sub menu . 
+
+         public function list_submenu_area(Request $r){
+        
+         $area = District::where([['is_deleted', 0], ['region_id', $r->region_id]])->get();
+         $str = " ";
+         foreach ($area as $a) {
+             $str.="<li class='clk-area dropdown-item' data-info = '".$a->id."' value='".$a->id."'> ".$a->name."</li><br>";
+         }
+
+             return $str;
+         
+     }
+
+         public function list_submenu_teritory(Request $r){
+        
+         $dataset = Area::where([['is_deleted', 0], ['district_id', $r->area_id]])->get();
+         $str = " ";
+         foreach ($dataset as $data) {
+             $str.="<li class='clk-teritory' data-info = '".$data->id."' value='".$data->id."'> ".$data->name."</li><br>";
+         }
+
+            return $str;
+         
+     }
+
+        public function list_submenu_market(Request $r){
+        
+         $dataset = Market::where([['is_deleted', 0], ['area_id', $r->teritory_id]])->get();
+         $str = " ";
+         foreach ($dataset as $data) {
+             $str.="<li class='clk-market' data-info = '".$data->id."' value='".$data->id."'> ".$data->name."</li><br>";
+         }
+
+            return $str;
+         
+     }
 }

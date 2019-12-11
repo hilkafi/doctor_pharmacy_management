@@ -32,7 +32,9 @@ class DoctorController extends Controller
         $dataset = Doctor::where('is_deleted',0)->orderBy('id', 'DESC')->paginate(20);
         $region = new District();
         $regions = Region::where('is_deleted',0)->get();
+
         return view('doctor.index', compact('dataset','region','regions'));
+
 
     }
 
@@ -550,7 +552,8 @@ class DoctorController extends Controller
 
           return redirect()->back()->with('message', 'Doctor Has Been UnCovered Succssfully');
          }
- 
+
+  
 
 
 

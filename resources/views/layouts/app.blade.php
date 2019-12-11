@@ -179,6 +179,31 @@ th, td{
     padding:5px;
     color: #fff;
 }
+
+.drpdwn {
+
+  position: relative;
+  display: inline-block;
+}
+
+.drpdwn-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.drpdwn-content li {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+
     
     </style>
 </head>
@@ -202,15 +227,48 @@ th, td{
                       <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Zone<span class="caret"></span>
+                                      
+
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div id = "" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{url('/region')}}">Region</a>
-                                    <a class="dropdown-item" href="{{url('/area')}}">Area</a>
-                                    <a class="dropdown-item" href="{{url('teritory')}}">Teritory</a>
-                                    <a class="dropdown-item" href="{{url('market')}}">Market</a>
+                                   <ul class="navbar-nav mr-auto">
+                                   @foreach($regions as $r)
+                                    <li class="dropdown-item "  id ="clk-region" value="{{$r->id}}">{{$r->name}}
+
+                                    <div>
+                                    <ul id ="clk-area" class="">
+                                      
+                                    </ul>
+                                    <ul id ="clk-teritory">
+                                    </ul>
+
+                                    <ul id ="clk-market">
+                                    </ul>
+
+                                    </div>
+                                    
+                                   
+                                 
+
+                                    </li>
+                                   @endforeach
+                                 </ul>
+
+
+
+                                 
                                 </div>
-                        </li>
+
+ 
+
+                      </li>
+
+
+                
+
+                       
                         <li class="nav-item dropdown">
                           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                           Institutes<span class="caret"></span>
@@ -237,6 +295,9 @@ th, td{
                         </li>
 
                     </ul>
+
+
+
                     @endguest
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -276,10 +337,29 @@ th, td{
                             </li>
                         @endguest
                     </ul>
+
                 </div>
             </div>
+
         </nav>
+              <div class="drpdwn">
+                <ul id ="clk-area" class="drpdwn-content">
+                                      
+               </ul>
+                                   
+              </div>
+
         <main class="py-5 my-5">
+
+
+
+
+
+                                  
+
+
+     
+        
             @yield('content')
         </main>
     </div>
@@ -305,7 +385,70 @@ th, td{
         $('#notification_count').css('display', 'none');
       });
     });
-  });
+
+     $('#clk-region').click(function(){
+
+    var region_id = $(this).val();
+    var _url = "{{URL::to('region/list_sub_area')}}";
+    $.ajax({
+        url: _url,
+        method:"POST",
+        data:{region_id:region_id, _token: "{{ csrf_token() }}" },
+        success: function(result)
+        {
+        $('#clk-area').html(result);
+        }
+
+    });
+    });
+
+     $(document).on('click','.clk-area',  function(){
+      var area_id = $(this).attr('data-info');
+      //alert(area_id);
+      var _url = "{{URL::to('region/list_sub_teritory')}}";
+      $.ajax({
+
+        url:_url,
+        method : "POST",
+        data:{area_id:area_id,_token:"{{ csrf_token() }}"},
+        success: function(result)
+        {
+          $('#clk-teritory').html(result);
+        }
+
+
+      });
+
+     });
+
+      $(document).on('click','.clk-teritory',  function(){
+      var teritory_id = $(this).attr('data-info');
+      //alert(area_id);
+      var _url = "{{URL::to('region/list_sub_market')}}";
+      $.ajax({
+
+        url:_url,
+        method : "POST",
+        data:{teritory_id:teritory_id,_token:"{{ csrf_token() }}"},
+        success: function(result)
+        {
+          $('#clk-market').html(result);
+        }
+
+
+      });
+
+     });
+
+
+       });
+
+
+
+
+
+
+
  
     </script>
 </html>
