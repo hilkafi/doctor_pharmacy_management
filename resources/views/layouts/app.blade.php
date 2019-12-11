@@ -202,171 +202,169 @@ th, td{
   display: block;
 }
 
+ul.mul-dropdown li {
+  padding: 5px;
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu a{
+  color: black;
+}
+
+.dropdown-submenu a:hover{
+  color: black;
+}
+
+
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+
 
 
     
     </style>
 </head>
 <body>
-    <div id="app">
+  <div id="app">
     <nav class="navbar navbar-inverse navbar-expand-md navbar-light fixed-top" style = "background-color:#090257;" >
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                <h2 style="color:white;"><b>Pharmasia</b></h2>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon " style=""></span>
-                </button>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url('/home') }}">
+        <h2 style="color:white;"><b>Pharmasia</b></h2>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon " style=""></span>
+        </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    @guest
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left Side Of Navbar -->
+            @guest
 
-                    @else
-                    <ul class="navbar-nav mr-auto">
-                      <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Zone<span class="caret"></span>
-                                      
+            @else
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu mul-dropdown">
+                    @foreach($regions as $r)
+                    <li class="dropdown-submenu">
+                      <a class="test region" tabindex="-1" href="#" data-info="{{ $r->id }}">{{ $r->name }}</a>
+                      <ul class="dropdown-menu" id="second-level">
 
-                                </a>
-
-                                <div id = "" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{url('/region')}}">Region</a>
-                                   <ul class="navbar-nav mr-auto">
-                                   @foreach($regions as $r)
-                                    <li class="dropdown-item "  id ="clk-region" value="{{$r->id}}">{{$r->name}}
-
-                                    <div>
-                                    <ul id ="clk-area" class="">
-                                      
-                                    </ul>
-                                    <ul id ="clk-teritory">
-                                    </ul>
-
-                                    <ul id ="clk-market">
-                                    </ul>
-
-                                    </div>
-                                    
-                                   
-                                 
-
-                                    </li>
-                                   @endforeach
-                                 </ul>
-
-
-
-                                 
-                                </div>
-
- 
-
-                      </li>
-
-
-                
-
-                       
-                        <li class="nav-item dropdown">
-                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                          Institutes<span class="caret"></span>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="{{url('/hospital')}}" style="color: black;">Institues</a>
-                              <a class="dropdown-item" href="{{url('/hospitals')}}">Hospital</a>
-                              <a class="dropdown-item" href="{{url('/clinics')}}">Clinic</a>
-                              <a class="dropdown-item" href="{{url('/others')}}">Others</a>
-                              
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                         <a  class="nav-link" href="{{url('/consulting_center')}}" style="color: white;">Consultation Center</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url('/doctor')}}" style="color: white;">Doctors</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url('/dispensary')}}" style="color: white;">Pharmacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url('/employee/')}}" style="color: white;">Employee</a>
-                        </li>
-
-                    </ul>
-
-
-
-                    @endguest
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a style="color:white;" class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                           
-                        @else
-                        <li class="nav-item" style="margin-right: 10px">
-                          <a href="{{url('personal-info/notification')}}">
-                          <div class="icon-wrapper" >
-                             <i class="fa fa-bell"></i>
-                             <span class="badge" id="notification_count"></span>
-                            </div>
-                          </a>
-                        </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div id="right-menu" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="{{url('/home')}}">Dashboard</a>
-                                  <a class="dropdown-item" href="{{url('/user')}}/{{Auth::user()->_key}}">Profile</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-
+                      </ul>
+                    </li>
+                    @endforeach
+                  </ul>
                 </div>
-            </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            Zone<span class="caret"></span></a>
 
-        </nav>
-              <div class="drpdwn">
-                <ul id ="clk-area" class="drpdwn-content">
-                                      
-               </ul>
-                                   
+                  <div id = "" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{url('/region')}}">Region</a>
+                    <ul class="navbar-nav mr-auto">
+                      @foreach($regions as $r)
+                      <li class="dropdown-item "  id ="clk-region" value="{{$r->id}}">{{$r->name}}
+                      <div>
+                        <ul id ="clk-area" class=""> 
+                        </ul>
+                        <ul id ="clk-teritory">
+                        </ul>
+                        <ul id ="clk-market">
+                        </ul>
+                      </div>
+                      </li>
+                     @endforeach
+                   </ul>
+                  </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                Institutes<span class="caret"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{url('/hospital')}}" style="color: black;">Institues</a>
+                  <a class="dropdown-item" href="{{url('/hospitals')}}">Hospital</a>
+                  <a class="dropdown-item" href="{{url('/clinics')}}">Clinic</a>
+                  <a class="dropdown-item" href="{{url('/others')}}">Others</a>
+                </div>
+              </li>
+
+              <li class="nav-item">
+                <a  class="nav-link" href="{{url('/consulting_center')}}" style="color: white;">Consultation Center</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('/doctor')}}" style="color: white;">Doctors</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('/dispensary')}}" style="color: white;">Pharmacy</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('/employee/')}}" style="color: white;">Employee</a>
+              </li>
+          </ul>
+          @endguest
+            <!-- Right Side Of Navbar -->
+          <ul class="navbar-nav ml-auto">
+                <!-- Authentication Links -->
+            @guest
+            <li class="nav-item">
+                <a style="color:white;" class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>
+             
+            @else
+            <li class="nav-item" style="margin-right: 10px">
+              <a href="{{url('personal-info/notification')}}">
+              <div class="icon-wrapper" >
+                 <i class="fa fa-bell"></i>
+                 <span class="badge" id="notification_count"></span>
+                </div>
+              </a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    {{ Auth::user()->name }} <span class="caret"></span></a>
+              <div id="right-menu" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{url('/home')}}">Dashboard</a>
+                <a class="dropdown-item" href="{{url('/user')}}/{{Auth::user()->_key}}">Profile</a>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
               </div>
+            </li>
+                @endguest
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-        <main class="py-5 my-5">
-
-
-
-
-
-                                  
-
-
-     
-        
-            @yield('content')
-        </main>
+    <div class="drpdwn">
+      <ul id ="clk-area" class="drpdwn-content">                   
+     </ul>                 
     </div>
-</body>
-    <script>
-    $( document ).ready(function() {
 
+    <main class="py-5 my-5">
+      @yield('content')
+    </main>
+
+  </div>
+</body>
+  <script>
+    $( document ).ready(function() {
       $( window ).on( "load", function() {
           var _url = "{{URL::to('/personalinfo/count_notification')}}";
           $.ajax({
@@ -381,25 +379,25 @@ th, td{
             }
       });
 
-      $(document).on('click', '#notification_count', function(){
-        $('#notification_count').css('display', 'none');
+        $(document).on('click', '#notification_count', function(){
+          $('#notification_count').css('display', 'none');
+        });
       });
-    });
 
-     $('#clk-region').click(function(){
+     $(document).on('click', '.region', function(){
+      console.log('hmm its changing');
+      var region_id = $(this).attr('data-info');
+      var _url = "{{URL::to('region/list_sub_area')}}";
+      $.ajax({
+          url: _url,
+          method:"POST",
+          data:{region_id:region_id, _token: "{{ csrf_token() }}" },
+          success: function(result)
+          {
+          $('#second-level').html(result);
+          }
 
-    var region_id = $(this).val();
-    var _url = "{{URL::to('region/list_sub_area')}}";
-    $.ajax({
-        url: _url,
-        method:"POST",
-        data:{region_id:region_id, _token: "{{ csrf_token() }}" },
-        success: function(result)
-        {
-        $('#clk-area').html(result);
-        }
-
-    });
+      });
     });
 
      $(document).on('click','.clk-area',  function(){
@@ -440,6 +438,12 @@ th, td{
 
      });
 
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+
 
        });
 
@@ -450,5 +454,5 @@ th, td{
 
 
  
-    </script>
+  </script>
 </html>

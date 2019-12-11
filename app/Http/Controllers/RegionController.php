@@ -232,7 +232,20 @@ class RegionController extends Controller
          $area = District::where([['is_deleted', 0], ['region_id', $r->region_id]])->get();
          $str = " ";
          foreach ($area as $a) {
-             $str.="<li class='clk-area dropdown-item' data-info = '".$a->id."' value='".$a->id."'> ".$a->name."</li><br>";
+            $str =    '<li class="dropdown-submenu">
+                  <a class="test" data-info="'.$a->id.'" href="#">'.$a->name.'<span class="caret"></span></a>
+                  <ul class="dropdown-menu" id="third-level">
+
+                    <li class="dropdown-submenu">
+                      <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                        <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                      </ul>
+                    </li>
+                    
+                  </ul>
+                </li>';
          }
 
              return $str;
