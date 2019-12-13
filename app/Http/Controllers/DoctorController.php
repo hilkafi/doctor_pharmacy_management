@@ -29,7 +29,7 @@ class DoctorController extends Controller
     public function index()
     {
         //
-        $dataset = Doctor::where('is_deleted',0)->orderBy('id', 'DESC')->paginate(20);
+        $dataset = Doctor::where([['is_verified', 1], ['is_deleted',0]])->orderBy('id', 'DESC')->paginate(20);
         $region = new District();
         $regions = Region::where('is_deleted',0)->get();
 
@@ -281,6 +281,7 @@ class DoctorController extends Controller
         $is_covered = $r->is_covered;
 
         $data = DB::table('doctor')->join('chamber', 'doctor.id', '=', 'chamber.doctor_id');
+        $data = $data->where('is_verified', 1);
         if(!empty($name)){
             $data = $data->where('name', 'like', '%'.trim($name).'%' );
         }
@@ -326,6 +327,7 @@ class DoctorController extends Controller
         $dataset = $data->distinct('name')->paginate(10);
 
         $regions = Region::where('is_deleted',0)->get();
+        //return $dataset;
 
         return view('doctor._list', compact('dataset', 'region', 'regions'));
     }

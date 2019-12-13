@@ -254,10 +254,23 @@ ul.mul-dropdown li {
                 <span class="caret"></span></button>
                 <ul class="dropdown-menu mul-dropdown">
                     @foreach($regions as $r)
-                    <li class="dropdown-submenu">
-                      <a class="test region" tabindex="-1" href="#" data-info="{{ $r->id }}">{{ $r->name }}</a>
+                    <li class="dropdown-submenu regn">
+                      <a class="test" tabindex="-1" href="#" data-info="{{ $r->id }}">{{ $r->name }}</a>
                       <ul class="dropdown-menu" id="second-level">
+                        <li class="dropdown-submenu">
+                          <a class="test" data-info="" href="#">Level<span class="caret"></span></a>
+                          <ul class="dropdown-menu" id="third-level">
 
+                            <li class="dropdown-submenu">
+                              <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                                <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                              </ul>
+                            </li>
+                            
+                          </ul>
+                        </li>
                       </ul>
                     </li>
                     @endforeach
@@ -300,7 +313,7 @@ ul.mul-dropdown li {
               </li>
 
               <li class="nav-item">
-                <a  class="nav-link" href="{{url('/consulting_center')}}" style="color: white;">Consultation Center</a>
+                <a  class="nav-link" href="{{url('/consulting_center')}}" style="color: white;">C. Center</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{url('/doctor')}}" style="color: white;">Doctors</a>
@@ -310,6 +323,9 @@ ul.mul-dropdown li {
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{url('/employee/')}}" style="color: white;">Employee</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('/approval')}}" style="color: white;">Approval</a>
               </li>
           </ul>
           @endguest
@@ -384,7 +400,7 @@ ul.mul-dropdown li {
         });
       });
 
-     $(document).on('click', '.region', function(){
+     $(document).on('click', '.regn', function(e){
       console.log('hmm its changing');
       var region_id = $(this).attr('data-info');
       var _url = "{{URL::to('region/list_sub_area')}}";

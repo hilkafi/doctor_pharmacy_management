@@ -137,5 +137,10 @@ Route::post('/login/employee', 'Auth\AdminLoginController@login')->name('admin.l
 Route::get('/employee-profile', 'AdminController@index');
 Route::get('/logout', 'Auth\AdminLoginController@logout');
 
+//Approval Related Route
+Route::get('/approval', 'ApprovalController@index');
+Route::get('/approval/{id}/doctor', 'ApprovalController@doctor_approved');
+Route::get('/approval/{id}/pharmacy', 'ApprovalController@pharmacy_approved');
+
 //User related Route
 Route::resource('user', 'UserController');

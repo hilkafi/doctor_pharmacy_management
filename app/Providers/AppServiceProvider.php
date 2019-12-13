@@ -32,8 +32,11 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.app',function($view){
 
           $regions = Region::where('is_deleted',0)->get();
+          $areas = District::where('is_deleted',0)->get();
+          $teritorys = Area::where('is_deleted',0)->get();
+          $markets = Market::where('is_deleted',0)->get();
 
-            $view->with('regions',$regions);
+            $view->with(compact('regions', 'areas', 'teritorys', 'markets'));
 
 
         });

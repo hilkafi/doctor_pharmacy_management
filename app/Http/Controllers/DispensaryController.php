@@ -27,7 +27,7 @@ class DispensaryController extends Controller
      */
     public function index()
     {
-        $dataset = Dispensary::where('is_deleted', 0)->paginate(10);
+        $dataset = Dispensary::where([['is_verified', 1], ['is_deleted', 0]])->orderBy('id', 'DESC')->paginate(30);
         $region = new District();
         $regions = Region::where('is_deleted',0)->get();
         return view('dispensary.index', compact('dataset', 'region','regions'));
@@ -60,7 +60,6 @@ class DispensaryController extends Controller
             'owner' => 'required',
             'market_id' => 'required',
             'district_id' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
 
@@ -164,7 +163,6 @@ class DispensaryController extends Controller
             'owner' => 'required',
             'market_id' => 'required',
             'district_id' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             
         ]);
 
@@ -229,7 +227,7 @@ class DispensaryController extends Controller
         $area_id = $r->area_id;
         $market_id = $r->market_id;
         $is_covered = $r->is_covered;
-        $data = Dispensary::where('is_deleted', 0);
+        $data = Dispensary::where([['is_verified', 1], ['is_deleted', 0]]);
         if(!empty($search)){
             $data = $data->where('name', 'like', '%'.trim($search).'%' );
         }
