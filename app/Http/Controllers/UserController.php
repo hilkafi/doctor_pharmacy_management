@@ -22,6 +22,11 @@ class UserController extends Controller
 	  public function index()
 
     {
+        $user_role = Auth::user()->user_role;
+        if($user_role == 2){
+          return redirect()->back()->with('message', 'You do not have the permission');
+        }
+
          $dataset = User::where('is_deleted',0)->paginate(20);
         //$dataset = User::where('is_deleted',0)->orderBy('id','DESC')->paginate(20);
         //$employee= Employee::all();

@@ -26,10 +26,30 @@ class ApprovalController extends Controller
      */
     public function index()
     {
+        $user_role = Auth::user()->user_role;
+        if($user_role == 2){
+          return redirect()->back()->with('message', 'You do not have the permission');
+        }
+
         $doctors = Doctor::where([['is_verified', 0], ['is_deleted', 0]])->get();
         $pharmacys = Dispensary::where([['is_verified', 0], ['is_deleted', 0]])->get();
         $region = new District();
         return view('approval.index', compact('doctors', 'pharmacys', 'region'));
+    }
+
+    public function newly_added_doctor_list()
+    {
+        $user_id = Auth::user()->id;
+        $dataset = Doctor::where([['is_verified', 0], ['is_deleted', 0], ['created_by', $user_id]])->get();
+        return view('approval.newly_added_doc', compact('dataset'));
+    }
+
+    public function newly_added_pharmacy_list()
+    { 
+        $user_id = Auth::user()->id;
+        $dataset = Dispensary::where([['is_verified', 0], ['is_deleted', 0], ['created_by', $user_id]])->get();
+        $region = new District();
+        return view('approval.newly_added_pharma', compact('dataset', 'region'));
     }
 
     public function doctor_approved($id){

@@ -28,7 +28,11 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        //
+      $user_role = Auth::user()->user_role;
+        if($user_role == 2){
+          return redirect()->back()->with('message', 'You do not have the permission');
+        }
+        
         $dataset = Doctor::where([['is_verified', 1], ['is_deleted',0]])->orderBy('id', 'DESC')->paginate(20);
         $region = new District();
         $regions = Region::where('is_deleted',0)->get();

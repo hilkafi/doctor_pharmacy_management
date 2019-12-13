@@ -8,6 +8,7 @@ use App\Employee;
 use App\District;
 use App\Region;
 use App\Area;
+use Auth;
 
 class EmployeeController extends Controller
 {
@@ -26,6 +27,11 @@ class EmployeeController extends Controller
 
     public function index()
     {
+      $user_role = Auth::user()->user_role;
+        if($user_role == 2){
+          return redirect()->back()->with('message', 'You do not have the permission');
+        }
+
         $dataset = Employee::where('is_deleted',0)->orderBy('id','DESC')->paginate(20);
         $district = new District();
         $regions = Region::where('is_deleted', 0)->get();

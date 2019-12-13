@@ -141,6 +141,8 @@ Route::get('/logout', 'Auth\AdminLoginController@logout');
 Route::get('/approval', 'ApprovalController@index');
 Route::get('/approval/{id}/doctor', 'ApprovalController@doctor_approved');
 Route::get('/approval/{id}/pharmacy', 'ApprovalController@pharmacy_approved');
+Route::get('/approval/newly_added_doctor', 'ApprovalController@newly_added_doctor_list');
+Route::get('/approval/newly_added_pharmacy', 'ApprovalController@newly_added_pharmacy_list');
 
 //User related Route
 Route::resource('user', 'UserController');

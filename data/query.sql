@@ -4,4 +4,6 @@ ALTER TABLE `personal_info` ADD `b_date` VARCHAR(100) NULL DEFAULT NULL AFTER `m
 ----13-12-19--kafi--
 ALTER TABLE `doctor` ADD `is_verified` INT NOT NULL DEFAULT '0' AFTER `is_covered`;
 ALTER TABLE `dispensary` ADD `is_verified` INT NOT NULL DEFAULT '0' AFTER `is_covered`;
-ALTER TABLE `hospital` ADD `is_verified` INT NOT NULL DEFAULT '0' AFTER `img_loc`; 
+ALTER TABLE `hospital` ADD `is_verified` INT NOT NULL DEFAULT '0' AFTER `img_loc`;
+ALTER TABLE `dispensary` ADD `created_by` INT NULL DEFAULT NULL AFTER `img_loc`;
+ALTER TABLE `doctor` ADD `created_by` INT NULL DEFAULT NULL AFTER `is_deleted`; 

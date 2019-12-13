@@ -315,6 +315,8 @@ ul.mul-dropdown li {
               <li class="nav-item">
                 <a  class="nav-link" href="{{url('/consulting_center')}}" style="color: white;">C. Center</a>
               </li>
+
+            @if(Auth::user()->user_role == 0 || Auth::user()->user_role == 1 )
               <li class="nav-item">
                 <a class="nav-link" href="{{url('/doctor')}}" style="color: white;">Doctors</a>
               </li>
@@ -327,6 +329,16 @@ ul.mul-dropdown li {
               <li class="nav-item">
                 <a class="nav-link" href="{{url('/approval')}}" style="color: white;">Approval</a>
               </li>
+            @endif
+
+            @if(Auth::user()->user_role == 2)
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('/approval/newly_added_doctor')}}" style="color: white;">New Doc</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('/approval/newly_added_pharmacy')}}" style="color: white;">New Pharma</a>
+              </li>
+            @endif
           </ul>
           @endguest
             <!-- Right Side Of Navbar -->

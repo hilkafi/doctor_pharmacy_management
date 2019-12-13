@@ -12,6 +12,7 @@ use App\Area;
 use App\Market;
 use App\Hospital;
 use App\Consulting_Center;
+use Auth;
 
 
 class HomeController extends Controller
@@ -33,6 +34,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user_role = Auth::user()->user_role;
+        $user_name = Auth::user()->name;
         $pharmacy = Dispensary::where('is_deleted','0')->get();
         $pharmacy = count($pharmacy);
         $cov_phar = Dispensary::where('is_covered','Covered')->where('is_deleted','0')->get();
@@ -75,6 +78,6 @@ class HomeController extends Controller
 
 
 
-        return view('home',compact('pharmacy','cov_phar','percentage','doctor','cov_doc','doc_per','region','area','teritory','market','hospital','con_cen'));
+        return view('home',compact('pharmacy','cov_phar','percentage','doctor','cov_doc','doc_per','region','area','teritory','market','hospital','con_cen', 'user_role', 'user_name'));
     }
 }
