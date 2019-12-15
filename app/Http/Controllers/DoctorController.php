@@ -273,6 +273,7 @@ class DoctorController extends Controller
         $district_id = $r->district_id;
         $area_id = $r->area_id;
         $market_id = $r->market_id;
+        $mpo_id = $r->mpo_id;
         $hospital_id = $r->hospital_id;
         
         $cc_id = $r->cc_id;
@@ -301,6 +302,15 @@ class DoctorController extends Controller
         if(!empty($market_id)){
             $data = $data->where('market_id', $market_id);
         }
+        if(!empty($mpo_id)){
+
+          $mpo = Employee::where('is_deleted',0)->where('id',$mpo_id)->first();
+
+
+
+          $data = $data->where('area_id', $mpo->area_id)->where('is_covered','Covered');
+        }
+
         if(!empty($hospital_id)){
             $data = $data->where('hospital_id', $hospital_id);
         }

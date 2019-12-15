@@ -11,6 +11,7 @@ use App\Consulting_Center;
 use App\Chamber;
 use App\Doctor;
 use App\Dispensary;
+use App\Employee;
 use Auth;
 use App\Region;
 
@@ -231,6 +232,42 @@ class TeritoryController extends Controller
             $str = "";
             if(!empty($dataset)){
                $str .="<option value = ''>Select Hospital</option>";
+                foreach($dataset as $data){
+                   $str .= "<option value='{$data->id}'>{$data->name}</option>";
+                }
+               return $str;
+            }
+        }
+
+            public function list_mpo(Request $r){
+            $dataset = Employee::where([['is_deleted', 0], ['area_id', $r->area]])->get();
+            $str = "";
+            if(!empty($dataset)){
+               $str .="<option value = ''>Select MPO</option>";
+                foreach($dataset as $data){
+                   $str .= "<option value='{$data->id}'>{$data->name}</option>";
+                }
+               return $str;
+            }
+        }
+
+            public function list_dis_mpo(Request $r){
+            $dataset = Employee::where([['is_deleted', 0], ['district_id', $r->district]])->get();
+            $str = "";
+            if(!empty($dataset)){
+               $str .="<option value = ''>Select MPO</option>";
+                foreach($dataset as $data){
+                   $str .= "<option value='{$data->id}'>{$data->name}</option>";
+                }
+               return $str;
+            }
+        }
+
+           public function list_reg_mpo(Request $r){
+            $dataset = Employee::where([['is_deleted', 0], ['region_id', $r->region]])->get();
+            $str = "";
+            if(!empty($dataset)){
+               $str .="<option value = ''>Select MPO</option>";
                 foreach($dataset as $data){
                    $str .= "<option value='{$data->id}'>{$data->name}</option>";
                 }
