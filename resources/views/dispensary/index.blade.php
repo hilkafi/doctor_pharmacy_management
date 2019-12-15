@@ -43,6 +43,12 @@
                                 <option value="">Select Market</option>
                             </select>
                         </div>
+                        <br><br>
+                        <div class="input-group col-md-3">
+                            <select class="form-control" id="mpo" name="mpo_id">
+                                <option value="">Select MPO</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="is-covered col-md-4" style="border: 1px solid #ddd; padding: 5px; margin-bottom: 10px;">
@@ -187,6 +193,52 @@ $(document).ready(function(){
 
     });
 });
+        $('#area').change(function(){
+
+    var area_id = $(this).val();
+    var _url = "{{URL::to('teritory/list_mpo')}}";
+    $.ajax({
+        url: _url,
+        method:"POST",
+        data:{ area : area_id, _token : "{{ csrf_token() }}" },
+        success: function(result)
+        {
+        $('#mpo').html(result);
+        }
+
+    });
+});
+
+    $('#district').change(function(){
+
+    var district_id = $(this).val();
+    var _url = "{{URL::to('teritory/list_dis_mpo')}}";
+    $.ajax({
+        url: _url,
+        method:"POST",
+        data:{ district : district_id, _token : "{{ csrf_token() }}" },
+        success: function(result)
+        {
+        $('#mpo').html(result);
+        }
+
+    });
+    });
+    $('#region').change(function(){
+
+    var region_id = $(this).val();
+    var _url = "{{URL::to('teritory/list_reg_mpo')}}";
+    $.ajax({
+        url: _url,
+        method:"POST",
+        data:{region:region_id, _token: "{{ csrf_token() }}" },
+        success: function(result)
+        {
+        $('#mpo').html(result);
+        }
+
+    });
+    });
 
 $('#srch').click(function(){
 
