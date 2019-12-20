@@ -48,6 +48,9 @@ Route::post('/teritory/list_area', 'TeritoryController@list_area');
 Route::post('/teritory/list_market', 'TeritoryController@list_market');
 Route::post('/teritory/list_consulting_center', 'TeritoryController@list_consulting_center');
 Route::post('/teritory/list_hospital', 'TeritoryController@list_hospital');
+Route::post('/teritory/list_mpo', 'TeritoryController@list_mpo');
+Route::post('/teritory/list_dis_mpo', 'TeritoryController@list_dis_mpo');
+Route::post('/teritory/list_reg_mpo', 'TeritoryController@list_reg_mpo');
 Route::post('/teritory/search', 'TeritoryController@search');
 
 

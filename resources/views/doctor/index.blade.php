@@ -44,9 +44,21 @@
                             <select class="form-control" id="market" name="market_id">
                                 <option value="">Select Market</option>
                             </select>
+                        </div><br><br>
+                        <div class="input-group col-md-3">
+                            <select class="form-control" id="mpo" name="mpo_id">
+                                <option value="">Select MPO</option>
+                            </select>
                         </div>
+
                     </div>
+
                 </div>
+               
+
+
+
+
                 <p class="btn btn-outline-primary" id="ch">Institue</p>
                 <div class="display-ch" style="display: none;  margin-bottom: 10px">
                     <div class="input-group">
@@ -238,6 +250,7 @@ $(document).ready(function(){
 
     });
     });
+
     $('#area').change(function(){
 
     var area_id = $(this).val();
@@ -253,6 +266,54 @@ $(document).ready(function(){
 
     });
 });
+
+    $('#area').change(function(){
+
+    var area_id = $(this).val();
+    var _url = "{{URL::to('teritory/list_mpo')}}";
+    $.ajax({
+        url: _url,
+        method:"POST",
+        data:{ area : area_id, _token : "{{ csrf_token() }}" },
+        success: function(result)
+        {
+        $('#mpo').html(result);
+        }
+
+    });
+});
+
+    $('#district').change(function(){
+
+    var district_id = $(this).val();
+    var _url = "{{URL::to('teritory/list_dis_mpo')}}";
+    $.ajax({
+        url: _url,
+        method:"POST",
+        data:{ district : district_id, _token : "{{ csrf_token() }}" },
+        success: function(result)
+        {
+        $('#mpo').html(result);
+        }
+
+    });
+    });
+    $('#region').change(function(){
+
+    var region_id = $(this).val();
+    var _url = "{{URL::to('teritory/list_reg_mpo')}}";
+    $.ajax({
+        url: _url,
+        method:"POST",
+        data:{region:region_id, _token: "{{ csrf_token() }}" },
+        success: function(result)
+        {
+        $('#mpo').html(result);
+        }
+
+    });
+    });
+
 
     $('#market').change(function(){
 

@@ -232,6 +232,7 @@ class DispensaryController extends Controller
         $area_id = $r->area_id;
         $market_id = $r->market_id;
         $is_covered = $r->is_covered;
+        $mpo_id  =$r->mpo_id;
         $data = Dispensary::where([['is_verified', 1], ['is_deleted', 0]]);
         if(!empty($search)){
             $data = $data->where('name', 'like', '%'.trim($search).'%' );
@@ -245,6 +246,14 @@ class DispensaryController extends Controller
         if(!empty($area_id)){
             $data = $data->where('area_id', $area_id);
         }
+        if(!empty($mpo_id)){
+
+          $mpo = Employee::where('is_deleted',0)->where('id',$mpo_id)->first();
+          $data = $data->where('area_id', $mpo->area_id)->where('is_covered','Covered');
+
+            
+        }
+
         if(!empty($market_id)){
             $data = $data->where('market_id', $market_id);
         }
