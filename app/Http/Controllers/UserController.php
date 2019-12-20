@@ -12,6 +12,7 @@ use App\Employee;
 use DB;
 use Exception;
 use Hash;
+use Auth;
 
 class UserController extends Controller
 {
@@ -27,13 +28,9 @@ class UserController extends Controller
           return redirect()->back()->with('message', 'You do not have the permission');
         }
 
-         $dataset = User::where('is_deleted',0)->paginate(20);
-        //$dataset = User::where('is_deleted',0)->orderBy('id','DESC')->paginate(20);
-        //$employee= Employee::all();
-        $region = Region::where('is_deleted', 0)->get();
-        $district = new District();
-         return view('user.index', compact('dataset','district', 'region'));
-    }
+         $dataset = User::where('is_deleted', 0)->whereIn('user_role', [1, 2])->paginate(20);
+         return view('user.index', compact('dataset'));
+     }
 
     /**
      * Show the form for creating a new resource.
@@ -58,15 +55,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $validatedData = $request->validate([
             'name' => ['required','string'],
             'user_role' => 'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'district_id' => 'required',
-            'area_id' => 'required',
-            'region_id' => 'required',
             
         ]);
 
@@ -77,27 +70,13 @@ class UserController extends Controller
                 $model->email = $request->email;
                 $model->password = Hash::make( $request->password);
                 $model->user_role = $request->user_role;
+                $model->contact = $request->contact;
                 $model->_key = md5(microtime().rand());
                 if(!$model->save()){
                		throw new Exception("Error Processing Request");
                }
 
-            	//$lastId = DB::getPdo()->lastInsertId();
-
-            	//$modelEmp = new Employee();             
-                //$modelEmp->user_id = $lastId;
-               // $modelEmp->phone = $request->phone;
-                //$modelEmp->address = $request->address;
-                //$modelEmp->designation = $request->designation;
-                //$modelEmp->area_id = $request->area_id;
-                //$modelEmp->district_id = $request->district_id;
-                //$modelEmp->region_id = $request->region_id;
-               	//if(!$modelEmp->save()){
-               		//throw new Exception("Error Processing Request");
-               		
-              // }
-
-              // DB::commit();
+               DB::commit();
                return redirect('/user')->with('message', 'User Created Successfully');
 
           	}catch(Exception $e){
@@ -128,19 +107,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
         $data = User::where('_key',$id)->first();
-        $data_id = $data->id;
-        //$employee = DB::table('users')->join('employee', 'users.id', '=', 'employee.user_id');
-
-         $employee = Employee::where('user_id',$data_id)->first();
-         //return $employee;
-
-        $dataset = Region::where('is_deleted',0)->get();
-        $dataset_two = District::where('is_deleted',0)->get();
-        $dataset_three = Area::where('is_deleted',0)->get();
-        $region = new District();
-        return view('user.edit',compact('data','dataset', 'employee','dataset_two','dataset_three','region'));
+        return view('user.edit',compact('data'));
     }
 
     /**
@@ -155,10 +123,7 @@ class UserController extends Controller
         //
        $validatedData = $request->validate([
             'name' => ['required','string'],
-
-            'district_id' => 'required',
-            'area_id' => 'required',
-            'region_id' => 'required',
+            'email' => 'required',
             
         ]);
 
@@ -167,30 +132,14 @@ class UserController extends Controller
                 $model =User::find($id);
                 $model->name = $request->name;
                 $model->email = $request->email;
-                //$model->password = Hash::make( $request->password);
                 $model->user_role = $request->user_role;
-                //$model->_key = md5(microtime().rand());
+                $model->contact = $request->contact;
                 if(!$model->save()){
                     throw new Exception("Error Processing Request");
                }
 
-              
-
-                $modelEmp = Employee::where('id',$id)->first();             
-                $modelEmp->user_id = $id;
-                $modelEmp->phone = $request->phone;
-                $modelEmp->address = $request->address;
-                $modelEmp->designation = $request->designation;
-                $modelEmp->area_id = $request->area_id;
-                $modelEmp->district_id = $request->district_id;
-                $modelEmp->region_id = $request->region_id;
-                if(!$modelEmp->save()){
-                    throw new Exception("Error Processing Request");
-                    
-               }
-
                DB::commit();
-               return redirect('/user')->with('message', 'User Created Successfully');
+               return redirect('/user')->with('message', 'User Updated Successfully');
 
             }catch(Exception $e){
                 DB::rollback();

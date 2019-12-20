@@ -11,7 +11,7 @@
                 </div>
                 <div class="table-responsive">
                     <table class ="table table-bordered table-sm">
-                        <tr class ="table-active">
+                        <tr class ="table-active bg-warning">
                             <th style="text-align: center">Sl.</th>
                             <th style="text-align: center">Name</th>
                             <th style="text-align: center">Designation</th>
@@ -65,7 +65,7 @@
                     </div>
                 <div class="table-responsive">
                     <table class ="table table-bordered table-sm" style="font-size: 15px;">
-                        <tr class ="table-active">
+                        <tr class ="table-active bg-warning">
                             <th>Sl.</th>
                             <th style="text-align: center;">Name</th>
                             <th style="text-align: center;">Region</th>

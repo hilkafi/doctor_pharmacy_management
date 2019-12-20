@@ -1,6 +1,6 @@
-<div class="table-responsive">
+                <div class="table-responsive">
                 <table class ="table table-bordered">
-                <tr class ="table-active">
+                <tr class ="table-active bg-info">
                 <th>Sl.</th>
                 <th>Name</th>
                 <th>Region</th>
@@ -10,7 +10,7 @@
 
                 <th>Market</th>
                 <th>Doctor Covered</th>
-                <th>C. Pharmacy</th>
+                <th>Pharmacy</th>
                 <th style="width: 15%; text-align: center;">action</th>
                 </tr>
                 <?php $i = 0;
@@ -39,14 +39,11 @@
                 <td>{{$data->pharmacy_covered($data->id)}}</td>
                  <td style="width: 15%; text-align: center;"> <a href='hospital/{{$data->_key}}/edit' class="btn btn-outline-dark"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                      <a href='hospital/{{$data->_key}}/details' class="btn btn-outline-secondary"><i class="fa fa-eye" aria-hidden="true"></i></a>
-
-                <a href="{{url('/institute/delete')}}/{{$data->id}}" onclick="return confirm('Data will be deleted permanently.Are you sure about delete?')" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a> 
+                    <a href="{{url('/institute/delete')}}/{{$data->id}}" onclick="return confirm('Data will be deleted permanently.Are you sure about delete?')" class="btn btn-outline-danger"><i class="fa fa-trash" aria-hidden="true"></i></a> 
                 </td>
                 </tr>
                 @endforeach
               
                 </table>
                 <?php echo $dataset->render(); ?>
-                </div>
-
                 </div>

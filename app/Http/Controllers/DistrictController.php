@@ -34,9 +34,9 @@ class DistrictController extends Controller
           }
 
 
-        $dataset = District::where('is_deleted',0)->paginate(3);
+        $dataset = District::where('is_deleted',0)->paginate(30);
         $region = new District();
-        $regions = Region::where('is_deleted',0)->paginate(3);
+        $regions = Region::where('is_deleted',0)->paginate(30);
         return view('area.index', compact('dataset','region', 'regions'));
         
     }

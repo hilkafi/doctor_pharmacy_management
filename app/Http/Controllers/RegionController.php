@@ -228,39 +228,49 @@ class RegionController extends Controller
     // for sub menu . 
 
          public function list_submenu_area(Request $r){
+            $obj = new District();
+         $areas = District::where([['is_deleted', 0], ['region_id', $r->region_id]])->orderBy('id', 'DESC')->get();
+         $str = "";
+         $str .= '<li><a href="#">'.$obj->region_name($r->region_id).'</a></li>';
+         if(!empty($areas)){
+                    $str .= '<li class="dropdown-submenu">';
+                    foreach ($areas as $area){
+                            $str .= '<a href="#" class="dropdown-toggle area" data-toggle="dropdown" role="button">'.
+                                  $area->name.'<span class="caret"></span>
+                              </a><br>
+                              <ul class="dropdown-menu" id = "third-level" style="left: 100%;top: 0;">
+
+                              </ul>';
+                    }
+                    $str .= '</li>';
+            }
         
-         $area = District::where([['is_deleted', 0], ['region_id', $r->region_id]])->get();
-         $str = " ";
-         foreach ($area as $a) {
-            $str =    '<li class="dropdown-submenu">
-                  <a class="test" data-info="'.$a->id.'" href="#">'.$a->name.'<span class="caret"></span></a>
-                  <ul class="dropdown-menu" id="third-level">
 
-                    <li class="dropdown-submenu">
-                      <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
-                        <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
-                      </ul>
-                    </li>
-                    
-                  </ul>
-                </li>';
-         }
-
-             return $str;
+             return !empty($str) ? $str : '' ;
          
      }
 
-         public function list_submenu_teritory(Request $r){
+    public function list_submenu_teritory(Request $r){
         
-         $dataset = Area::where([['is_deleted', 0], ['district_id', $r->area_id]])->get();
-         $str = " ";
-         foreach ($dataset as $data) {
-             $str.="<li class='clk-teritory' data-info = '".$data->id."' value='".$data->id."'> ".$data->name."</li><br>";
-         }
+        $obj = new District();
+        $teritories = Area::where([['is_deleted', 0], ['district_id', $r->area_id]])->orderBy('id', 'DESC')->get();
+         $str = "";
+         $str .= '<li><a href="#">'.$obj->district_name($r->area_id).'</a></li>';
+         if(!empty($teritories)){
+                    $str .= '<li class="dropdown-submenu">';
+                    foreach ($teritories as $teritory){
+                            $str .= '<a href="#" class="dropdown-toggle teritory" data-toggle="dropdown" role="button">'.
+                                  $teritory->name.'<span class="caret"></span>
+                              </a><br>
+                              <ul class="dropdown-menu" id = "fourth-level" style="left: 100%;top: 0;">
 
-            return $str;
+                              </ul>';
+                    }
+                    $str .= '</li>';
+            }
+        
+
+             return !empty($str) ? $str : '' ;
          
      }
 

@@ -127,11 +127,13 @@
 
                     @endif
              
+                    @if($user_role == 2)
                     <br><br>
 
                         <div class="row">
                             <h3>Welcome To Pharmasia <span style="color: blue;">{{ $user_name }}</span></h3>
                         </div>
+                    @endif
                
                
                   

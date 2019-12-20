@@ -80,4 +80,17 @@ class HomeController extends Controller
 
         return view('home',compact('pharmacy','cov_phar','percentage','doctor','cov_doc','doc_per','region','area','teritory','market','hospital','con_cen', 'user_role', 'user_name'));
     }
+
+    public function arr(){
+/*        $regions = Region::all();
+        $rarr[] = NULL;
+        foreach($regions as $region){
+            $rarr['name'] = $region->name;
+        }
+
+        $arr = ['name' => )
+
+                ]
+        }*/
+    }
 }

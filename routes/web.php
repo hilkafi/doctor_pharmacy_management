@@ -26,7 +26,7 @@ Route::get('region/{id}/view_pharmacy', 'RegionController@view_pharmacy_details'
 Route::get('region/delete/{id}', 'RegionController@delete');
 Route::resource('/region', 'RegionController');
 Route::post('/region/search', 'RegionController@search');
-Route::post('/region/list_sub_area', 'RegionController@list_submenu_area');
+Route::post('region/list_submenu_area', 'RegionController@list_submenu_area');
 Route::post('/region/list_sub_teritory', 'RegionController@list_submenu_teritory');
 Route::post('/region/list_sub_market', 'RegionController@list_submenu_market');
 

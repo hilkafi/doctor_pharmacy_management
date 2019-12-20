@@ -125,14 +125,14 @@
 
                 <div class="table-responsive">
                 <table class ="table table-bordered table-sm">
-                <tr class ="table-active">
+                <tr class ="table-active bg-info">
                 <th style="text-align: center">Sl.</th>
                 <th style="text-align: center">Name</th>
                 <th style="text-align: center">Designation</th>
                 <th style="text-align: center">Expertise</th>
                 <th style="text-align: center">Is Covered</th>
                 <th style="width: 5%; text-align: center;">Chember</th>
-                <th style="width: 15%; text-align: center;">action</th>
+                <th style="width: 15%; text-align: center;">Actions</th>
                 </tr>
                 <?php $i = 0;
                 ?>

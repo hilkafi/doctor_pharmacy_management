@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Pharmasia</title>
 
     <!-- Scripts -->
     <script src="{{ asset('public/js/app.js') }}"></script>
@@ -19,6 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/favicon.ico') }}" rel="icon" type="image/x-icon">
     <style>
     body {
   overflow-x: hidden;
@@ -180,51 +181,18 @@ th, td{
     color: #fff;
 }
 
-.drpdwn {
 
-  position: relative;
-  display: inline-block;
-}
-
-.drpdwn-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.drpdwn-content li {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-ul.mul-dropdown li {
-  padding: 5px;
-}
-
+/*Multilevel Dropdown*/
 .dropdown-submenu {
-  position: relative;
+    position: relative;
 }
-
-.dropdown-submenu a{
-  color: black;
-}
-
-.dropdown-submenu a:hover{
-  color: black;
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
 }
 
 
 
-.dropdown-submenu .dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -1px;
-}
+
 
 
 
@@ -248,55 +216,36 @@ ul.mul-dropdown li {
 
             @else
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu mul-dropdown">
-                    @foreach($regions as $r)
-                    <li class="dropdown-submenu regn">
-                      <a class="test" tabindex="-1" href="#" data-info="{{ $r->id }}">{{ $r->name }}</a>
-                      <ul class="dropdown-menu" id="second-level">
-                        <li class="dropdown-submenu">
-                          <a class="test" data-info="" href="#">Level<span class="caret"></span></a>
-                          <ul class="dropdown-menu" id="third-level">
+            @if(Auth::user()->user_role == 0)
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                      Zone<span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu multi-level">
+                      <?php foreach ($regions as $region): ?>
+                          <li class="dropdown-submenu">
+                              <a href="#" class="dropdown-toggle region" data-toggle="dropdown" role="button" data-info = "{{ $region->id }}">
+                                  {{ $region->name }} <span class="caret"></span>
+                              </a>
+                              <ul class="dropdown-menu" id = "second-level" style="left: 100%;top: 0;">
 
-                            <li class="dropdown-submenu">
-                              <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
-                              <ul class="dropdown-menu">
-                                <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
-                                <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
                               </ul>
-                            </li>
-                            
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    @endforeach
+                          </li>
+                      <?php endforeach; ?>
                   </ul>
-                </div>
               </li>
+              @endif
+
+
               <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            Zone<span class="caret"></span></a>
+                            Sections<span class="caret"></span></a>
 
                   <div id = "" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{url('/region')}}">Region</a>
-                    <ul class="navbar-nav mr-auto">
-                      @foreach($regions as $r)
-                      <li class="dropdown-item "  id ="clk-region" value="{{$r->id}}">{{$r->name}}
-                      <div>
-                        <ul id ="clk-area" class=""> 
-                        </ul>
-                        <ul id ="clk-teritory">
-                        </ul>
-                        <ul id ="clk-market">
-                        </ul>
-                      </div>
-                      </li>
-                     @endforeach
-                   </ul>
+                      <a class="dropdown-item" href="{{url('/area')}}">Area</a>
+                      <a class="dropdown-item" href="{{url('/teritory')}}">Teritory</a>
+                      <a class="dropdown-item" href="{{url('/market')}}">Market</a>
                   </div>
               </li>
 
@@ -350,6 +299,8 @@ ul.mul-dropdown li {
             </li>
              
             @else
+
+            @if(!empty($number))
             <li class="nav-item" style="margin-right: 10px">
               <a href="{{url('personal-info/notification')}}">
               <div class="icon-wrapper" >
@@ -358,13 +309,16 @@ ul.mul-dropdown li {
                 </div>
               </a>
             </li>
+            @endif
 
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }} <span class="caret"></span></a>
               <div id="right-menu" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{url('/home')}}">Dashboard</a>
-                <a class="dropdown-item" href="{{url('/user')}}/{{Auth::user()->_key}}">Profile</a>
+                @if(Auth::user()->user_role == 0 || Auth::user()->user_role == 1)
+                  <a class="dropdown-item" href="{{url('/user')}}">User List</a>
+                @endif
                 <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
@@ -412,10 +366,10 @@ ul.mul-dropdown li {
         });
       });
 
-     $(document).on('click', '.regn', function(e){
-      console.log('hmm its changing');
+     $(document).on('mouseover', '.region', function(e){
       var region_id = $(this).attr('data-info');
-      var _url = "{{URL::to('region/list_sub_area')}}";
+     console.log(region_id);
+      var _url = "{{URL::to('region/list_submenu_area')}}";
       $.ajax({
           url: _url,
           method:"POST",
@@ -428,7 +382,7 @@ ul.mul-dropdown li {
       });
     });
 
-     $(document).on('click','.clk-area',  function(){
+     $(document).on('mouseover','.area',  function(){
       var area_id = $(this).attr('data-info');
       //alert(area_id);
       var _url = "{{URL::to('region/list_sub_teritory')}}";
@@ -439,7 +393,7 @@ ul.mul-dropdown li {
         data:{area_id:area_id,_token:"{{ csrf_token() }}"},
         success: function(result)
         {
-          $('#clk-teritory').html(result);
+          $('#third-level').html(result);
         }
 
 
@@ -466,11 +420,10 @@ ul.mul-dropdown li {
 
      });
 
-  $('.dropdown-submenu a.test').on("click", function(e){
-    $(this).next('ul').toggle();
-    e.stopPropagation();
-    e.preventDefault();
-  });
+/*      $(document).on('mouseover', '.region', function(){
+        var region_id = $(this).attr('data-info');
+         // console.log(region_id);
+      });*/
 
 
        });

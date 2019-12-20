@@ -20,38 +20,29 @@
 
                             </div>
                             </div>
-                            <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Designation') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="designation" value="" required autocomplete="" autofocus>
 
 
-                            </div>
-                        </div>
-
-                            <div class="form-group row">
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' User Role') }}</label>
 
                             <div class="col-md-6">
                                 <select class="form-control" id="user_role" name="user_role">
                                     <option value="">Select User Role</option>
-                                    <option value="1">RSM</option>
-                                    <option value="2">AM</option>
-                                    <option value="3">MPO</option>
+                                    <option value="1">Super Admin</option>
+                                    <option value="2">Editor</option>
                                 </select>
                             </div>
                         </div>
 
 
-                            <div class="form-group row">
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('email') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="email" class="form-control @error('name') is-invalid @enderror" name="email" value="" required autocomplete="" autofocus>
                             </div>
 
-                            </div>
+                        </div>
                             <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
@@ -81,69 +72,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Contact No.') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="phone" value="" required autocomplete="" autofocus>
-
-                            </div>
-                        </div>
-
-
-                       
-
-
-                        <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Region') }}</label>
-
-                            <div class="col-md-6">
-                            <select class="form-control" id ="region" name ="region_id" required>
-                            <option value="">Select Region</option>
-                            @foreach($dataset as $data)
-                            <option value="{{$data->id}}">{{$data->name}}</option>
-                           @endforeach
-                            </select>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
-
-                            <div class="col-md-6">
-                            <select class="form-control" id="district" name ="district_id" required>
-                            <option value="">Select District</option>
-                            </select>
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <label for="region_id" class="col-md-4 col-form-label text-md-right">{{ __('Area') }}</label>
-
-                            <div class="col-md-6">
-                            <select class="form-control" id="area" name ="area_id" required>
-                            <option value="">Select Area</option>
-                            </select>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __(' Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="address" value="" required autocomplete="" autofocus>
-
-                            </div>
-                        </div>
-
-                            <div class="form-group row">
-                           
-
-                            <div class="col-md-6">
-                                <input id="latitude" type="hidden" class="form-control @error('name') is-invalid @enderror"  name="latitude" value="" required autocomplete="" autofocus>
-                                 <input id="longitude" type="hidden" class="form-control @error('name') is-invalid @enderror"  name="longitude" value="" required autocomplete="" autofocus>
-
-
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="contact" value="">
 
                             </div>
                         </div>
@@ -164,54 +93,6 @@
 </div>
 <script>
 $(document).ready(function(){
-
-    $('#region').change(function(){
-
-    var region_id = $(this).val();
-    var _url = "{{URL::to('teritory/list_district')}}";
-    $.ajax({
-        url: _url,
-        method:"POST",
-        data:{region:region_id, _token: "{{ csrf_token() }}" },
-        success: function(result)
-        {
-        $('#district').html(result);
-        }
-
-    });
-    });
-    $('#district').change(function(){
-
-    var district_id = $(this).val();
-    var _url = "{{URL::to('teritory/list_area')}}";
-    $.ajax({
-        url: _url,
-        method:"POST",
-        data:{ district : district_id, _token : "{{ csrf_token() }}" },
-        success: function(result)
-        {
-        $('#area').html(result);
-        }
-
-    });
-    });
-    $('#area').change(function(){
-
-    var area_id = $(this).val();
-    var _url = "{{URL::to('teritory/list_market')}}";
-    $.ajax({
-        url: _url,
-        method:"POST",
-        data:{ area : area_id, _token : "{{ csrf_token() }}" },
-        success: function(result)
-        {
-        $('#market').html(result);
-        }
-
-    });
-});
-
-
 
 
 

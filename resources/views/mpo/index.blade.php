@@ -63,14 +63,14 @@
 
                 <div class="table-responsive">
                 <table class ="table table-bordered">
-                <tr class ="table-active">
+                <tr class ="table-active bg-info">
                     <th>Sl.</th>
                     <th>Name</th>
                     <th>Designation</th>
                     <th>Region</th>
                     <th>Area</th>
                     <th>Teritory</th>
-                    <th>action</th>
+                    <th>Actions</th>
                 </tr>
                 <?php $i = 0;
                 ?>

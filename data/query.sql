@@ -7,3 +7,6 @@ ALTER TABLE `dispensary` ADD `is_verified` INT NOT NULL DEFAULT '0' AFTER `is_co
 ALTER TABLE `hospital` ADD `is_verified` INT NOT NULL DEFAULT '0' AFTER `img_loc`;
 ALTER TABLE `dispensary` ADD `created_by` INT NULL DEFAULT NULL AFTER `img_loc`;
 ALTER TABLE `doctor` ADD `created_by` INT NULL DEFAULT NULL AFTER `is_deleted`; 
+---20-12-19---
+ALTER TABLE `users` ADD `contact` VARCHAR(256) NULL DEFAULT NULL AFTER `user_role`; 
+ALTER TABLE `employee` CHANGE `phone` `phone` VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; 
