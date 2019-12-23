@@ -179,7 +179,7 @@ class DistrictController extends Controller
         if(!empty($region_id)){
             $data = $data->where('region_id', $region_id);
         }
-        $dataset = $data->paginate(10);
+        $dataset = $data->paginate(30);
         return view('area._list', compact('dataset', 'region'));
     }
 

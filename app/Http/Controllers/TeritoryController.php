@@ -39,9 +39,9 @@ class TeritoryController extends Controller
           }
 
 
-        $dataset = Area::where('is_deleted',0)->paginate(3);
+        $dataset = Area::where('is_deleted',0)->paginate(30);
         $region = new District();
-        $regions = Region::where('is_deleted',0)->paginate(3);
+        $regions = Region::where('is_deleted',0)->paginate(30);
         return view('teritory.index', compact('dataset','region', 'regions'));
     }
 
@@ -290,7 +290,7 @@ class TeritoryController extends Controller
         if(!empty($district_id)){
             $data = $data->where('district_id', $district_id);
         }
-        $dataset = $data->paginate(10);
+        $dataset = $data->paginate(30);
         return view('teritory._list', compact('dataset', 'region'));
     }
 

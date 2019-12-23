@@ -217,6 +217,7 @@ th, td{
             @else
           <ul class="navbar-nav mr-auto">
             @if(Auth::user()->user_role == 0)
+            @if(count($regions) > 0)
               <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
                       Zone<span class="caret"></span>
@@ -234,6 +235,7 @@ th, td{
                       <?php endforeach; ?>
                   </ul>
               </li>
+              @endif
               @endif
 
 

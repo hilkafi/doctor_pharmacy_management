@@ -35,7 +35,7 @@ class RegionController extends Controller
     
 
 
-         $dataset = Region::where('is_deleted',0)->paginate(3);
+         $dataset = Region::where('is_deleted',0)->paginate(30);
         return view('region.index')->with('dataset',$dataset);
     
         
@@ -166,7 +166,7 @@ class RegionController extends Controller
         if(!empty($search)){
             $data = $data->where('name', 'like', '%'.trim($search).'%' );
         }
-        $dataset = $data->paginate(10);
+        $dataset = $data->paginate(30);
         return view('region._list', compact('dataset'));
     }
 

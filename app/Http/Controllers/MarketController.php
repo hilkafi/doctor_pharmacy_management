@@ -29,9 +29,9 @@ class MarketController extends Controller
     public function index()
     {
         //
-        $dataset = Market::where('is_deleted',0)->paginate(3);
+        $dataset = Market::where('is_deleted',0)->paginate(30);
         $region = new District();
-        $regions = Region::where('is_deleted',0)->paginate(3);
+        $regions = Region::where('is_deleted',0)->paginate(30);
         return view('market.index', compact('dataset','region', 'regions'));
     }
 
@@ -178,7 +178,7 @@ class MarketController extends Controller
         if(!empty($area_id)){
             $data = $data->where('area_id', $area_id);
         }
-        $dataset = $data->paginate(10);
+        $dataset = $data->paginate(30);
         return view('market._list', compact('dataset', 'region'));
     }
 
