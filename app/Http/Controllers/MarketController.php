@@ -18,43 +18,27 @@ class MarketController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
 
 
 
     public function index()
     {
-        //
         $dataset = Market::where('is_deleted',0)->paginate(30);
         $region = new District();
         $regions = Region::where('is_deleted',0)->paginate(30);
         return view('market.index', compact('dataset','region', 'regions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
         $dataset = Region::where('is_deleted',0)->get();
         $dataset_two = District::where('is_deleted',0)->get();
         $dataset_three = Area::where('is_deleted',0)->get();
         return view('market.create', compact('dataset','dataset_two','dataset_three'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -62,52 +46,30 @@ class MarketController extends Controller
             'district_id' => 'required',
             'area_id' => 'required',
             'region_id' => 'required',
-            
         ]);
 
         $model = new Market();
-         
-                $model->name = $request->market;
-                $model->area_id = $request->area_id;
-                $model->district_id = $request->district_id;
-                $model->region_id = $request->region_id;
-                $model->_key = md5(microtime().rand());
-                    
-        
-        
-               if($model->save()){
-                $message = "Succssfully added department";
-               }
-               else{
-                   $message = "Data Entry Error";
-               
-                
-            }
-           
-              
-            
-
-            return redirect('/market')->with('message',$message);
+        $model->name = $request->market;
+        $model->area_id = $request->area_id;
+        $model->district_id = $request->district_id;
+        $model->region_id = $request->region_id;
+        $model->_key = md5(microtime().rand());
+        if($model->save()){
+            $message = "Succssfully added department";
+        }
+        else{
+           $message = "Data Entry Error";
+        }
+        return redirect('/market')->with('message',$message);
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $data = Market::where('_key',$id)->first();
@@ -118,22 +80,13 @@ class MarketController extends Controller
         return view('market.edit',compact('data','dataset','dataset_two','dataset_three','dis'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
         $validatedData = $request->validate([
             'market' => 'required',
             'area_id'=> 'required',
             'district_id'=> 'required',
             'region_id'=> 'required',
-            
         ]);
 
         $model =  Market::where('id',$id)->first();
@@ -141,23 +94,14 @@ class MarketController extends Controller
         $model->area_id = $request->area_id;
         $model->district_id = $request->district_id;
         $model->region_id = $request->region_id;
-       
-       if($model->save()){
-        $message = "Succssfully updated department";
-       }
-       else{
+        if($model->save()){
+            $message = "Succssfully updated department";
+        }
+        else{
            $message = "Data Entry Error";
-       }
-       
+        }
         return redirect('/market')->with('message',$message);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function search(Request $r){
         $region = new District();
@@ -184,10 +128,8 @@ class MarketController extends Controller
 
     public function delete($id)
     {
-        //
         $data = Market::find($id);
         $data->is_deleted = 1;
-
         if($data->save()){
             $message = "Deleted Successfully";
         }
@@ -198,31 +140,24 @@ class MarketController extends Controller
     }
     public function view_details($id)
      {
-          $functionality = new Market;
-          $d = Market::where('_key',$id)->first();
-          $dataset = Chamber::where('market_id',$d->id)->get();
-          $doc_id[] = null;
-          foreach ($dataset as $data) {
-
-                 $doc_id[] = $data->doctor_id;
-           }
-
-
-         $final_data = Doctor::whereIn('id',$doc_id)->paginate(10);
-
-          return view('market.details',compact('final_data','d','functionality'));
-
+        $functionality = new Market;
+        $d = Market::where('_key',$id)->first();
+        $dataset = Chamber::where('market_id',$d->id)->get();
+        $doc_id[] = null;
+        foreach ($dataset as $data) {
+            $doc_id[] = $data->doctor_id;
         }
-        public function view_pharmacy_details($id)
-        {
-          $dis = new District;  
-          $functionality = new Market;
-          $d = Market::where('_key',$id)->first();
-          $dataset = Dispensary::where('market_id',$d->id)->paginate(10);
+        $final_data = Doctor::whereIn('id',$doc_id)->paginate(10);
+        return view('market.details',compact('final_data','d','functionality'));
 
+    }
+    public function view_pharmacy_details($id)
+    {
+        $dis = new District;  
+        $functionality = new Market;
+        $d = Market::where('_key',$id)->first();
+        $dataset = Dispensary::where('market_id',$d->id)->paginate(10);
+        return view('market.pharmacy',compact('dataset','d','functionality','dis'));
 
-
-          return view('market.pharmacy',compact('dataset','d','functionality','dis'));
-
-        }
+    }
 }

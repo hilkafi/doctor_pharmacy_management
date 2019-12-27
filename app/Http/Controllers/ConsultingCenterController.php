@@ -27,7 +27,6 @@ class ConsultingCenterController extends Controller
      */
     public function index()
     {
-        //
         $dataset = Consulting_Center::where('is_deleted', 0)->paginate(10);
         $region = new District();
         $regions = Region::where('is_deleted',0)->get();
@@ -41,12 +40,11 @@ class ConsultingCenterController extends Controller
      */
     public function create()
     {
-        //
-            $dataset = Region::where('is_deleted',0)->get();
-            $dataset_two = District::where('is_deleted',0)->get();
-            $dataset_three = Area::where('is_deleted',0)->get();
-            $dataset_four = Market::where('is_deleted',0)->get();
-            return view('consulting_center.create', compact('dataset','dataset_two','dataset_three','dataset_four'));
+        $dataset = Region::where('is_deleted',0)->get();
+        $dataset_two = District::where('is_deleted',0)->get();
+        $dataset_three = Area::where('is_deleted',0)->get();
+        $dataset_four = Market::where('is_deleted',0)->get();
+        return view('consulting_center.create', compact('dataset','dataset_two','dataset_three','dataset_four'));
     }
 
     /**
@@ -57,60 +55,42 @@ class ConsultingCenterController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $validatedData = $request->validate([
             'name' => 'required',
             'market_id' => 'required',
             'teritory_id' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
-            
         ]);
 
         $model = new Consulting_Center();
-         
-                $model->name = $request->name;
-                $model->address = $request->address;
-                $model->market_id = $request->market_id;
-                $model->area_id = $request->area_id;
-                $model->teritory_id = $request->teritory_id;
-                $model->region_id = $request->region_id;
-
-                  if($files = $request->file('image'))
-                  {
-                        //$files = $files->resize(150,150);
-                        $destination = "public/images/";
-                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
-                        $insert = $files->move($destination, $profile);
-                            if($insert)
-                            {
-                                $model->img_loc = $destination.$profile;
-                            }
-                            else{
-                                echo "Say some error";
-                            }
-
-                }
-
-
-
-                $model->_key = md5(microtime().rand());
-                    
-        
-        
-               if($model->save()){
-                $message = "Succssfully added data";
-               }
-               else{
-                   $message = "Data Entry Error";
-               
-                
+        $model->name = $request->name;
+        $model->address = $request->address;
+        $model->market_id = $request->market_id;
+        $model->area_id = $request->area_id;
+        $model->teritory_id = $request->teritory_id;
+        $model->region_id = $request->region_id;
+        if($files = $request->file('image'))
+        {
+            $destination = "public/images/";
+            $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $insert = $files->move($destination, $profile);
+            if($insert)
+            {
+                $model->img_loc = $destination.$profile;
             }
-           
-              
-            
+            else{
+                echo "Say some error";
+            }
 
-            return redirect('/consulting_center')->with('message',$message);
+        }
+        $model->_key = md5(microtime().rand());
+        if($model->save()){
+            $message = "Succssfully added data";
+        }
+        else{
+           $message = "Data Entry Error";
+        }
+
+        return redirect('/consulting_center')->with('message',$message);
     }
 
     /**
@@ -132,9 +112,7 @@ class ConsultingCenterController extends Controller
      */
     public function edit($id)
     {
-        //
         $data = Consulting_Center::where('_key',$id)->first();
-   
         $dataset = Region::where('is_deleted',0)->get();
         $region = new District();
         return view('consulting_center.edit',compact('data','dataset','region'));
@@ -149,41 +127,30 @@ class ConsultingCenterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $validatedData = $request->validate([
             'name' => 'required',
             'market_id' => 'required',
             'teritory_id' => 'required',
-            
         ]);
 
         $model = Consulting_Center::where('id', $id)->first();
-         
-                $model->name = $request->name;
-                $model->address = $request->address;
-                $model->market_id = $request->market_id;
-                $model->teritory_id = $request->teritory_id;
-                $model->area_id = $request->area_id;
-                $model->region_id = $request->region_id;
-                    
-        
-        
-               if($model->save()){
-                $message = "Record Updated Succssfully";
-               }
-               else{
-                   $message = "Data Entry Error";
-               
-                
-            }
-           
-              
-            
-
-            return redirect('/consulting_center')->with('message',$message);
+        $model->name = $request->name;
+        $model->address = $request->address;
+        $model->market_id = $request->market_id;
+        $model->teritory_id = $request->teritory_id;
+        $model->area_id = $request->area_id;
+        $model->region_id = $request->region_id;
+        if($model->save()){
+            $message = "Record Updated Succssfully";
+        }
+        else{
+           $message = "Data Entry Error";
+        }
+        return redirect('/consulting_center')->with('message',$message);
     }
 
-        public function search(Request $r){
+    public function search(Request $r)
+    {
         $region = new District();
         $search = $r->search;
         $region_id = $r->region_id;
@@ -208,24 +175,20 @@ class ConsultingCenterController extends Controller
         }
         $dataset = $data->paginate(10);
         return view('consulting_center._list', compact('dataset', 'region'));
- }
+    }
 
 
     public function view_details($id)
     {
-          $functionality = new Consulting_Center;
-          $d = Consulting_Center::where('_key',$id)->first();
-          $dataset = Chamber::where('consulting_center_id',$d->id)->get();
-          $doc_id[] = null;
-           foreach ($dataset as $data) {
-
-                 $doc_id[] = $data->doctor_id;
-            }
-
-
-         $final_data = Doctor::whereIn('id',$doc_id)->paginate(10);
-
-          return view('consulting_center/details',compact('final_data','d','functionality'));
+        $functionality = new Consulting_Center;
+        $d = Consulting_Center::where('_key',$id)->first();
+        $dataset = Chamber::where('consulting_center_id',$d->id)->get();
+        $doc_id[] = null;
+        foreach ($dataset as $data) {
+            $doc_id[] = $data->doctor_id;
+        }
+        $final_data = Doctor::whereIn('id',$doc_id)->paginate(10);
+        return view('consulting_center/details',compact('final_data','d','functionality'));
 
     }
     /**
@@ -236,7 +199,6 @@ class ConsultingCenterController extends Controller
      */
     public function delete($id)
     {
-        //
         $data = Consulting_Center::find($id);
         $data->is_deleted = 1;
 
@@ -249,27 +211,22 @@ class ConsultingCenterController extends Controller
         return redirect()->back()->with('message',$message);
     }
 
-    public function visit_cc_pharmacy($id){
-
+    public function visit_cc_pharmacy($id)
+    {
         $data = Dispensary::where('consulting_center_id',$id)->where('is_deleted','0')->first();
-
-            if(!empty($data))
-            {
-
-                $dataset = Region::where('is_deleted',0)->get();
-                $region = new District();
-                $employee = Employee::where('area_id',$data->area_id)->first();
-
-                return view('consulting_center.pharmacy_details',compact('data','dataset','region','employee'));
-
-            }
-
-            else{
-
-                $message = "This Consultation Center has no pharmacy record yet. Please Add a pharmacy first ";
-                return redirect()->back()->with('message',$message);
-            }
+        if(!empty($data))
+        {
+            $dataset = Region::where('is_deleted',0)->get();
+            $region = new District();
+            $employee = Employee::where('area_id',$data->area_id)->first();
+            return view('consulting_center.pharmacy_details',compact('data','dataset','region','employee'));
+        }
+        else{
+            $message = "This Consultation Center has no pharmacy record yet. Please Add a pharmacy first ";
+            return redirect()->back()->with('message',$message);
+        }
 
 
     }
 }
+

@@ -26,17 +26,15 @@ class DistrictController extends Controller
 
     public function index()
     {
-        //
-         $user_role = Auth::user()->user_role;
-         if($user_role == 3 || $user_role == 4){
-         $message = "You are not authorised to perform this action";
-         return redirect()->back()->with('message',$message);
-          }
-
-
+        $user_role = Auth::user()->user_role;
+        if($user_role == 3 || $user_role == 4){
+            $message = "You are not authorised to perform this action";
+            return redirect()->back()->with('message',$message);
+        }
         $dataset = District::where('is_deleted',0)->paginate(30);
         $region = new District();
         $regions = Region::where('is_deleted',0)->paginate(30);
+
         return view('area.index', compact('dataset','region', 'regions'));
         
     }
@@ -48,13 +46,11 @@ class DistrictController extends Controller
      */
     public function create()
     {   
-         $user_role = Auth::user()->user_role;
-         if($user_role == 3 || $user_role == 4){
-         $message = "You are not authorised to perform this action";
-         return redirect()->back()->with('message',$message);
+        $user_role = Auth::user()->user_role;
+        if($user_role == 3 || $user_role == 4){
+            $message = "You are not authorised to perform this action";
+            return redirect()->back()->with('message',$message);
           }
-
-
         $dataset = Region::where('is_deleted',0)->get();
         return view('area.create')->with('dataset',$dataset);
     }
@@ -70,33 +66,24 @@ class DistrictController extends Controller
         $validatedData = $request->validate([
             'district' => 'required',
             'region_id' => 'required',
-            
         ]);
 
         $model = new District();
-            if(District::where('name',$request->district)->doesntExist()){
-                $model->name = $request->district;
-                $model->region_id = $request->region_id;
-                $model->_key = md5(microtime().rand());
-                    
-        
-        
-               if($model->save()){
-                $message = "Succssfully added department";
-               }
-               else{
-                   $message = "Data Entry Error";
-               }
-                
-            }
-            else{
-                $message = "The name is already exist";
-            }
-
-
-
-
-       
+        if(District::where('name',$request->district)->doesntExist())
+        {
+            $model->name = $request->district;
+            $model->region_id = $request->region_id;
+            $model->_key = md5(microtime().rand());
+           if($model->save()){
+            $message = "Succssfully added department";
+           }
+           else{
+               $message = "Data Entry Error";
+           }
+        }
+        else{
+            $message = "The name is already exist";
+        }
         return redirect('/area')->with('message',$message);
     }
 
@@ -119,13 +106,11 @@ class DistrictController extends Controller
      */
     public function edit($id)
     {   
-         $user_role = Auth::user()->user_role;
-         if($user_role == 3 || $user_role == 4){
-         $message = "You are not authorised to perform this action";
-         return redirect()->back()->with('message',$message);
-          }
-
-
+        $user_role = Auth::user()->user_role;
+        if($user_role == 3 || $user_role == 4){
+            $message = "You are not authorised to perform this action";
+            return redirect()->back()->with('message',$message);
+        }
         $data = District::where('_key',$id)->first();
         $dataset = Region::where('is_deleted',0)->get();
         $region = new District;
@@ -144,7 +129,6 @@ class DistrictController extends Controller
         $validatedData = $request->validate([
             'district' => 'required',
             'region_id'=> 'required',
-            
         ]);
 
         $model =  District::where('id',$id)->first();
@@ -157,7 +141,6 @@ class DistrictController extends Controller
        else{
            $message = "Data Entry Error";
        }
-       
         return redirect('/area')->with('message',$message);
     }
 
@@ -185,17 +168,13 @@ class DistrictController extends Controller
 
     public function delete($id)
     {
-        //
-         $user_role = Auth::user()->user_role;
-         if($user_role == 3 || $user_role == 4){
-         $message = "You are not authorised to perform this action";
-         return redirect()->back()->with('message',$message);
-          }
-
-
+        $user_role = Auth::user()->user_role;
+        if($user_role == 3 || $user_role == 4){
+            $message = "You are not authorised to perform this action";
+            return redirect()->back()->with('message',$message);
+        }
         $data = District::find($id);
         $data->is_deleted = 1;
-
         if($data->save()){
             $message = "Deleted Successfully";
         }
@@ -208,32 +187,25 @@ class DistrictController extends Controller
 
      public function view_details($id)
      {
-          $functionality = new District;
-          $d = District::where('_key',$id)->first();
-          $dataset = Chamber::where('area_id',$d->id)->get();
-          $doc_id[] = null;
-          foreach ($dataset as $data) {
-
-                 $doc_id[] = $data->doctor_id;
-           }
-
-
-         $final_data = Doctor::whereIn('id',$doc_id)->paginate(10);
-
-          return view('area.details',compact('final_data','d','functionality'));
-
+        $functionality = new District;
+        $d = District::where('_key',$id)->first();
+        $dataset = Chamber::where('area_id',$d->id)->get();
+        $doc_id[] = null;
+        foreach ($dataset as $data) {
+            $doc_id[] = $data->doctor_id;
         }
-        public function view_pharmacy_details($id)
-        {
-          $dis = new District;  
-          $functionality = new District;
-          $d = District::where('_key',$id)->first();
-          $dataset = Dispensary::where('district_id',$d->id)->paginate(10);
+        $final_data = Doctor::whereIn('id',$doc_id)->paginate(10);
+        return view('area.details',compact('final_data','d','functionality'));
+    }
 
+    public function view_pharmacy_details($id)
+    {
+        $dis = new District;  
+        $functionality = new District;
+        $d = District::where('_key',$id)->first();
+        $dataset = Dispensary::where('district_id',$d->id)->paginate(10);
+        return view('area.pharmacy',compact('dataset','d','functionality','dis'));
 
-
-          return view('area.pharmacy',compact('dataset','d','functionality','dis'));
-
-        }
+    }
 
 }

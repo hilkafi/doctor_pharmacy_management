@@ -29,17 +29,14 @@ class DoctorController extends Controller
     public function index()
     {
       $user_role = Auth::user()->user_role;
-        if($user_role == 2){
-          return redirect()->back()->with('message', 'You do not have the permission');
-        }
-        
-        $dataset = Doctor::where([['is_verified', 1], ['is_deleted',0]])->orderBy('id', 'DESC')->paginate(20);
-        $region = new District();
-        $regions = Region::where('is_deleted',0)->get();
+      if($user_role == 2){
+        return redirect()->back()->with('message', 'You do not have the permission');
+      }
+      $dataset = Doctor::where([['is_verified', 1], ['is_deleted',0]])->orderBy('id', 'DESC')->paginate(20);
+      $region = new District();
+      $regions = Region::where('is_deleted',0)->get();
 
-        return view('doctor.index', compact('dataset','region','regions'));
-
-
+      return view('doctor.index', compact('dataset','region','regions'));
     }
 
     /**
@@ -49,9 +46,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-
-        $dataset = Region::where('is_deleted',0)->get();
-        return view('doctor.create', compact('dataset'));
+      $dataset = Region::where('is_deleted',0)->get();
+      return view('doctor.create', compact('dataset'));
     }
 
     /**
@@ -62,101 +58,84 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $validatedData = $request->validate([
-            'doc_name' => 'required',
-            'designation' => 'required',
-            
-        ]);
+      $validatedData = $request->validate([
+        'doc_name' => 'required',
+        'designation' => 'required',
+      ]);
 
-        DB::beginTransaction();
-        try {
-          
-        $model = new Doctor();
-         
-                $model->name = $request->doc_name;
-                $model->designation = $request->designation;
-                $model->expertise = $request->expertise;
-                $model->department = $request->department;
-                $model->degree = $request->degree;
-                $model->institute = $request->institute;
-                $model->contact = $request->contact;
-                $model->mail = $request->mail;
-                $model->address = $request->address;
-                $model->is_qualified = $request->is_qualified;
-                $model->mul_chamber = $request->mul_chamber;
-                $model->is_covered = $request->is_covered;
+      DB::beginTransaction();
+      try {
+        $model = new Doctor(); 
+        $model->name = $request->doc_name;
+        $model->designation = $request->designation;
+        $model->expertise = $request->expertise;
+        $model->department = $request->department;
+        $model->degree = $request->degree;
+        $model->institute = $request->institute;
+        $model->contact = $request->contact;
+        $model->mail = $request->mail;
+        $model->address = $request->address;
+        $model->is_qualified = $request->is_qualified;
+        $model->mul_chamber = $request->mul_chamber;
+        $model->is_covered = $request->is_covered;
+        if($files = $request->file('pro_pic'))
+        {
+          $destination = "public/images/";
+          $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+          $insert = $files->move($destination, $profile);
+          if($insert)
+          {
+              $model->img_loc = $destination.$profile;
+          }
+          else{
+              echo "Say some error";
+          }
 
-                    if($files = $request->file('pro_pic'))
-                    {
-                        //$files = $files->resize(150,150);
-                        $destination = "public/images/";
-                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
-                        $insert = $files->move($destination, $profile);
-                            if($insert)
-                            {
-                                $model->img_loc = $destination.$profile;
-                            }
-                            else{
-                                echo "Say some error";
-                            }
-
-                    }
-                            if($files = $request->file('visiting_card'))
-                            {
-                            //$files = $files->resize(150,150);
-                             $destination = "public/images/";
-                             $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
-                             $insert = $files->move($destination, $profile);
-                              if($insert)
-                              {
-                                $model->visiting_card = $destination.$profile;
-                              }
-                              else{
-                                echo "Say some error";
-                              }
-
-                    }
-
-
-                $model->_key = md5(microtime().rand());
-
-               if(!$model->save()){
-                  throw new Exception("Error Processing Request");
-               }
-
-               $last_id = DB::getPdo()->lastInsertId();
-
-               $modelChamber = new Chamber();
-         
-                $modelChamber->doctor_id= $last_id;
-                $modelChamber->region_id = $request->region_id;
-                $modelChamber->area_id = $request->area_id;
-                $modelChamber->teritory_id = $request->teritory_id;
-                $modelChamber->market_id = $request->market_id;
-                $modelChamber->consulting_center_id = $request->consulting_center_id;
-                $modelChamber->hospital_id = $request->hospital_id;
-                $modelChamber->address = $request->address;
-                $modelChamber->contact = $request->contact;
-                $modelChamber->visiting_hour = $request->visiting_hour;
-                $modelChamber->fee = $request->fee;
-                $modelChamber->_key = md5(microtime().rand());
-
-
-               if(!$modelChamber->save()){
-                throw new Exception("Error Processing Request");
-               }
-
-               DB::commit();
-              return redirect('/doctor')->with('message', 'Record Added Successfully');
-
-
-            } catch (Exception $e) {
-              DB::rollback();
-              return redirect()->back()->with('message', 'There is some Error');
-          
         }
-      }
+        if($files = $request->file('visiting_card'))
+        {
+          $destination = "public/images/";
+          $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+          $insert = $files->move($destination, $profile);
+          if($insert)
+          {
+            $model->visiting_card = $destination.$profile;
+          }
+          else{
+            echo "Say some error";
+          }
+
+        }
+        $model->_key = md5(microtime().rand());
+        if(!$model->save()){
+          throw new Exception("Error Processing Request");
+        }
+
+        $last_id = DB::getPdo()->lastInsertId();
+          $modelChamber = new Chamber();
+          $modelChamber->doctor_id= $last_id;
+          $modelChamber->region_id = $request->region_id;
+          $modelChamber->area_id = $request->area_id;
+          $modelChamber->teritory_id = $request->teritory_id;
+          $modelChamber->market_id = $request->market_id;
+          $modelChamber->consulting_center_id = $request->consulting_center_id;
+          $modelChamber->hospital_id = $request->hospital_id;
+          $modelChamber->address = $request->address;
+          $modelChamber->contact = $request->contact;
+          $modelChamber->visiting_hour = $request->visiting_hour;
+          $modelChamber->fee = $request->fee;
+          $modelChamber->_key = md5(microtime().rand());
+         if(!$modelChamber->save()){
+          throw new Exception("Error Processing Request");
+         }
+
+        DB::commit();
+        return redirect('/doctor')->with('message', 'Record Added Successfully');
+      } catch (Exception $e) {
+          DB::rollback();
+          return redirect()->back()->with('message', 'There is some Error');
+        }
+    }
 
     /**
      * Display the specified resource.
@@ -166,11 +145,11 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        $data = Doctor::where('id', $id)->first();
-        $chambers = Chamber::where('doctor_id',$data->id)->where('is_deleted','0')->get();
-        $user = new Doctor;
+      $data = Doctor::where('id', $id)->first();
+      $chambers = Chamber::where('doctor_id',$data->id)->where('is_deleted','0')->get();
+      $user = new Doctor;
 
-        return view('doctor.details', compact('data', 'chambers','user'));
+      return view('doctor.details', compact('data', 'chambers','user'));
     }
 
     /**
@@ -181,7 +160,6 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-        //
         $data = Doctor::where('id',$id)->first();
 
         $dataset = Region::where('is_deleted',0)->get();
@@ -198,67 +176,58 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $validatedData = $request->validate([
-            'doc_name' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            
-        ]);
+      $validatedData = $request->validate([
+        'doc_name' => 'required',
+      ]);
 
-        $model = Doctor::where('id',$id)->first();
-        $model->name = $request->doc_name;
-        $model->designation = $request->designation;
-        $model->expertise = $request->expertise;
-        $model->department = $request->department;
-        $model->degree = $request->degree;
-        $model->institute = $request->institute;
-        $model->contact = $request->contact;
-        $model->mail = $request->mail;
-        $model->address = $request->address;
-        $model->is_qualified = $request->is_qualified;
-        $model->mul_chamber = $request->mul_chamber;
-        $model->is_covered = $request->is_covered;
-                            if($files = $request->file('pro_pic'))
-                    {
-                        //$files = $files->resize(150,150);
-                        $destination = "public/images/";
-                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
-                        $insert = $files->move($destination, $profile);
-                            if($insert)
-                            {
-                                $model->img_loc = $destination.$profile;
-                            }
-                            else{
-                                echo "Say some error";
-                            }
+      $model = Doctor::where('id',$id)->first();
+      $model->name = $request->doc_name;
+      $model->designation = $request->designation;
+      $model->expertise = $request->expertise;
+      $model->department = $request->department;
+      $model->degree = $request->degree;
+      $model->institute = $request->institute;
+      $model->contact = $request->contact;
+      $model->mail = $request->mail;
+      $model->address = $request->address;
+      $model->is_qualified = $request->is_qualified;
+      $model->mul_chamber = $request->mul_chamber;
+      $model->is_covered = $request->is_covered;
+      if($files = $request->file('pro_pic'))
+      {
+        $destination = "public/images/";
+        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+        $insert = $files->move($destination, $profile);
+        if($insert)
+        {
+            $model->img_loc = $destination.$profile;
+        }
+        else{
+            echo "Say some error";
+        }
 
-                    }
-                            if($files = $request->file('visiting_card'))
-                            {
-                            //$files = $files->resize(150,150);
-                             $destination = "public/images/";
-                             $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
-                             $insert = $files->move($destination, $profile);
-                              if($insert)
-                              {
-                                $model->visiting_card = $destination.$profile;
-                              }
-                              else{
-                                echo "Say some error";
-                              }
+      }
+      if($files = $request->file('visiting_card'))
+      {
+        $destination = "public/images/";
+        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+        $insert = $files->move($destination, $profile);
+        if($insert)
+        {
+          $model->visiting_card = $destination.$profile;
+        }
+        else{
+          echo "Say some error";
+        }
 
-                    }
-
-        
-       
-       if($model->save()){
+      }
+      if($model->save()){
         $message = "Succssfully updated department";
-       }
-       else{
-           $message = "Data Entry Error";
-       }
-       
-        return redirect('/doctor')->with('message',$message);
+      }
+      else{
+        $message = "Data Entry Error";
+      }
+      return redirect('/doctor')->with('message',$message);
     }
 
     /**
@@ -303,11 +272,7 @@ class DoctorController extends Controller
             $data = $data->where('market_id', $market_id);
         }
         if(!empty($mpo_id)){
-
           $mpo = Employee::where('is_deleted',0)->where('id',$mpo_id)->first();
-
-
-
           $data = $data->where('area_id', $mpo->area_id)->where('is_covered','Covered');
         }
 
@@ -339,9 +304,7 @@ class DoctorController extends Controller
         $data = $data->where('is_covered', $is_covered);
         }
         $dataset = $data->distinct('name')->paginate(10);
-
         $regions = Region::where('is_deleted',0)->get();
-        //return $dataset;
 
         return view('doctor._list', compact('dataset', 'region', 'regions'));
     }
@@ -353,29 +316,28 @@ class DoctorController extends Controller
 
     public function delete($id)
     {
-        //
-        $data = Doctor::find($id);
-        $data->is_deleted = 1;
-
-        if($data->save()){
-            $message = "Deleted Successfully";
-        }
-        else{
-            $message = "Data is not deletd successfully";
-        }
-        return redirect()->back()->with('message',$message);
+      $data = Doctor::find($id);
+      $data->is_deleted = 1;
+      if($data->save()){
+          $message = "Deleted Successfully";
+      }
+      else{
+          $message = "Data is not deletd successfully";
+      }
+      return redirect()->back()->with('message',$message);
     }
 
     public function visit_view($id){
-        $data = Doctor::where('_key', $id)->first();
-        $dataset = Region::where('is_deleted',0)->get();
-        $region = new District();
-        return view('doctor.visit', compact('data', 'dataset', 'region'));
+      $data = Doctor::where('_key', $id)->first();
+      $dataset = Region::where('is_deleted',0)->get();
+      $region = new District();
+      return view('doctor.visit', compact('data', 'dataset', 'region'));
     }
-    public function visit_confirm(Request $r, $id){
 
-        $doc = Doctor::where('id',$r->doctor_id)->first();
-        if($doc->latitude ==$r->latitude || $doc->longitude==$r->longitude){
+    public function visit_confirm(Request $r, $id){
+      $doc = Doctor::where('id',$r->doctor_id)->first();
+      if($doc->latitude ==$r->latitude || $doc->longitude==$r->longitude)
+      {
         $employee_id = Auth::user()->id;
         $model = new VisitLog();
         $model->doctor_id = $r->doctor_id;
@@ -383,194 +345,133 @@ class DoctorController extends Controller
 
 
 
-       if($model->save()){
-            $message = "Successfully Visited Doctor";
+        if($model->save()){
+          $message = "Successfully Visited Doctor";
         }
         else{
-            $message = "Visit is not complete";
+          $message = "Visit is not complete";
         }
         return redirect('/home')->with('message',$message);
+      }
+    return redirect()->back()->with('message','You are not in current location');
+  }
 
-
-           
-        }
-
-        return redirect()->back()->with('message','You are not in current location');
-
-
-    }
-
-    public function visit_log(){
-        $region = new District();
-        $regions = Region::where('is_deleted',0)->get();
-        $dataset = VisitLog::whereNotNull('doctor_id')->orderBy('id', 'DESC')->paginate(20);
-       // $dataset = $dataset->groupBy('doctor_id');
-       // return $dataset;
-        return view('doctor.visit_log', compact('dataset', 'regions'));
-    }
+  public function visit_log(){
+    $region = new District();
+    $regions = Region::where('is_deleted',0)->get();
+    $dataset = VisitLog::whereNotNull('doctor_id')->orderBy('id', 'DESC')->paginate(20);
+    return view('doctor.visit_log', compact('dataset', 'regions'));
+  }
 
     public function visited_doctor_details($id){
-            $dataset = VisitLog::where('doctor_id', $id)->paginate(20);
-            //$dataset = $dataset->groupBy('employee_id');
-            //return $id;
-            $vlog = new VisitLog();
-        return view('doctor.visit_details', compact('dataset', 'id', 'vlog'));
+      $dataset = VisitLog::where('doctor_id', $id)->paginate(20);
+      $vlog = new VisitLog();
+      return view('doctor.visit_details', compact('dataset', 'id', 'vlog'));
     }
 
-        public function add_chamber($id){
+    public function add_chamber($id){
+      $data = Doctor::where('id',$id)->first();
+      $dataset = Region::where('is_deleted',0)->get();
+      return view('doctor.add_chamber',compact('data','dataset'));
+    }
 
-            $data = Doctor::where('id',$id)->first();
-            $dataset = Region::where('is_deleted',0)->get();
+    public function final_add_chamber(Request $request){
+      $validatedData = $request->validate([
+        'doctor_id' => 'required',
+        'teritory_id' => 'required'
+      ]);
+      $model = new Chamber();
+      $model->doctor_id= $request->doctor_id;
+      $model->region_id = $request->region_id;
+      $model->area_id = $request->area_id;
+      $model->teritory_id = $request->teritory_id;
+      $model->market_id = $request->market_id;
+      $model->consulting_center_id = $request->consulting_center_id;
+      $model->hospital_id = $request->hospital_id;
+      $model->address = $request->address;
+      $model->contact = $request->contact;
+      $model->visiting_hour = $request->visiting_hour;
+      $model->fee = $request->fee;
+      $model->_key = md5(microtime().rand());
+      if($model->save()){
+        $message = "Succssfully added data";
+      }
+      else{
+        $message = "Data Entry Error";
+      }
+      return redirect('/doctor')->with('message',$message);
+    }
 
-            return view('doctor.add_chamber',compact('data','dataset'));
+    public function delete_chamber($id){
 
+      $chamber = Chamber::find($id);
+      $chamber->is_deleted = 1;
+      if($chamber->save()){
+        $message = "Deleted Successfully";
+      }
+      else{
+      $message = "Data is not deletd successfully";
+      }
+      return redirect()->back()->with('message',$message);
+    }
 
-         }
-         public function final_add_chamber(Request $request){
-
-            $validatedData = $request->validate([
-            'doctor_id' => 'required',
-            'teritory_id' => 'required'
-            
-        ]);
-                $model = new Chamber();
-         
-                $model->doctor_id= $request->doctor_id;
-                $model->region_id = $request->region_id;
-                $model->area_id = $request->area_id;
-                $model->teritory_id = $request->teritory_id;
-                $model->market_id = $request->market_id;
-                $model->consulting_center_id = $request->consulting_center_id;
-                $model->hospital_id = $request->hospital_id;
-                $model->address = $request->address;
-                $model->contact = $request->contact;
-                $model->visiting_hour = $request->visiting_hour;
-                $model->fee = $request->fee;
-                $model->_key = md5(microtime().rand());
-
-
-               if($model->save()){
-                $message = "Succssfully added data";
-               }
-               else{
-                   $message = "Data Entry Error";
-               
-                
-            }
-           
-              
-            
-
-            return redirect('/doctor')->with('message',$message);
-
-
-         }
-
-         public function delete_chamber($id){
-
-          $chamber = Chamber::find($id);
-          $chamber->is_deleted = 1;
-
-            if($chamber->save()){
-              $message = "Deleted Successfully";
-            }
-            else{
-            $message = "Data is not deletd successfully";
-            }
-
-        return redirect()->back()->with('message',$message);
+    public function edit_chamber($id)
+    {
+      $chamber = Chamber::where('id',$id)->where('is_deleted','0')->first();
+      $data = Doctor::where('id',$chamber->doctor_id)->where('is_deleted','0')->first();
+      $dataset = Region::where('is_deleted',0)->get();
+      $district = new District;
+      return view('doctor.chamber_edit',compact('data','chamber','dataset','district'));
+    }
 
 
+    public function edit_store(Request $request,$id)
+    {
+      $validatedData = $request->validate([
+        'doctor_id' => 'required',
+        'teritory_id' => 'required'
+      
+      ]);
+      $model =Chamber::find($id);
+      $model->doctor_id= $request->doctor_id;
+      $model->region_id = $request->region_id;
+      $model->area_id = $request->area_id;
+      $model->teritory_id = $request->teritory_id;
+      $model->market_id = $request->market_id;
+      $model->consulting_center_id = $request->consulting_center_id;
+      $model->hospital_id = $request->hospital_id;
+      $model->address = $request->address;
+      $model->contact = $request->contact;
+      $model->visiting_hour = $request->visiting_hour;
+      $model->fee = $request->fee;
+      if($model->save()){
+        $message = "Succssfully updated data";
+      }
+      else{
+        $message = "Data Entry Error";
+      }
+      return redirect('/doctor')->with('message',$message);
+    }
 
 
+    public function cover($id){
+      $doctor = Doctor::where('id', $id)->first();
+      $doctor->is_covered = 'Covered';
+      if(!$doctor->save()){
+        return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
+      }
 
+      return redirect()->back()->with('message', 'Doctor Has Been Covered Succssfully');
+    }
 
+    public function uncover($id){
+      $doctor = Doctor::where('id', $id)->first();
+      $doctor->is_covered = 'Not Covered';
 
-         }
-
-         public function edit_chamber($id)
-         {
-          
-          $chamber = Chamber::where('id',$id)->where('is_deleted','0')->first();
-          $data = Doctor::where('id',$chamber->doctor_id)->where('is_deleted','0')->first();
-          $dataset = Region::where('is_deleted',0)->get();
-          $district = new District;
-
-          return view('doctor.chamber_edit',compact('data','chamber','dataset','district'));
-
-
-
-
-         }
-
-
-         public function edit_store(Request $request,$id)
-         {
-             $validatedData = $request->validate([
-            'doctor_id' => 'required',
-            'teritory_id' => 'required'
-            
-        ]);
-                $model =Chamber::find($id);
-         
-                $model->doctor_id= $request->doctor_id;
-                $model->region_id = $request->region_id;
-                $model->area_id = $request->area_id;
-                $model->teritory_id = $request->teritory_id;
-                $model->market_id = $request->market_id;
-                $model->consulting_center_id = $request->consulting_center_id;
-                $model->hospital_id = $request->hospital_id;
-                $model->address = $request->address;
-                $model->contact = $request->contact;
-                $model->visiting_hour = $request->visiting_hour;
-                $model->fee = $request->fee;
-           
-
-
-               if($model->save()){
-                $message = "Succssfully updated data";
-               }
-               else{
-                   $message = "Data Entry Error";
-               
-                
-            }
-           
-              
-            
-
-            return redirect('/doctor')->with('message',$message);
-
-
-         }
-
-
-
-
-         public function cover($id){
-          $doctor = Doctor::where('id', $id)->first();
-          $doctor->is_covered = 'Covered';
-
-          if(!$doctor->save()){
-            return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
-            }
-
-          return redirect()->back()->with('message', 'Doctor Has Been Covered Succssfully');
-         }
-
-         public function uncover($id){
-          $doctor = Doctor::where('id', $id)->first();
-          $doctor->is_covered = 'Not Covered';
-
-          if(!$doctor->save()){
-            return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
-            }
-
-          return redirect()->back()->with('message', 'Doctor Has Been UnCovered Succssfully');
-         }
-
-  
-
-
-
+      if(!$doctor->save()){
+        return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
+      }
+      return redirect()->back()->with('message', 'Doctor Has Been UnCovered Succssfully');
+    }
+    
 }

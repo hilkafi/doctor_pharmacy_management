@@ -75,11 +75,6 @@ class HomeController extends Controller
          $con_cen = Consulting_Center::where('is_deleted','0')->get();
          $con_cen = count($con_cen);
 
-
-
-
-
-
         return view('home',compact('pharmacy','cov_phar','percentage','doctor','cov_doc','doc_per','region','area','teritory','market','hospital','con_cen', 'user_role', 'user_name'));
     }
 

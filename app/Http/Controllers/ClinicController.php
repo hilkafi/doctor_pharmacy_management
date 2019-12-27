@@ -35,7 +35,6 @@ class ClinicController extends Controller
     public function create()
     {
         $dataset = Region::where('is_deleted',0)->get();
-      
         return view('clinic.create', compact('dataset'));
     }
 
@@ -50,37 +49,27 @@ class ClinicController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'market_id' => 'required',
-            'district_id' => 'required',
-            
+            'district_id' => 'required',    
         ]);
 
-        $model = new Clinic();
-         
-                $model->name = $request->name;
-                $model->address = $request->address;
-                $model->market_id = $request->market_id;
-                $model->area_id = $request->area_id;
-                $model->district_id = $request->district_id;
-                $model->region_id = $request->region_id;
-                $model->latitude = $request->latitude;
-                $model->longitude = $request->longitude;
-                $model->_key = md5(microtime().rand());
+        $model = new Clinic(); 
+        $model->name = $request->name;
+        $model->address = $request->address;
+        $model->market_id = $request->market_id;
+        $model->area_id = $request->area_id;
+        $model->district_id = $request->district_id;
+        $model->region_id = $request->region_id;
+        $model->latitude = $request->latitude;
+        $model->longitude = $request->longitude;
+        $model->_key = md5(microtime().rand());
                     
-        
-        
-               if($model->save()){
-                $message = "Succssfully added data";
-               }
-               else{
-                   $message = "Data Entry Error";
-               
-                
-            }
-           
-              
-            
-
-            return redirect('/clinic')->with('message',$message);
+        if($model->save()){
+            $message = "Succssfully added data";
+        }
+        else{
+           $message = "Data Entry Error";  
+        }
+        return redirect('/clinic')->with('message',$message);
     }
 
     /**
@@ -125,30 +114,21 @@ class ClinicController extends Controller
              
         ]);
 
-        $model = Clinic::where('id', $id)->first();
-         
-                $model->name = $request->name;
-                $model->address = $request->address;
-                $model->market_id = $request->market_id;
-                $model->area_id = $request->area_id;
-                $model->district_id = $request->district_id;
-                $model->region_id = $request->region_id;
-                    
-        
-        
-               if($model->save()){
-                $message = "Record Updated Succssfully";
-               }
-               else{
-                   $message = "Data Entry Error";
-               
-                
-            }
-           
-              
-            
+        $model = Clinic::where('id', $id)->first();       
+        $model->name = $request->name;
+        $model->address = $request->address;
+        $model->market_id = $request->market_id;
+        $model->area_id = $request->area_id;
+        $model->district_id = $request->district_id;
+        $model->region_id = $request->region_id;
 
-            return redirect('/clinic')->with('message',$message);
+        if($model->save()){
+            $message = "Record Updated Succssfully";
+        }
+        else{
+           $message = "Data Entry Error";  
+        }
+        return redirect('/clinic')->with('message',$message);
     }
 
 
@@ -159,7 +139,8 @@ class ClinicController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function search (Request $r){
+    public function search (Request $r)
+    {
         $region = new District();
         $search = $r->search;
         $region_id = $r->region_id;
@@ -167,6 +148,7 @@ class ClinicController extends Controller
         $area_id = $r->area_id;
         $market_id = $r->market_id;
         $data = Clinic::where('is_deleted', 0);
+
         if(!empty($search)){
             $data = $data->where('name', 'like', '%'.trim($search).'%' );
         }
@@ -187,34 +169,30 @@ class ClinicController extends Controller
     }
 
 
-        public function visit_view($id){
+    public function visit_view($id){
         $data = Clinic::where('_key', $id)->first();
         $dataset = Region::where('is_deleted',0)->get();
         $region = new District();
         return view('clinic.visit', compact('data', 'dataset', 'region'));
     }
 
-        public function visit_confirm(Request $r, $id){
-
+    public function visit_confirm(Request $r, $id){
         $doc = Clinic::where('id',$r->clinic_id)->first();
         if($doc->latitude ==$r->latitude || $doc->longitude==$r->longitude){    
-        
+            $employee_id = Auth::user()->id;
+            $model = new VisitLog();
+            $model->clinic_id = $r->clinic_id;
+            $model->employee_id = $employee_id;
 
-        $employee_id = Auth::user()->id;
-        $model = new VisitLog();
-        $model->clinic_id = $r->clinic_id;
-        $model->employee_id = $employee_id;
-
-       if($model->save()){
-            $message = "Successfully Visited Doctor";
+           if($model->save()){
+                $message = "Successfully Visited Doctor";
+            }
+            else{
+                $message = "Visit is not complete";
+            }
+            return redirect('/home')->with('message',$message);
         }
-        else{
-            $message = "Visit is not complete";
-        }
-        return redirect('/home')->with('message',$message);
-    }
-
-     return redirect()->back()->with('message','You are not in current location');
+        return redirect()->back()->with('message','You are not in current location');
     }
 
 
@@ -225,7 +203,6 @@ class ClinicController extends Controller
     {
         $data = Clinic::find($id);
         $data->is_deleted = 1;
-
         if($data->save()){
             $message = "Deleted Successfully";
         }

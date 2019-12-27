@@ -18,14 +18,14 @@ class Employee extends Model
 
 	public function region_name($id)
 	{
-	        if(!empty($id))
-	        {
-	            $data = $this->where('user_id',$id)->first();
-	            $region_id = $data->region_id;
-	            $region = Region::where('id', $region_id)->first();
+        if(!empty($id))
+        {
+            $data = $this->where('user_id',$id)->first();
+            $region_id = $data->region_id;
+            $region = Region::where('id', $region_id)->first();
 
-	        }
-	        return !empty($region) ? $region->name : " ";
+        }
+        return !empty($region) ? $region->name : " ";
 
 	}
 

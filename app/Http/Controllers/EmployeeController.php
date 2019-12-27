@@ -16,18 +16,10 @@ class EmployeeController extends Controller
     {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-  
-
-
 
     public function index()
     {
-      $user_role = Auth::user()->user_role;
+        $user_role = Auth::user()->user_role;
         if($user_role == 2){
           return redirect()->back()->with('message', 'You do not have the permission');
         }
@@ -38,14 +30,8 @@ class EmployeeController extends Controller
         return view('mpo.index', compact('dataset','district','regions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
         $dataset = Region::where('is_deleted',0)->get();
         $dataset_two = District::where('is_deleted',0)->get();
         $dataset_three = Area::where('is_deleted',0)->get();
@@ -61,16 +47,10 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $validatedData = $request->validate([
-
-
-            'region_id' => 'required',
-            
+            'region_id' => 'required',   
         ]);
-
         $model = new Employee();
-
         $model->name = $request->name;
         $model->designation = $request->designation;
         $model->phone = $request->phone;
@@ -80,33 +60,17 @@ class EmployeeController extends Controller
         $model->region_id = $request->region_id;
         $model->address = $request->address;     
         $model->_key = md5(microtime().rand());
-                    
-        
-        
-            if($model->save()){
-                $message = "Succssfully added data";
-            }
-            else{
-                $message = "Data Entry Error";
-               
-                
-            }
-           
-              
-            
-
-            return redirect('employee')->with('message',$message);
+        if($model->save()){
+            $message = "Succssfully added data";
+        }
+        else{
+            $message = "Data Entry Error";  
+        }
+        return redirect('employee')->with('message',$message);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
         $data = Employee::where('_key',$id)->first();
         $district = new District;
         $teritory = Area::where('id',$data->area_id)->where('is_deleted',0)->first();
@@ -114,38 +78,22 @@ class EmployeeController extends Controller
         return view('mpo.details',compact('data','district','teritory'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
         $datas = Employee::where('_key',$id)->first();
-
         $dataset = Region::where('is_deleted',0)->get();
         $dataset_two = District::where('is_deleted',0)->get();
         $dataset_three = Area::where('is_deleted',0)->get();
         $region = new District();
+
         return view('mpo.edit',compact('datas','dataset','dataset_two','dataset_three','region'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
         $validatedData = $request->validate([
-
             'region_id' => 'required',
-            
         ]);
 
         $model = Employee::where('_key',$id)->first();
@@ -158,28 +106,21 @@ class EmployeeController extends Controller
         $model->district_id = $request->district_id;
         $model->region_id = $request->region_id;
        
-       if($model->save()){
-        $message = "Succssfully updated department";
-       }
-       else{
+        if($model->save()){
+            $message = "Succssfully updated department";
+        }
+        else{
            $message = "Data Entry Error";
        }
        
         return redirect('employee')->with('message',$message);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function delete($id)
     {
-        //
         $data = Employee::find($id);
         $data->is_deleted = 1;
-
         if($data->save()){
             $message = "Deleted Successfully";
         }

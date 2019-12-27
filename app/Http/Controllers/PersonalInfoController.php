@@ -60,26 +60,16 @@ class PersonalInfoController extends Controller
      */
     public function edit($id)
     {
-        //
         $data = Doctor::where('id',$id)->where('is_deleted','0')->first();
         $personal = PersonalInfo::where('doc_id',$data->id)->first();
-
         return view('personal_info.edit',compact('data','personal'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
         $b_date = date('m-d', strtotime($request->date_of_birth));
         $m_date = date('m-d', strtotime($request->marriage_anniversary));
-
 
         $model =PersonalInfo::where('doc_id',$id)->first();
         $model->doc_id = $request->doc_id;
@@ -105,19 +95,15 @@ class PersonalInfoController extends Controller
         $model->ssc_year = $request->ssc_year;
         $model->college = $request->college;
         $model->hsc_year = $request->hsc_year;
-            if($model->save()){
-                $message = "Succssfully added data";
-            }
-            else{
-                $message = "Data Entry Error";
-               
-                
-            }
+        if($model->save()){
+            $message = "Succssfully added data";
+        }
+        else{
+            $message = "Data Entry Error";
            
-              
             
-
-            return redirect()->back()->with('message',$message); 
+        }
+        return redirect()->back()->with('message',$message); 
     }
 
     /**
@@ -134,7 +120,6 @@ class PersonalInfoController extends Controller
     public function personal_info($id)
     {   
         $data = Doctor::where('id',$id)->where('is_deleted','0')->first();
-       // $personal = DB::table('doctor')->join('personal_info','doctor.id', '=','personal_info.doc_id')->first();
         $personal = PersonalInfo::where('doc_id',$data->id)->first();
         return view('personal_info.create',compact('data','personal'));
     }
@@ -168,82 +153,59 @@ class PersonalInfoController extends Controller
         $model->ssc_year = $request->ssc_year;
         $model->college = $request->college;
         $model->hsc_year = $request->hsc_year;
-
-            if($model->save()){
-                $message = "Succssfully added data";
-            }
-            else{
-                $message = "Data Entry Error";
-               
-                
-            }
+        if($model->save()){
+            $message = "Succssfully added data";
+        }
+        else{
+            $message = "Data Entry Error";
            
-              
             
-
-            return redirect()->back()->with('message',$message);  
+        }
+        return redirect()->back()->with('message',$message);  
     }
 
 
 
-    public function show_personal_index($id){
-
+    public function show_personal_index($id)
+    {
         $data = Doctor::where('id',$id)->where('is_deleted','0')->first();
-        //$personal = DB::table('doctor')->join('personal_info','doctor.id', '=','personal_info.doc_id')->first();
-
         $personal = PersonalInfo::where('doc_id',$data->id)->first();
-            if(!empty($personal))
-            {
-                return view('personal_info.index',compact('data','personal'));
-            }
-            else{
-
-                $message = "No Personal Info to display.Please add personal info first";
-                return redirect()->back()->with('message',$message);
-            }
-
-        
+        if(!empty($personal))
+        {
+            return view('personal_info.index',compact('data','personal'));
+        }
+        else{
+            $message = "No Personal Info to display.Please add personal info first";
+            return redirect()->back()->with('message',$message);
+        }  
     }
 
 
     public function show_birthday(){
         $date = date('m-d');
-        //return $date;
         $doctor[] = null;
-
         $date_of_birth = PersonalInfo::where('b_date', $date)->get();
-            
-            if(!empty($date_of_birth)){
-                foreach ($date_of_birth as $db) {
-
-                    $doctor[] = $db->doc_id;
-      
-                    
-                }
+        if(!empty($date_of_birth)){
+            foreach ($date_of_birth as $db) {
+                $doctor[] = $db->doc_id;
             }
-
-             $num_doc = Doctor::whereIn('id', $doctor)->where('is_deleted','0')->get();
-             return view('doctor.birthday',compact('num_doc'));
+        }
+        $num_doc = Doctor::whereIn('id', $doctor)->where('is_deleted','0')->get();
+        return view('doctor.birthday',compact('num_doc'));
     }
 
     public function show_marriage_anniversary()
     {
         $date = date('m-d');
         $doctor[] = null;
-
         $anniversary = PersonalInfo::where('m_date', $date)->get();
-            
-            if(!empty($anniversary)){
-                foreach ($anniversary as $anni) {
-
-                    $doctor[] = $anni->doc_id;
-      
-                    
-                }
+        if(!empty($anniversary)){
+            foreach ($anniversary as $anni) {
+                $doctor[] = $anni->doc_id;
             }
-
-             $num_doc = Doctor::whereIn('id', $doctor)->where('is_deleted','0')->get();
-             return view('doctor.anniversary',compact('num_doc'));
+        }
+        $num_doc = Doctor::whereIn('id', $doctor)->where('is_deleted','0')->get();
+        return view('doctor.anniversary',compact('num_doc'));
 
     }
 
@@ -253,7 +215,6 @@ class PersonalInfoController extends Controller
         $birthday = PersonalInfo::where('b_date', $date)->get();
         $anniversary = PersonalInfo::where('m_date', $date)->get();
         $number = count($birthday) + count($anniversary);
-
         !empty($number) ? $str .= '<span class="badge" >'.$number.'</span>' : '';
 
         return $number;
@@ -269,7 +230,7 @@ class PersonalInfoController extends Controller
                 }
             }
         $number_birthday = Doctor::whereIn('id', $doctor)->where('is_deleted','0')->get();
-
+        
     //upcoming birthday
         $tomorrow = date('m-d', strtotime('+1 day'));
         $upcoming_date = date('m-d', strtotime('+7 day'));

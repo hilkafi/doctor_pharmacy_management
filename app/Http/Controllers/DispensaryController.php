@@ -27,15 +27,15 @@ class DispensaryController extends Controller
      */
     public function index()
     {
-        $user_role = Auth::user()->user_role;
-        if($user_role == 2){
-          return redirect()->back()->with('message', 'You do not have the permission');
-        }
+      $user_role = Auth::user()->user_role;
+      if($user_role == 2){
+        return redirect()->back()->with('message', 'You do not have the permission');
+      }
 
-        $dataset = Dispensary::where([['is_verified', 1], ['is_deleted', 0]])->orderBy('id', 'DESC')->paginate(30);
-        $region = new District();
-        $regions = Region::where('is_deleted',0)->get();
-        return view('dispensary.index', compact('dataset', 'region','regions'));
+      $dataset = Dispensary::where([['is_verified', 1], ['is_deleted', 0]])->orderBy('id', 'DESC')->paginate(30);
+      $region = new District();
+      $regions = Region::where('is_deleted',0)->get();
+      return view('dispensary.index', compact('dataset', 'region','regions'));
     }
 
     /**
@@ -45,11 +45,11 @@ class DispensaryController extends Controller
      */
     public function create()
     {
-        $dataset = Region::where('is_deleted',0)->get();
-        $dataset_two = District::where('is_deleted',0)->get();
-        $dataset_three = Area::where('is_deleted',0)->get();
-        $dataset_four = Market::where('is_deleted',0)->get();
-        return view('dispensary.create', compact('dataset','dataset_two','dataset_three','dataset_four'));
+      $dataset = Region::where('is_deleted',0)->get();
+      $dataset_two = District::where('is_deleted',0)->get();
+      $dataset_three = Area::where('is_deleted',0)->get();
+      $dataset_four = Market::where('is_deleted',0)->get();
+      return view('dispensary.create', compact('dataset','dataset_two','dataset_three','dataset_four'));
     }
 
     /**
@@ -60,63 +60,48 @@ class DispensaryController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'owner' => 'required',
-            'market_id' => 'required',
-            'district_id' => 'required',
-            
-        ]);
+      $validatedData = $request->validate([
+        'name' => 'required',
+        'owner' => 'required',
+        'market_id' => 'required',
+        'district_id' => 'required',
+          
+      ]);
 
-        $model = new Dispensary();
-         
-                $model->consulting_center_id = $request->consulting_center_id;
-                $model->hospital_id = $request->hospital_id;
-                $model->name = $request->name;
-                $model->owner = $request->owner;
-                $model->contact = $request->contact;
-                $model->mail = $request->mail;
-                $model->address = $request->address;
-                $model->market_id = $request->market_id;
-                $model->area_id = $request->area_id;
-                $model->district_id = $request->district_id;
-                $model->region_id = $request->region_id;
-
-                $model->is_covered = $request->is_covered;
-
-                    if($files = $request->file('image'))
-                    {
-                        //$files = $files->resize(150,150);
-                        $destination = "public/images/";
-                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
-                        $insert = $files->move($destination, $profile);
-                            if($insert)
-                            {
-                                $model->img_loc = $destination.$profile;
-                            }
-                            else{
-                                echo "Say some error";
-                            }
-
-                    }
-
-                $model->_key = md5(microtime().rand());
-                    
-        
-        
-               if($model->save()){
-                $message = "Succssfully added data";
-               }
-               else{
-                   $message = "Data Entry Error";
-               
-                
-            }
-           
-              
-            
-
-            return redirect('/dispensary')->with('message',$message);
+      $model = new Dispensary();       
+      $model->consulting_center_id = $request->consulting_center_id;
+      $model->hospital_id = $request->hospital_id;
+      $model->name = $request->name;
+      $model->owner = $request->owner;
+      $model->contact = $request->contact;
+      $model->mail = $request->mail;
+      $model->address = $request->address;
+      $model->market_id = $request->market_id;
+      $model->area_id = $request->area_id;
+      $model->district_id = $request->district_id;
+      $model->region_id = $request->region_id;
+      $model->is_covered = $request->is_covered;
+      if($files = $request->file('image'))
+      {
+        $destination = "public/images/";
+        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+        $insert = $files->move($destination, $profile);
+        if($insert)
+        {
+          $model->img_loc = $destination.$profile;
+        }
+        else{
+          echo "Say some error";
+        }
+      }
+      $model->_key = md5(microtime().rand());
+      if($model->save()){
+        $message = "Succssfully added data";
+      }
+      else{
+        $message = "Data Entry Error"; 
+      }
+      return redirect('/dispensary')->with('message',$message);
     }
 
     /**
@@ -127,16 +112,11 @@ class DispensaryController extends Controller
      */
     public function show($id)
     {
-        //
-        $data = Dispensary::where('_key', $id)->first();
-        $dataset = Region::where('is_deleted',0)->get();
-        $region = new District();
-     
-        $employee = Employee::where('area_id',$data->area_id)->first();
-            
-
-        //$user = Employee::where('is_deleted','0')->where('id',$employee->user_id)->first();
-        return view('dispensary.visit', compact('data', 'dataset', 'region','employee'));
+      $data = Dispensary::where('_key', $id)->first();
+      $dataset = Region::where('is_deleted',0)->get();
+      $region = new District();
+      $employee = Employee::where('area_id',$data->area_id)->first();
+      return view('dispensary.visit', compact('data', 'dataset', 'region','employee'));
     }
 
     /**
@@ -147,11 +127,10 @@ class DispensaryController extends Controller
      */
     public function edit($id)
     {
-        $data = Dispensary::where('_key',$id)->first();
-   
-        $dataset = Region::where('is_deleted',0)->get();
-        $region = new District();
-        return view('dispensary.edit',compact('data','dataset','region'));
+      $data = Dispensary::where('_key',$id)->first();
+      $dataset = Region::where('is_deleted',0)->get();
+      $region = new District();
+      return view('dispensary.edit',compact('data','dataset','region'));
     }
 
     /**
@@ -163,59 +142,45 @@ class DispensaryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'owner' => 'required',
-            'market_id' => 'required',
-            'district_id' => 'required',
-            
-        ]);
+      $validatedData = $request->validate([
+        'name' => 'required',
+        'owner' => 'required',
+        'market_id' => 'required',
+        'district_id' => 'required',  
+      ]);
 
-        $model = Dispensary::where('id', $id)->first();
-         
-                $model->consulting_center_id = $request->consulting_center_id;
-                $model->hospital_id = $request->hospital_id;
-                $model->name = $request->name;
-                $model->owner = $request->owner;
-                $model->address = $request->address;
-                $model->market_id = $request->market_id;
-                $model->area_id = $request->area_id;
-                $model->district_id = $request->district_id;
-                $model->region_id = $request->region_id;
-                $model->is_covered = $request->is_covered;
+      $model = Dispensary::where('id', $id)->first();   
+      $model->consulting_center_id = $request->consulting_center_id;
+      $model->hospital_id = $request->hospital_id;
+      $model->name = $request->name;
+      $model->owner = $request->owner;
+      $model->address = $request->address;
+      $model->market_id = $request->market_id;
+      $model->area_id = $request->area_id;
+      $model->district_id = $request->district_id;
+      $model->region_id = $request->region_id;
+      $model->is_covered = $request->is_covered;        
+      if($files = $request->file('image'))
+      {
+        $destination = "public/images/";
+        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
+        $insert = $files->move($destination, $profile);
+        if($insert)
+        {
+          $model->img_loc = $destination.$profile;
+        }
+        else{
+          echo "Say some error";
+        }
 
-                
-                    if($files = $request->file('image'))
-                    {
-                        //$files = $files->resize(150,150);
-                        $destination = "public/images/";
-                        $profile =date('YmdHis') . "." . $files->getClientOriginalExtension();
-                        $insert = $files->move($destination, $profile);
-                            if($insert)
-                            {
-                                $model->img_loc = $destination.$profile;
-                            }
-                            else{
-                                echo "Say some error";
-                            }
-
-                    }
-                    
-        
-        
-               if($model->save()){
-                $message = "Record Updated Succssfully";
-               }
-               else{
-                   $message = "Data Entry Error";
-               
-                
-            }
-           
-              
-            
-
-            return redirect('/dispensary')->with('message',$message);
+      }
+      if($model->save()){
+        $message = "Record Updated Succssfully";
+      }
+      else{
+        $message = "Data Entry Error";
+      }
+      return redirect('/dispensary')->with('message',$message);
     }
 
     /**
@@ -225,75 +190,67 @@ class DispensaryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function search(Request $r){
-        $region = new District();
-        $search = $r->search;
-        $region_id = $r->region_id;
-        $district_id = $r->district_id;
-        $area_id = $r->area_id;
-        $market_id = $r->market_id;
-        $is_covered = $r->is_covered;
-        $mpo_id  =$r->mpo_id;
-        $data = Dispensary::where([['is_verified', 1], ['is_deleted', 0]]);
-        if(!empty($search)){
-            $data = $data->where('name', 'like', '%'.trim($search).'%' );
-        }
-        if(!empty($region_id)){
-            $data = $data->where('region_id', $region_id);
-        }
-        if(!empty($district_id)){
-            $data = $data->where('district_id', $district_id);
-        }
-        if(!empty($area_id)){
-            $data = $data->where('area_id', $area_id);
-        }
-        if(!empty($mpo_id)){
-
-          $mpo = Employee::where('is_deleted',0)->where('id',$mpo_id)->first();
-          $data = $data->where('area_id', $mpo->area_id)->where('is_covered','Covered');
-
-            
-        }
-
-        if(!empty($market_id)){
-            $data = $data->where('market_id', $market_id);
-        }
-        if(!empty($is_covered)){
-        $data = $data->where('is_covered', $is_covered);
-        }
-        $dataset = $data->paginate(10);
-        return view('dispensary._list', compact('dataset', 'region'));
- }
-
-
-
-        public function visit_view($id){
-        $data = Dispensary::where('_key', $id)->first();
-        $dataset = Region::where('is_deleted',0)->get();
-        $region = new District();
-        $employee = Employee::where('area_id',$data->area_id)->first();
-        //$user = Employee::where('is_deleted','0')->where('id',$employee->user_id)->first();
-        return view('dispensary.visit', compact('data', 'dataset', 'region','employee'));
+      $region = new District();
+      $search = $r->search;
+      $region_id = $r->region_id;
+      $district_id = $r->district_id;
+      $area_id = $r->area_id;
+      $market_id = $r->market_id;
+      $is_covered = $r->is_covered;
+      $mpo_id  =$r->mpo_id;
+      $data = Dispensary::where([['is_verified', 1], ['is_deleted', 0]]);
+      if(!empty($search)){
+          $data = $data->where('name', 'like', '%'.trim($search).'%' );
+      }
+      if(!empty($region_id)){
+          $data = $data->where('region_id', $region_id);
+      }
+      if(!empty($district_id)){
+          $data = $data->where('district_id', $district_id);
+      }
+      if(!empty($area_id)){
+          $data = $data->where('area_id', $area_id);
+      }
+      if(!empty($mpo_id)){
+        $mpo = Employee::where('is_deleted',0)->where('id',$mpo_id)->first();
+        $data = $data->where('area_id', $mpo->area_id)->where('is_covered','Covered');
+      }
+      if(!empty($market_id)){
+          $data = $data->where('market_id', $market_id);
+      }
+      if(!empty($is_covered)){
+      $data = $data->where('is_covered', $is_covered);
+      }
+      $dataset = $data->paginate(10);
+      return view('dispensary._list', compact('dataset', 'region'));
     }
 
+    public function visit_view($id){
+      $data = Dispensary::where('_key', $id)->first();
+      $dataset = Region::where('is_deleted',0)->get();
+      $region = new District();
+      $employee = Employee::where('area_id',$data->area_id)->first();
+      return view('dispensary.visit', compact('data', 'dataset', 'region','employee'));
+    }
 
-        public function visit_confirm(Request $r, $id){
-
-        $doc = Dispensary::where('id',$r->dispensary_id)->first();
-        if($doc->latitude ==$r->latitude || $doc->longitude==$r->longitude){    
+    public function visit_confirm(Request $r, $id)
+    {
+      $doc = Dispensary::where('id',$r->dispensary_id)->first();
+      if($doc->latitude ==$r->latitude || $doc->longitude==$r->longitude)
+      {    
         $employee_id = Auth::user()->id;
         $model = new VisitLog();
         $model->dispensary_id = $r->dispensary_id;
         $model->employee_id = $employee_id;
-
-       if($model->save()){
-            $message = "Successfully Visited";
+        if($model->save()){
+          $message = "Successfully Visited";
         }
         else{
-            $message = "Visit is not complete";
+          $message = "Visit is not complete";
         }
         return redirect('/home')->with('message',$message);
-    }
-     return redirect()->back()->with('message','You are not in current location');
+      }
+      return redirect()->back()->with('message','You are not in current location');
     }
 
 
@@ -303,37 +260,33 @@ class DispensaryController extends Controller
 
     public function delete($id)
     {
-        $data = Dispensary::find($id);
-        $data->is_deleted = 1;
+      $data = Dispensary::find($id);
+      $data->is_deleted = 1;
 
-        if($data->save()){
-            $message = "Deleted Successfully";
-        }
-        else{
-            $message = "Data is not deletd successfully";
-        }
-        return redirect()->back()->with('message',$message);
+      if($data->save()){
+        $message = "Deleted Successfully";
+      }
+      else{
+        $message = "Data is not deletd successfully";
+      }
+      return redirect()->back()->with('message',$message);
     }
 
     public function cover($id){
-          $pharmacy = Dispensary::where('id', $id)->first();
-          $pharmacy->is_covered = 'Covered';
+      $pharmacy = Dispensary::where('id', $id)->first();
+      $pharmacy->is_covered = 'Covered';
+      if(!$pharmacy->save()){
+        return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
+      }
+      return redirect()->back()->with('message', 'Pharmacy Has Been Covered Succssfully');
+    }
 
-          if(!$pharmacy->save()){
-            return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
-            }
-
-          return redirect()->back()->with('message', 'Pharmacy Has Been Covered Succssfully');
-         }
-
-         public function uncover($id){
-          $pharmacy = Dispensary::where('id', $id)->first();
-          $pharmacy->is_covered = 'Not Covered';
-
-          if(!$pharmacy->save()){
-            return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
-            }
-
-          return redirect()->back()->with('message', 'Pharmacy Has Been UnCovered Succssfully');
-         }
+    public function uncover($id){
+      $pharmacy = Dispensary::where('id', $id)->first();
+      $pharmacy->is_covered = 'Not Covered';
+      if(!$pharmacy->save()){
+        return redirect()->back()->with('message', 'There Is Some Error. Please Try Later');
+        }
+      return redirect()->back()->with('message', 'Pharmacy Has Been UnCovered Succssfully');
+    }
 }
