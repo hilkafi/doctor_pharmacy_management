@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
 
-    <title>Pharmasia</title>
+    <title>Pharma Market Info</title>
 
     <!-- Scripts -->
     <script src="{{ asset('public/js/app.js') }}"></script>
@@ -19,6 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/responsive.css') }}" rel="stylesheet" type="text/css" media="screen">
     <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/favicon.ico') }}" rel="icon" type="image/x-icon">
 </head>
@@ -27,7 +28,7 @@
     <nav class="navbar navbar-inverse navbar-expand-md navbar-light fixed-top" style = "background-color:#090257;" >
       <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/home') }}">
-        <h2 style="color:white;"><b>Pharmasia</b></h2>
+        <h2 style="color:white;"><b>PMI</b></h2>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon " style=""></span>
@@ -87,12 +88,9 @@
               </li>
               @endif
               @endif
-
-
               <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             Sections<span class="caret"></span></a>
-
                   <div id = "" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{url('/region')}}">Region</a>
                       <a class="dropdown-item" href="{{url('/area')}}">Area</a>
@@ -100,7 +98,6 @@
                       <a class="dropdown-item" href="{{url('/market')}}">Market</a>
                   </div>
               </li>
-
               <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 Institutes<span class="caret"></span>
@@ -112,7 +109,6 @@
                   <a class="dropdown-item" href="{{url('/others')}}">Others</a>
                 </div>
               </li>
-
               <li class="nav-item">
                 <a  class="nav-link" href="{{url('/consulting_center')}}" style="color: white;">C. Center</a>
               </li>
@@ -130,11 +126,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{url('/approval')}}" style="color: white;">Approval</a>
               </li>
-                @if(Auth::user()->user_role == 0 || Auth::user()->user_role == 1)
-                <li class="nav-item">
-                  <a class="nav-link" href="{{url('/user')}}" style="color: white;">User List</a>
-                </li>
-                @endif
+              @if(Auth::user()->user_role == 0 || Auth::user()->user_role == 1)
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('/user')}}" style="color: white;">User List</a>
+              </li>
+              @endif
             @endif
 
             @if(Auth::user()->user_role == 2)
@@ -152,11 +148,9 @@
                 <!-- Authentication Links -->
             @guest
             <li class="nav-item">
-                <a style="color:white;" class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+              <a style="color:white;" class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
             </li>
-             
             @else
-
             @if(!empty($number))
             <li class="nav-item" style="margin-right: 10px">
               <a href="{{url('personal-info/notification')}}">
@@ -167,7 +161,6 @@
               </a>
             </li>
             @endif
-
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }} <span class="caret"></span></a>

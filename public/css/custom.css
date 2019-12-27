@@ -1,4 +1,4 @@
-    body {
+body {
   overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
@@ -157,13 +157,10 @@ th, td{
     padding:5px;
     color: #fff;
 }
-
-
 /*Multilevel Dropdown*/
 .dropdown-submenu {
     position: relative;
 }
-
 .dropdown-submenu>.dropdown-menu {
     top: 0;
     left: 100%;
@@ -173,14 +170,12 @@ th, td{
     -moz-border-radius: 0 6px 6px;
     border-radius: 0 6px 6px 6px;
 }
-
 .dropdown-submenu:hover>.dropdown-menu {
     display: block;
 }
 .navbar-light .navbar-nav .nav-link {
   color: black;
 }
-
 /*Footer*/
 .footer{
   bottom:0;
