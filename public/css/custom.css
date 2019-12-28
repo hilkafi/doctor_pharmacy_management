@@ -177,7 +177,14 @@ th, td{
   color: black;
 }
 /*Footer*/
-.footer{
-  bottom:0;
-  width:100%;
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: darkblue;
+  padding: 5px;
+  width: 100%;
+  color: white;
+  font-size: 12px;
+  text-align: center;
 }
