@@ -25,7 +25,7 @@
 </head>
 <body>  
   <div id="app">
-    <nav class="navbar navbar-inverse navbar-expand-md navbar-light fixed-top" style = "background-color:#090257;" >
+    <nav class="navbar navbar-inverse navbar-expand-md navbar-light" style = "background-color:#090257;" >
       <div class="container-fluid">
         <a class="navbar-brand" href="{{ url('/home') }}">
         <h2 style="color:white;"><b>PMI</b></h2>
@@ -40,13 +40,13 @@
 
             @else
           <ul class="navbar-nav mr-auto">
-            @if(Auth::user()->user_role == 0)
             @if(count($regions) > 0)
               <li class="dropdown">
                   <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" style="color: white;">
                       Zone<span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu multi-level">
+                      <li><a href="{{url('region')}}" class="nav-link">Region</a></li>
                       <?php foreach ($regions as $region): ?>
                           <li class="dropdown-submenu">
                               <a href="" class="nav-link dropdown-toggle region" data-toggle="dropdown" role="button" data-info = "{{ $region->id }}">
@@ -55,18 +55,21 @@
                               <ul class="dropdown-menu" id = "second-level" style="left: 100%;top: 0;">
                                 <li><a href="{{url('region/')}}/{{$region->_key}}/details" class="nav-link">{{ $region->name.' Doctor ' }}</a></li>
                                 <li><a href="{{url('region/')}}/{{$region->_key}}/view_pharmacy" class="nav-link">{{ $region->name.' Pharmacy' }}</a></li>
+                                <li><a href="{{url('area')}}" class="nav-link">Area</a></li>
                                 <?php foreach($region->areas as $area):?>
                                 <li class="dropdown-submenu">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ $area->name }}</a>
                                     <ul class="dropdown-menu">
                                       <li><a href="{{url('area/')}}/{{$area->_key}}/details" class="nav-link">{{ $area->name.' Doctor ' }}</a></li>
                                       <li><a href="{{url('area/')}}/{{$area->_key}}/view_pharmacy" class="nav-link">{{ $area->name.' Pharmacy' }}</a></li>
+                                      <li><a href="{{url('teritory')}}" class="nav-link">Teritory</a></li>
                                         <?php foreach($area->teritories as $teritory):?>
                                         <li class="dropdown-submenu">
                                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ $teritory->name }}</a>
                                             <ul class="dropdown-menu">
                                               <li><a href="{{url('teritory/')}}/{{$teritory->_key}}/details" class="nav-link">{{ $teritory->name.' Doctor ' }}</a></li>
                                               <li><a href="{{url('teritory/')}}/{{$teritory->_key}}/view_pharmacy" class="nav-link">{{ $teritory->name.' Pharmacy' }}</a></li>
+                                              <li><a href="{{url('market')}}" class="nav-link">Market</a></li>
                                               <?php foreach($teritory->markets as $market):?>
                                                 <li>
                                                   <a href="{{url('market/')}}/{{$market->_key}}/details" class="nav-link">{{ $market->name.' Doctor ' }}</a>
@@ -86,7 +89,6 @@
                       <?php endforeach; ?>
                   </ul>
               </li>
-              @endif
               @endif
               <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
